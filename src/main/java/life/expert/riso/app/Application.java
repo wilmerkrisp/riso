@@ -44,8 +44,7 @@ import reactor.core.publisher.Hooks;
 @EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
 public class Application
 	{
-	
-	/**
+	/** +
 	 * Main method using Spring main cycle
 	 *
 	 * @param args
