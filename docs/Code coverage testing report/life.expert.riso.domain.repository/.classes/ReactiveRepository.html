@@ -1,0 +1,139 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReactiveRepository</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">life.expert.riso.domain.repository</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReactiveRepository (life.expert.riso.domain.repository)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">ReactiveRepository</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package life.expert.riso.domain.repository;
+<i>2</i>&nbsp;//@Header@
+<i>3</i>&nbsp;//--------------------------------------------------------------------------------
+<i>4</i>&nbsp;//
+<i>5</i>&nbsp;//                          riso  life.expert.riso.domain.repository
+<i>6</i>&nbsp;//                           wilmer 2019/07/23
+<i>7</i>&nbsp;//
+<i>8</i>&nbsp;//--------------------------------------------------------------------------------
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import org.reactivestreams.Publisher;
+<i>11</i>&nbsp;import reactor.core.publisher.Flux;
+<i>12</i>&nbsp;import reactor.core.publisher.Mono;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;/**
+<i>15</i>&nbsp; * The interface Reactive repository.
+<i>16</i>&nbsp; *
+<i>17</i>&nbsp; * @param &lt;T&gt;
+<i>18</i>&nbsp; * 	the type parameter
+<i>19</i>&nbsp; * @param &lt;ID&gt;
+<i>20</i>&nbsp; * 	the type parameter
+<i>21</i>&nbsp; */
+<i>22</i>&nbsp;public interface ReactiveRepository&lt;T, ID&gt;
+<i>23</i>&nbsp;	{
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	/**
+<i>26</i>&nbsp;	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+<i>27</i>&nbsp;	 * entity instance completely.
+<i>28</i>&nbsp;	 *
+<i>29</i>&nbsp;	 * @param &lt;S&gt;
+<i>30</i>&nbsp;	 * 	the type parameter
+<i>31</i>&nbsp;	 * @param entity
+<i>32</i>&nbsp;	 * 	must not be {@literal null}.
+<i>33</i>&nbsp;	 *
+<i>34</i>&nbsp;	 * @return {@link Mono} emitting the saved entity.
+<i>35</i>&nbsp;	 *
+<i>36</i>&nbsp;	 * @throws IllegalArgumentException
+<i>37</i>&nbsp;	 * 	in case the given {@code entity} is {@literal null}.
+<i>38</i>&nbsp;	 */
+<i>39</i>&nbsp;	&lt;S extends T&gt; Mono&lt;S&gt; save( S entity );
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	/**
+<i>42</i>&nbsp;	 * Saves all given entities.
+<i>43</i>&nbsp;	 *
+<i>44</i>&nbsp;	 * @param &lt;S&gt;
+<i>45</i>&nbsp;	 * 	the type parameter
+<i>46</i>&nbsp;	 * @param entities
+<i>47</i>&nbsp;	 * 	must not be {@literal null}.
+<i>48</i>&nbsp;	 *
+<i>49</i>&nbsp;	 * @return {@link Flux} emitting the saved entities.
+<i>50</i>&nbsp;	 *
+<i>51</i>&nbsp;	 * @throws IllegalArgumentException
+<i>52</i>&nbsp;	 * 	in case the given {@link Iterable} {@code entities} is {@literal null}.
+<i>53</i>&nbsp;	 */
+<i>54</i>&nbsp;	&lt;S extends T&gt; Flux&lt;S&gt; saveAll( Iterable&lt;S&gt; entities );
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;	/**
+<i>57</i>&nbsp;	 * Saves all given entities.
+<i>58</i>&nbsp;	 *
+<i>59</i>&nbsp;	 * @param &lt;S&gt;
+<i>60</i>&nbsp;	 * 	the type parameter
+<i>61</i>&nbsp;	 * @param entityStream
+<i>62</i>&nbsp;	 * 	must not be {@literal null}.
+<i>63</i>&nbsp;	 *
+<i>64</i>&nbsp;	 * @return {@link Flux} emitting the saved entities.
+<i>65</i>&nbsp;	 *
+<i>66</i>&nbsp;	 * @throws IllegalArgumentException
+<i>67</i>&nbsp;	 * 	in case the given {@code Publisher} {@code entityStream} is {@literal null}.
+<i>68</i>&nbsp;	 */
+<i>69</i>&nbsp;	&lt;S extends T&gt; Flux&lt;S&gt; saveAll( Publisher&lt;S&gt; entityStream );
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;	/**
+<i>72</i>&nbsp;	 * Returns all instances of the type.
+<i>73</i>&nbsp;	 *
+<i>74</i>&nbsp;	 * @return {@link Flux} emitting all entities.
+<i>75</i>&nbsp;	 */
+<i>76</i>&nbsp;	Flux&lt;T&gt; findAll();
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;	/**
+<i>79</i>&nbsp;	 * Returns the number of entities available.
+<i>80</i>&nbsp;	 *
+<i>81</i>&nbsp;	 * @return {@link Mono} emitting the number of entities.
+<i>82</i>&nbsp;	 */
+<i>83</i>&nbsp;	Mono&lt;Long&gt; count();
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;	/**
+<i>86</i>&nbsp;	 * Deletes all entities managed by the repository.
+<i>87</i>&nbsp;	 *
+<i>88</i>&nbsp;	 * @return {@link Mono} signaling when operation has completed.
+<i>89</i>&nbsp;	 */
+<i>90</i>&nbsp;	Mono&lt;Void&gt; deleteAll();
+<i>91</i>&nbsp;	}
+<i>92</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+
+    <div style="float:right;">generated on 2019-07-26 12:34</div>
+</div>
+</body>
+</html>

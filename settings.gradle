@@ -1,0 +1,6 @@
+/**
+ * - This file for multiproject build
+ - For performance the file is empty: Gradle tries to locate a file with every invocation of the build.
+ * */
+rootProject.name = 'riso'
+

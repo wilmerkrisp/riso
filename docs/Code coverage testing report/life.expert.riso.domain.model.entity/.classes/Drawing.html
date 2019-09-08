@@ -1,0 +1,108 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Drawing</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">life.expert.riso.domain.model.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Drawing (life.expert.riso.domain.model.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Drawing</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package life.expert.riso.domain.model.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.Optional;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;//@Header@
+<i>8</i>&nbsp;//--------------------------------------------------------------------------------
+<i>9</i>&nbsp;//
+<i>10</i>&nbsp;//                          riso  life.expert.riso.domain.model.entity
+<i>11</i>&nbsp;//                           wilmer 2019/07/23
+<i>12</i>&nbsp;//
+<i>13</i>&nbsp;//--------------------------------------------------------------------------------
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;/**
+<i>16</i>&nbsp; * The interface Drawing.
+<i>17</i>&nbsp; */
+<i>18</i>&nbsp;public interface Drawing
+<i>19</i>&nbsp;	{
+<i>20</i>&nbsp;	
+<i>21</i>&nbsp;	/**
+<i>22</i>&nbsp;	 * Gets x max.
+<i>23</i>&nbsp;	 *
+<i>24</i>&nbsp;	 * @return the x max
+<i>25</i>&nbsp;	 */
+<i>26</i>&nbsp;	public int getXMax();
+<i>27</i>&nbsp;	
+<i>28</i>&nbsp;	/**
+<i>29</i>&nbsp;	 * Gets y max.
+<i>30</i>&nbsp;	 *
+<i>31</i>&nbsp;	 * @return the y max
+<i>32</i>&nbsp;	 */
+<i>33</i>&nbsp;	public int getYMax();
+<i>34</i>&nbsp;	
+<i>35</i>&nbsp;	/**
+<i>36</i>&nbsp;	 * Put pixel.
+<i>37</i>&nbsp;	 *
+<i>38</i>&nbsp;	 * @param x
+<i>39</i>&nbsp;	 * 	the x
+<i>40</i>&nbsp;	 * @param y
+<i>41</i>&nbsp;	 * 	the y
+<i>42</i>&nbsp;	 * @param c
+<i>43</i>&nbsp;	 * 	the c
+<i>44</i>&nbsp;	 */
+<i>45</i>&nbsp;	public void putPixel( int x ,
+<i>46</i>&nbsp;	                      int y ,
+<i>47</i>&nbsp;	                      char c );
+<i>48</i>&nbsp;	
+<i>49</i>&nbsp;	/**
+<i>50</i>&nbsp;	 * Gets pixel.
+<i>51</i>&nbsp;	 *
+<i>52</i>&nbsp;	 * @param x
+<i>53</i>&nbsp;	 * 	the x
+<i>54</i>&nbsp;	 * @param y
+<i>55</i>&nbsp;	 * 	the y
+<i>56</i>&nbsp;	 *
+<i>57</i>&nbsp;	 * @return the pixel
+<i>58</i>&nbsp;	 */
+<i>59</i>&nbsp;	public Optional&lt;Character&gt; getPixel( int x ,
+<i>60</i>&nbsp;	                                     int y );
+<i>61</i>&nbsp;	}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-07-26 12:34</div>
+</div>
+</body>
+</html>
