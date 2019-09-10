@@ -2,6 +2,7 @@ package life.expert.riso.app.controller;
 
 
 
+import static life.expert.common.async.LogUtils.printConsumer;
 import static life.expert.riso.app.OutputHelper.FIGURE_DEFAULT_CHARACTER;
 import static life.expert.riso.app.OutputHelper.MAX_CANVAS_SIZE;
 import static life.expert.riso.app.OutputHelper.MAX_SCREEN_SIZE;
@@ -19,6 +20,7 @@ import life.expert.riso.domain.service.FillDataTransferObject;
 import life.expert.riso.domain.service.LineDataTransferObject;
 import life.expert.riso.domain.service.RectangleDataTransferObject;
 import life.expert.riso.domain.service.CanvasService;
+import life.expert.riso.domain.service.ResultDataTransferObject;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,12 +119,9 @@ public final class ShellCommands
 		{
 		
 		getCanvasService().createCanvas( new CanvasDataTransferObject( width , height ) )
-		                  .doOnNext( c -> setCurrentCanvas( c.getId() ) )
-		                  //.map( t -> t._2 )
-		                  .flatMap( Canvas::makeScreen )
+		                  .doOnNext( c -> setCurrentCanvas( c.getCanvasId() ) )
+		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
-		
-		//System.out.println("ShellCommands createCanvas " );
 		}
 	
 	/**
@@ -145,7 +144,7 @@ public final class ShellCommands
 	                     @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int secondPointY )
 		{
 		getCanvasService().newLine( new LineDataTransferObject( getCurrentCanvas() , firstPointX , firstPointY , secondPointX , secondPointY , FIGURE_DEFAULT_CHARACTER ) )
-		                  .flatMap( Canvas::makeScreen )
+		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}
 	
@@ -169,7 +168,7 @@ public final class ShellCommands
 	                          @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int lowerRightCornerY )
 		{
 		getCanvasService().newRectangle( new RectangleDataTransferObject( getCurrentCanvas() , upperLeftCornerX , upperLeftCornerY , lowerRightCornerX , lowerRightCornerY , FIGURE_DEFAULT_CHARACTER ) )
-		                  .flatMap( Canvas::makeScreen )
+		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}
 	
@@ -191,7 +190,7 @@ public final class ShellCommands
 		{
 		char c = colour.charAt( 0 );
 		getCanvasService().newFill( new FillDataTransferObject( getCurrentCanvas() , fillFromStartPointX , fillFromStartPointY , c ) )
-		                  .flatMap( Canvas::makeScreen )
+		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}
 	

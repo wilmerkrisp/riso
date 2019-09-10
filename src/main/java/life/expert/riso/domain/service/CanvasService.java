@@ -16,12 +16,12 @@ import reactor.core.publisher.Mono;
 
 public interface CanvasService
 	{
-	public Mono<Canvas> createCanvas( CanvasDataTransferObject canvas );
+	public Mono<ResultDataTransferObject> createCanvas( CanvasDataTransferObject canvas );
 	
-	public Mono<Canvas> newLine( LineDataTransferObject line );
+	public Mono<ResultDataTransferObject> newLine( LineDataTransferObject line );
 	
-	public Mono<Canvas> newRectangle( RectangleDataTransferObject rectangle );
+	public Mono<ResultDataTransferObject> newRectangle( RectangleDataTransferObject rectangle );
 	
-	public Mono<Canvas> newFill( FillDataTransferObject fill );
+	public Mono<ResultDataTransferObject> newFill( FillDataTransferObject fill );
 	
 	}

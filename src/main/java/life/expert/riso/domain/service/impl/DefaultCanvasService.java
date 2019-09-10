@@ -19,9 +19,11 @@ import life.expert.riso.domain.service.CanvasService;
 import life.expert.riso.domain.service.FillDataTransferObject;
 import life.expert.riso.domain.service.LineDataTransferObject;
 import life.expert.riso.domain.service.RectangleDataTransferObject;
+import life.expert.riso.domain.service.ResultDataTransferObject;
 import lombok.AccessLevel;
 import lombok.Getter;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 
@@ -60,6 +62,17 @@ import static io.vavr.API.Match;
 
 import static io.vavr.API.Function;     //lambda->Function3
 
+import life.expert.value.string.*;
+import life.expert.value.numeric.*;
+
+import static life.expert.common.async.LogUtils.*;        //logAtInfo
+import static life.expert.common.function.NullableUtils.*;//.map(nullableFunction)
+import static life.expert.common.function.CheckedUtils.*;// .map(consumerToBoolean)
+import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
+import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
+import static life.expert.common.base.Objects.*;          //deepCopyOfObject
+import static life.expert.common.reactivestreams.ForComprehension.*; //reactive for-comprehension
+
 /**
  * <pre> * The type Canvas service.
  *
@@ -83,8 +96,8 @@ public class DefaultCanvasService
 	
 	private final DrawingFactory drawingFactory;
 	
-	@Getter( AccessLevel.NONE ) Function<Mono<Canvas>,Publisher<Canvas>> LOWLEVEL_EXCEPTION_WRAPPER = s -> s.onErrorMap( not( err -> err.getClass()
-	                                                                                                                                    .equals( IllegalArgumentException.class ) ) , err -> new RuntimeException( "We are sorry, an unexpected error has occurred" , err ) );
+	@Getter( AccessLevel.NONE ) Function<Mono<ResultDataTransferObject>,Publisher<ResultDataTransferObject>> LOWLEVEL_EXCEPTION_WRAPPER = s -> s.onErrorMap( not( err -> err.getClass()
+	                                                                                                                                                                        .equals( IllegalArgumentException.class ) ) , err -> new RuntimeException( "We are sorry, an unexpected error has occurred" , err ) );
 	
 	/**
 	 * Instantiates a new Canvas service.
@@ -102,37 +115,51 @@ public class DefaultCanvasService
 	
 	@Override
 	//@Transactional
-	public Mono<Canvas> createCanvas( CanvasDataTransferObject canvas )
+	public Mono<ResultDataTransferObject> createCanvas( @NonNull CanvasDataTransferObject canvas )
 		{
 		var c = drawingFactory.newMonoOfCanvas( canvas.getWidth() , canvas.getHeight() );
 		
 		return getCanvasRepository().saveAll( c )
 		                            .next()
+		                            .flatMap( Canvas::makeScreen )
+		                            .zipWith( c )
+		                            .map( t -> new ResultDataTransferObject( t.getT2().getId() , t.getT1() ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
 	@Override
 	//@Transactional
-	public Mono<Canvas> newLine( LineDataTransferObject line )
+	public Mono<ResultDataTransferObject> newLine( @NonNull LineDataTransferObject line )
 		{
-		if( line.getCanvasId()
-		        .isBlank() )
-			return illegalStateMonoError( "canvas id must not be empty" );
+		
+		final String canvasId = line.getCanvasId();
+		
+		if( canvasId != null && canvasId.isBlank() )
+			return illegalStateMonoError( "canvas id must not be empty" + canvasId );
 		
 		var l = drawingFactory.newMonoOfLine( line.getX0() , line.getY0() , line.getX1() , line.getY1() , line.getCharacter() );
 		
-		return getCanvasRepository().findById( line.getCanvasId() )
+		System.out.println( "DefaultCanvasService newLine "+canvasId );
+		
+		var a=getCanvasRepository().findById( canvasId ).subscribe(printConsumer());
+		
+		return getCanvasRepository().findById( canvasId )
+		                            .doOnNext( printConsumer() )
 		                            .flatMap( c -> c.draw( l ) )
+		                            .doOnNext( printConsumer() )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
-		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .flatMap( Canvas::makeScreen )
+		                            .map( s -> new ResultDataTransferObject( canvasId , s ) );
+		//.transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
 	@Override
 	//@Transactional
-	public Mono<Canvas> newRectangle( RectangleDataTransferObject rectangle )
+	public Mono<ResultDataTransferObject> newRectangle( @NonNull RectangleDataTransferObject rectangle )
 		{
-		if( rectangle.getCanvasId()
-		             .isBlank() )
+		final String canvasId = rectangle.getCanvasId();
+		
+		if( canvasId != null && canvasId.isBlank() )
 			return illegalStateMonoError( "canvas id must not be empty" );
 		
 		var r = drawingFactory.newMonoOfRectangle( rectangle.getX0() , rectangle.getY0() , rectangle.getX1() , rectangle.getY1() , rectangle.getCharacter() );
@@ -140,15 +167,18 @@ public class DefaultCanvasService
 		return getCanvasRepository().findById( rectangle.getCanvasId() )
 		                            .flatMap( c -> c.draw( r ) )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
+		                            .flatMap( Canvas::makeScreen )
+		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
 	@Override
 	//@Transactional
-	public Mono<Canvas> newFill( FillDataTransferObject fill )
+	public Mono<ResultDataTransferObject> newFill( @NonNull FillDataTransferObject fill )
 		{
-		if( fill.getCanvasId()
-		        .isBlank() )
+		final String canvasId = fill.getCanvasId();
+		
+		if( canvasId != null && canvasId.isBlank() )
 			return illegalStateMonoError( "canvas id must not be empty" );
 		
 		var f = drawingFactory.newMonoOfFill( fill.getX() , fill.getY() , fill.getCharacter() );
@@ -156,6 +186,8 @@ public class DefaultCanvasService
 		return getCanvasRepository().findById( fill.getCanvasId() )
 		                            .flatMap( c -> c.draw( f ) )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
+		                            .flatMap( Canvas::makeScreen )
+		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 		
