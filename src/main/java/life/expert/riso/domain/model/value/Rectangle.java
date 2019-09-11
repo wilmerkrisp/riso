@@ -369,7 +369,7 @@ public final class Rectangle
 	
 	private Mono<Void> draw_( final Drawing canvas )
 		{
-		System.out.println( "Rectangle draw_ $drawingFiguresFactory$drawingFiguresFactory$drawingFiguresFactory$drawingFiguresFactory " + factory );
+		//System.out.println( "Rectangle draw_ $drawingFiguresFactory$drawingFiguresFactory$drawingFiguresFactory$drawingFiguresFactory " + factory );
 		
 		var l1 = factory.newMonoOfLine( x0 , y0 , x1 , y0 , character );
 		var l2 = factory.newMonoOfLine( x1 , y0 , x1 , y1 , character );
