@@ -143,7 +143,15 @@ public final class ShellCommands
 	                     @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int secondPointX ,
 	                     @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int secondPointY )
 		{
-		getCanvasService().newLine( new LineDataTransferObject( getCurrentCanvas() , firstPointX , firstPointY , secondPointX , secondPointY , FIGURE_DEFAULT_CHARACTER ) )
+		var l = new LineDataTransferObject();
+		l.setCanvasId( getCurrentCanvas() );
+		l.setX0( firstPointX );
+		l.setY0( firstPointY );
+		l.setX1( secondPointX );
+		l.setY1( secondPointY );
+		l.setCharacter( FIGURE_DEFAULT_CHARACTER );
+		
+		getCanvasService().newLine( l )
 		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}

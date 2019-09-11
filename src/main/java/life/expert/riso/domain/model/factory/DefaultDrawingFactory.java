@@ -13,6 +13,7 @@ package life.expert.riso.domain.model.factory;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.LineBuilder;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
 import life.expert.riso.domain.model.value.Fill;
 import life.expert.riso.domain.model.value.Line;
@@ -72,18 +73,9 @@ public class DefaultDrawingFactory
 		}
 	
 	@Override
-	public Mono<Figure> newMonoOfLine( int firstPointX ,
-	                                   int firstPointY ,
-	                                   int secondPointX ,
-	                                   int secondPointY ,
-	                                   char character )
+	public LineBuilder newLineBuilder()
 		{
-		return Line.builder()
-		           .startPoint( firstPointX , firstPointY )
-		           .endPoint( secondPointX , secondPointY )
-		           .filler( character )
-		           .buildMono()
-		           .cast( Figure.class );
+		return Line.builder();
 		}
 	
 	@Override
@@ -96,4 +88,9 @@ public class DefaultDrawingFactory
 		return Rectangle.monoOf( upperLeftCornerX , upperLeftCornerY , lowerRightCornerX , lowerRightCornerY , character )
 		                .cast( Figure.class );
 		}
+	
+	 
+	
+	
+	
 	}

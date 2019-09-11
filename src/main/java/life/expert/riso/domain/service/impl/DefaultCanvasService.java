@@ -13,6 +13,7 @@ package life.expert.riso.domain.service.impl;
 import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Canvas;
 
+import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.repository.CanvasRepository;
 import life.expert.riso.domain.service.CanvasDataTransferObject;
 import life.expert.riso.domain.service.CanvasService;
@@ -123,7 +124,8 @@ public class DefaultCanvasService
 		                            .next()
 		                            .flatMap( Canvas::makeScreen )
 		                            .zipWith( c )
-		                            .map( t -> new ResultDataTransferObject( t.getT2().getId() , t.getT1() ) )
+		                            .map( t -> new ResultDataTransferObject( t.getT2()
+		                                                                      .getId() , t.getT1() ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
@@ -137,16 +139,18 @@ public class DefaultCanvasService
 		if( canvasId != null && canvasId.isBlank() )
 			return illegalStateMonoError( "canvas id must not be empty" + canvasId );
 		
-		var l = drawingFactory.newMonoOfLine( line.getX0() , line.getY0() , line.getX1() , line.getY1() , line.getCharacter() );
+		var l = drawingFactory.newLineBuilder()
+		                         .startPoint( line.getX0() , line.getY0() )
+		                         .endPoint( line.getX1() , line.getY1() )
+		                         .filler( line.getCharacter() ).buildMono();
 		
-		System.out.println( "DefaultCanvasService newLine "+canvasId );
+		//System.out.println( "DefaultCanvasService newLine " + canvasId );
 		
-		var a=getCanvasRepository().findById( canvasId ).subscribe(printConsumer());
+//		var a = getCanvasRepository().findById( canvasId )
+//		                             .subscribe( printConsumer() );
 		
 		return getCanvasRepository().findById( canvasId )
-		                            .doOnNext( printConsumer() )
 		                            .flatMap( c -> c.draw( l ) )
-		                            .doOnNext( printConsumer() )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
 		                            .map( s -> new ResultDataTransferObject( canvasId , s ) );

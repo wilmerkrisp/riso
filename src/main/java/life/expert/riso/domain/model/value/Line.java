@@ -41,6 +41,7 @@ import io.vavr.control.Try;                               //try
 //import com.google.common.collect.*;                     //ImmutableList
 
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.LineBuilder;
 import life.expert.value.string.SolidString;
 import lombok.AllArgsConstructor;
 import lombok.Value;
@@ -180,8 +181,6 @@ public final class Line
 		return fromSupplier( () -> new Line( x0 , y0 , x1 , y1 , character ) );
 		}
 	
-
-	
 	/**
 	 * Standard shallow copy factory
 	 *
@@ -237,8 +236,6 @@ public final class Line
 		{
 		return Tuple.of( object.getX0() , object.getY0() , object.getX1() , object.getY1() , object.getCharacter() );
 		}
-	
-
 	
 	//</editor-fold>
 	
@@ -313,19 +310,19 @@ public final class Line
 		}
 	
 	//<editor-fold desc="builder pattern">
-
 	
 	/**
 	 * <pre>
 	 * Classic builder patterns for creating  Line.
 	 * </pre>
 	 */
-	public static Builder builder()
+	public static LineBuilder builder()
 		{
 		return new Builder();
 		}
 	
 	public static final class Builder
+		implements LineBuilder
 		{
 		
 		private int x0;
@@ -343,6 +340,7 @@ public final class Line
 			}
 		
 		//to do Please use AKA preconditions
+		@Override
 		public Builder startPoint( final int x0 ,
 		                           final int y0 )
 			{
@@ -351,6 +349,7 @@ public final class Line
 			return this;
 			}
 		
+		@Override
 		public Builder endPoint( final int x1 ,
 		                         final int y1 )
 			{
@@ -359,9 +358,10 @@ public final class Line
 			return this;
 			}
 		
-		public Builder filler(char character )
+		@Override
+		public Builder filler( char character )
 			{
-			this.character=character;
+			this.character = character;
 			return this;
 			}
 		
@@ -378,11 +378,13 @@ public final class Line
 		 * @implNote to create objects, this method calls the private factory monoOf_
 		 * 	to verify objects, this method uses precondition-objects
 		 */
-		public final Mono<Line> buildMono()
+		@Override
+		public final Mono<Figure> buildMono()
 			{
 			return PositivePoint.monoOf( x0 , y0 )
 			                    .then( PositivePoint.monoOf( x1 , y1 ) )
-			                    .then( monoOf_( x0 , y0 , x1 , y1 , character ) );
+			                    .then( monoOf_( x0 , y0 , x1 , y1 , character ) )
+			                    .cast( Figure.class );
 			}
 		
 		/**
@@ -396,7 +398,7 @@ public final class Line
 		 * </pre>
 		 */
 		@Deprecated
-		public final Line build()
+		public final Figure build()
 			{
 			return buildMono().block();
 			}
@@ -411,7 +413,8 @@ public final class Line
 		 *
 		 * @return the Try with Success or Failure inside
 		 */
-		public final Try<Line> buildTry()
+		@Override
+		public final Try<Figure> buildTry()
 			{
 			return tryFromMono( buildMono() );
 			}
