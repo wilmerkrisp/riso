@@ -57,7 +57,7 @@ public class DefaultDrawingFactory
 	public Mono<Canvas> newMonoOfCanvas( int width ,
 	                                     int height )
 		{
-		return DefaultCanvas.monoOf(  width , height )
+		return DefaultCanvas.monoOf( width , height )
 		                    .cast( Canvas.class );
 		}
 	
@@ -66,7 +66,7 @@ public class DefaultDrawingFactory
 	                                   int fillFromStartPointY ,
 	                                   char character )
 		{
-		return Fill.monoOf( fillFromStartPointX, fillFromStartPointY, character )
+		return Fill.monoOf( fillFromStartPointX , fillFromStartPointY , character )
 		           .cast( Figure.class );
 			
 		}
@@ -78,7 +78,11 @@ public class DefaultDrawingFactory
 	                                   int secondPointY ,
 	                                   char character )
 		{
-		return Line.monoOf( firstPointX , firstPointY, secondPointX, secondPointY, character )
+		return Line.builder()
+		           .startPoint( firstPointX , firstPointY )
+		           .endPoint( secondPointX , secondPointY )
+		           .filler( character )
+		           .buildMono()
 		           .cast( Figure.class );
 		}
 	
@@ -89,7 +93,7 @@ public class DefaultDrawingFactory
 	                                        int lowerRightCornerY ,
 	                                        char character )
 		{
-		return Rectangle.monoOf( upperLeftCornerX , upperLeftCornerY, lowerRightCornerX, lowerRightCornerY, character )
+		return Rectangle.monoOf( upperLeftCornerX , upperLeftCornerY , lowerRightCornerX , lowerRightCornerY , character )
 		                .cast( Figure.class );
 		}
 	}

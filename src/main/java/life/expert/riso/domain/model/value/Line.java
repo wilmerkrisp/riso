@@ -41,6 +41,7 @@ import io.vavr.control.Try;                               //try
 //import com.google.common.collect.*;                     //ImmutableList
 
 import life.expert.riso.domain.model.Figure;
+import life.expert.value.string.SolidString;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -179,66 +180,7 @@ public final class Line
 		return fromSupplier( () -> new Line( x0 , y0 , x1 , y1 , character ) );
 		}
 	
-	/**
-	 * Create Line from simple arguments
-	 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
-	 *
-	 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
-	 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
-	 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 * 	to verify objects, this method uses precondition-objects
-	 */
-	public static Mono<Line> monoOf( final int x0 ,
-	                                 final int y0 ,
-	                                 final int x1 ,
-	                                 final int y1 ,
-	                                 final char character )
-		{
-		return PositivePoint.monoOf( x0 , y0 )
-		                    .then( PositivePoint.monoOf( x1 , y1 ) )
-		                    .then( monoOf_( x0 , y0 , x1 , y1 , character ) );
-			
-		}
-	
-	/**
-	 * <pre>
-	 * Classic fabric method for creating  Line.
-	 * This factory method is prohibited because it is intended only for easy creation of objects in tests
-	 *
-	 *
-	 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
-	 * @deprecated please use pure functional methods monoOf.., without raise exceptions. </pre>
-	 */
-	@Deprecated
-	public static Line of( final int x0 ,
-	                       final int y0 ,
-	                       final int x1 ,
-	                       final int y1 ,
-	                       final char character )
-		{
-		return monoOf( x0 , y0 , x1 , y1 , character ).block();
-		}
-	
-	/**
-	 * Create Line from Mono with Tuple inside
-	 * The method helps chaining flows together
-	 *
-	 * @param tuple
-	 * 	the tuple
-	 *
-	 * @return the Mono with lazyli created object
-	 */
-	public static Mono<Line> monoOfMono( Mono<Tuple5<Integer,Integer,Integer,Integer,Character>> tuple )
-		{
-		if( tuple == null )
-			return illegalArgumentMonoError( "Input Mono must not be null." );
-		else
-			return tuple.flatMap( Line::monoOfTuple );
-		}
+
 	
 	/**
 	 * Standard shallow copy factory
@@ -279,25 +221,6 @@ public final class Line
 		return monoOf_( startPoint.getX() , startPoint.getY() , endPoint.getX() , endPoint.getY() , character );
 		}
 	
-	/**
-	 * Fabric method for creating objects wrapped into Try.
-	 *
-	 * For example, if this class is a precondition object and you need to check it and then pass it to the input of another object of the subject domain
-	 * This method is supposed to be used when you need to get an error immediately (not lazily),
-	 * for example, if the message is immediately returned to the user UI and not wait
-	 * when, for example at night, lazy processing occurs and a user error is detected
-	 *
-	 * @return the Try with Success or Failure inside
-	 */
-	public static Try<Line> tryOf( final int x0 ,
-	                               final int y0 ,
-	                               final int x1 ,
-	                               final int y1 ,
-	                               final char character )
-		{
-		return tryFromMono( monoOf( x0 , y0 , x1 , y1 , character ) );
-		}
-	
 	//</editor-fold>
 	
 	//<editor-fold desc="object to tuple conversions">
@@ -315,20 +238,7 @@ public final class Line
 		return Tuple.of( object.getX0() , object.getY0() , object.getX1() , object.getY1() , object.getCharacter() );
 		}
 	
-	/**
-	 * Create Line from Tuple
-	 * The method helps with conversion operations Tuple-&gt;Line
-	 *
-	 * @return the Mono with lazyli created object
-	 */
-	public static Mono<Line> monoOfTuple( Tuple5<Integer,Integer,Integer,Integer,Character> tuple )
-		{
-		if( tuple == null )
-			return illegalArgumentMonoError( "Input tuple must not be null." );
-		else
-			return TupleUtils.function( Line::monoOf )
-			                 .apply( tuple );
-		}
+
 	
 	//</editor-fold>
 	
@@ -401,6 +311,114 @@ public final class Line
 		//log("inside line:"+ ((Canvas)canvas).makeScreen() );
 		return empty();
 		}
+	
+	//<editor-fold desc="builder pattern">
+
+	
+	/**
+	 * <pre>
+	 * Classic builder patterns for creating  Line.
+	 * </pre>
+	 */
+	public static Builder builder()
+		{
+		return new Builder();
+		}
+	
+	public static final class Builder
+		{
 		
+		private int x0;
+		
+		private int y0;
+		
+		private int x1;
+		
+		private int y1;
+		
+		private char character;
+		
+		Builder()
+			{
+			}
+		
+		//to do Please use AKA preconditions
+		public Builder startPoint( final int x0 ,
+		                           final int y0 )
+			{
+			this.x0 = x0;
+			this.y0 = y0;
+			return this;
+			}
+		
+		public Builder endPoint( final int x1 ,
+		                         final int y1 )
+			{
+			this.x1 = x1;
+			this.y1 = y1;
+			return this;
+			}
+		
+		public Builder filler(char character )
+			{
+			this.character=character;
+			return this;
+			}
+		
+		/**
+		 * Create Line from simple arguments
+		 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
+		 *
+		 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
+		 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
+		 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
+		 *
+		 * @return the Mono with lazyli created object
+		 *
+		 * @implNote to create objects, this method calls the private factory monoOf_
+		 * 	to verify objects, this method uses precondition-objects
+		 */
+		public final Mono<Line> buildMono()
+			{
+			return PositivePoint.monoOf( x0 , y0 )
+			                    .then( PositivePoint.monoOf( x1 , y1 ) )
+			                    .then( monoOf_( x0 , y0 , x1 , y1 , character ) );
+			}
+		
+		/**
+		 * <pre>
+		 * Classic builder pattern for creating  Line.
+		 * This factory method is prohibited because it is intended only for easy creation of objects in tests
+		 *
+		 *
+		 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
+		 * @deprecated please use pure functional methods monoOf.., without raise exceptions.
+		 * </pre>
+		 */
+		@Deprecated
+		public final Line build()
+			{
+			return buildMono().block();
+			}
+		
+		/**
+		 * Builder pattern method for creating objects wrapped into Try.
+		 *
+		 * For example, if this class is a precondition object and you need to check it and then pass it to the input of another object of the subject domain
+		 * This method is supposed to be used when you need to get an error immediately (not lazily),
+		 * for example, if the message is immediately returned to the user UI and not wait
+		 * when, for example at night, lazy processing occurs and a user error is detected
+		 *
+		 * @return the Try with Success or Failure inside
+		 */
+		public final Try<Line> buildTry()
+			{
+			return tryFromMono( buildMono() );
+			}
+			
+		}
+	
+	//</editor-fold>
+	
 	}
 
