@@ -181,45 +181,6 @@ public final class Line
 		return fromSupplier( () -> new Line( x0 , y0 , x1 , y1 , character ) );
 		}
 	
-	/**
-	 * Standard shallow copy factory
-	 *
-	 * @param other
-	 * 	the other object
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 */
-	public static Mono<Line> copyOf( final Line other )
-		{
-		return monoOf_( other.getX0() , other.getY0() , other.getX1() , other.getY1() , other.getCharacter() );
-		}
-	
-	//</editor-fold>
-	
-	//<editor-fold desc="using and outstanding preconditions">
-	
-	/**
-	 * Create Line from precondition-objects
-	 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
-	 *
-	 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
-	 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
-	 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 * 	to verify objects, this method uses precondition-objects
-	 */
-	public static Mono<Line> monoOfPreconditions( PositivePoint startPoint ,
-	                                              PositivePoint endPoint ,
-	                                              Character character )
-		{
-		return monoOf_( startPoint.getX() , startPoint.getY() , endPoint.getX() , endPoint.getY() , character );
-		}
-	
 	//</editor-fold>
 	
 	//<editor-fold desc="object to tuple conversions">
@@ -364,6 +325,54 @@ public final class Line
 			this.character = character;
 			return this;
 			}
+		
+		@Override
+		public Builder startPoint( PositivePoint startPoint )
+			{
+			this.x0 = startPoint.getX();
+			this.y0 = startPoint.getY();
+			return this;
+			}
+		
+		@Override
+		public Builder endPoint( PositivePoint endPoint )
+			{
+			this.x1 = endPoint.getX();
+			this.y1 = endPoint.getY();
+			return this;
+			}
+		
+		@Override
+		public Builder startPointX( int x0)
+			{
+			this.x0 = x0;
+			return this;
+			}
+		
+		
+		@Override
+		public Builder startPointY( int y0)
+			{
+			this.x0 = x0;
+			return this;
+			}
+		
+		@Override
+		public Builder endPointX( int x1)
+			{
+			this.x1 = x1;
+			return this;
+			}
+		
+		
+		@Override
+		public Builder endPointY( int y1)
+			{
+			this.y1 = y1;
+			return this;
+			}
+		
+		
 		
 		/**
 		 * Create Line from simple arguments

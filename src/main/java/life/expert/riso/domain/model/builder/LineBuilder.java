@@ -11,6 +11,7 @@ package life.expert.riso.domain.model.builder;
 //               wilmer 2019/09/11
 //---------------------------------------------
 
+import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.value.Line;
 import lombok.NonNull;//@NOTNULL
@@ -91,12 +92,24 @@ public interface LineBuilder
 	public LineBuilder startPoint( final int x0 ,
 	                               final int y0 );
 	
+	public LineBuilder startPoint( PositivePoint startPoint );
+	
+	public LineBuilder startPointX( int x0 );
+	
+	public LineBuilder startPointY( int y0 );
+	
 	public LineBuilder endPoint( final int x1 ,
 	                             final int y1 );
 	
+	public LineBuilder endPoint( PositivePoint endPoint );
+	
+	public LineBuilder endPointX( int x1 );
+	
+	public LineBuilder endPointY( int y1 );
+	
 	public LineBuilder filler( char character );
 	
-	public Mono< Figure> buildMono();
+	public Mono<Figure> buildMono();
 	
 	public Try<Figure> buildTry();
 	}
