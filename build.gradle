@@ -109,7 +109,7 @@ plugins {
     id 'idea'
 
     id 'com.dorongold.task-tree' version '1.4' /* ./gradlew -q build taskTree */
-    id 'com.github.ben-manes.versions' version '0.24.0' /* ./gradlew -q dependencyUpdates */
+    id 'com.github.ben-manes.versions' version '0.25.0' /* ./gradlew -q dependencyUpdates */
 
     id "me.champeau.gradle.jmh" version "0.5.0-rc-2"
     id "io.morethan.jmhreport" version "0.9.0"
