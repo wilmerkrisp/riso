@@ -7,7 +7,9 @@ import static org.junit.Assert.assertThat;
 
 import io.vavr.Tuple;
 import io.vavr.control.Try;
+import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
 import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,11 +53,19 @@ public class LineTest
 	public void setUp()
 	throws Exception
 		{
-		canvas = DefaultCanvas.monoOf( PositiveInteger.of( 10 ) , PositiveInteger.of( 10 ) )
-		                      .block();
-		line = Line.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 1 , 4 ) , 'x' )
-		           .block();
-			
+	
+		
+		canvas = (DefaultCanvas)DefaultCanvas.builder()
+		                      .size( 10 , 10 )
+		                      .build();
+		
+		
+
+		line = (Line)Line.builder( )
+		                    .startPoint( 1 , 1 )
+		                    .endPoint( 1 , 4 )
+		                    .filler( 'x' )
+		                    .build();
 		}
 	
 	/**
@@ -64,7 +74,13 @@ public class LineTest
 	@Test
 	public void monoOf()
 		{
-		StepVerifier.create( Line.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 1 , 4 ) , 'x' ) )
+		var l  = Line.builder( )
+		                         .startPoint( 1 , 1 )
+		                         .endPoint( 1 , 4 )
+		                         .filler( 'x' )
+		                         .buildMono();
+		
+		StepVerifier.create( l )
 		            .expectNextCount( 1 )
 		            .expectComplete()
 		            .verify();
@@ -130,40 +146,6 @@ public class LineTest
 		assertThat( line.getCharacter() , is( 'x' ) );
 		}
 	
-	public static String fakeString( int x0 ,
-	                                 int y0 ,
-	                                 int x1 ,
-	                                 int y1 ,
-	                                 String character )
-		{
-		return "fakeString " + x0 + y0 + x1 + y1 + character;
-		}
 	
-	@Test
-	@SuppressWarnings( "unchecked" )
-	public void tryOf()
-		{
-		int    x0        = 2;
-		int    y0        = 3;
-		int    x1        = 5;
-		int    y1        = 6;
-		String character = null;
-		
-		var in = Tuple.of( x0 , y0 , x1 , y1 , character );
-		
-		//@formatter:off
-		Try<String> r= Match(in ).of(
-		                   Case( $(not(predicate(  ( x_0 , y_0 , x_1 , y_1, ch ) -> x_0 >= 1 && y_0 >= 1 && x_1 >= 1 && y_1 >= 1 ) )) ,
-		                         illegalArgumentFailure( "bad args" )) ,
-		                   Case( $() ,
-		                          t-> Success(function( LineTest::fakeString ).apply(t)) ) ,
-		                   Case( $() ,
-		                            Success("other result"))
-		                            );
-		//@formatter:on
-		
-		//log( "RESULT:: " + r );
-		
-		}
 		
 	}

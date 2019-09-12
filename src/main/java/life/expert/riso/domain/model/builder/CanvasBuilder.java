@@ -99,4 +99,6 @@ public interface CanvasBuilder
 	
 	public Try<Canvas> buildTry();
 	
+	public  Canvas build();
+	
 	}

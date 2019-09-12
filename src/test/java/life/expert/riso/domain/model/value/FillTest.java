@@ -5,9 +5,11 @@ package life.expert.riso.domain.model.value;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
 import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,15 +43,23 @@ public class FillTest
 	public void setUp()
 	throws Exception
 		{
-		var rect = Rectangle.monoOf( PositivePoint.of( 2 , 2 ) , PositivePoint.of( 9 , 9 ) , 'x' , ( PositivePoint a , PositivePoint b , Character c ) -> Line.monoOf( a , b , c )
-		                                                                                                                                                      .cast( Figure.class )).cast( Figure.class );
 		
-		canvas = DefaultCanvas.monoOf( PositiveInteger.of( 10 ) , PositiveInteger.of( 10 ) )
+		var rect = Rectangle.builder( new DefaultDrawingFactory() )
+		                    .startPoint( 2 , 2 )
+		                    .endPoint( 9 , 9 )
+		                    .filler( 'x' )
+		                    .build();
+		
+		canvas = DefaultCanvas.builder()
+		                      .size( 10 , 10 )
+		                      .buildMono()
 		                      .flatMap( c -> c.draw( rect ) )
 		                      .block();
 		
-		fill = Fill.monoOf( PositivePoint.of( 3 , 3 ) , 'o' )
-		           .block();
+		fill = (Fill) Fill.builder()
+		                  .point( 3 , 3 )
+		                  .filler( 'o' )
+		                  .build();
 			
 		}
 	
@@ -59,7 +69,11 @@ public class FillTest
 	@Test
 	public void monoOf()
 		{
-		StepVerifier.create( Fill.monoOf( PositivePoint.of( 10 , 10 ) , 'd' ) )
+		var f = Fill.builder()
+		            .point( 10 , 10 )
+		            .filler( 'd' )
+		            .buildMono();
+		StepVerifier.create( f )
 		            .expectNextCount( 1 )
 		            .expectComplete()
 		            .verify();

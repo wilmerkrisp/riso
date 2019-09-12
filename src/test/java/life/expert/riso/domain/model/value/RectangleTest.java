@@ -5,9 +5,11 @@ package life.expert.riso.domain.model.value;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
 import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,11 +43,15 @@ public class RectangleTest
 	public void setUp()
 	throws Exception
 		{
-		canvas = DefaultCanvas.monoOf( PositiveInteger.of( 10 ) , PositiveInteger.of( 10 ) )
-		                      .block();
-		rectangle = Rectangle.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 4 , 4 ) , 'x', ( PositivePoint a , PositivePoint b , Character c ) -> Line.monoOf( a , b , c )
-		                                                                                                                                                      .cast( Figure.class ) )
-		                     .block();
+		canvas = (DefaultCanvas)DefaultCanvas.builder()
+		                      .size( 10 , 10 )
+		                      .build();
+		
+		rectangle= (Rectangle) Rectangle.builder( new DefaultDrawingFactory() )
+		                    .startPoint( 1 , 1 )
+		                    .endPoint( 4 , 4 )
+		                    .filler( 'x' )
+		                    .build();
 		}
 	
 	/**
@@ -54,8 +60,14 @@ public class RectangleTest
 	@Test
 	public void monoOf()
 		{
-		StepVerifier.create( Rectangle.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 4 , 4 ) , 'x' , ( PositivePoint a , PositivePoint b , Character c ) -> Line.monoOf( a , b , c )
-		                                                                                                                                                                .cast( Figure.class )) )
+		var r=  Rectangle.builder( new DefaultDrawingFactory() )
+		                    .startPoint( 1 , 1 )
+		                    .endPoint( 4 , 4 )
+		                    .filler( 'x' )
+		                    .buildMono();
+		
+		
+		StepVerifier.create(r )
 		            .expectNextCount( 1 )
 		            .expectComplete()
 		            .verify();

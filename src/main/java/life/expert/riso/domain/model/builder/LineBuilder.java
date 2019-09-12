@@ -112,4 +112,6 @@ public interface LineBuilder
 	public Mono<Figure> buildMono();
 	
 	public Try<Figure> buildTry();
+	
+	public  Figure build();
 	}

@@ -9,7 +9,9 @@ import java.time.Duration;
 
 import com.google.common.base.Strings;
 import life.expert.riso.common.PositivePoint;
+import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
 import life.expert.riso.domain.model.value.Line;
 import life.expert.riso.domain.model.value.Rectangle;
 import life.expert.value.numeric.PositiveInteger;
@@ -36,7 +38,7 @@ import reactor.test.StepVerifier;
 public class CanvasTest
 	{
 	
-	private DefaultCanvas canvas;
+	private Canvas canvas;
 	
 	/**
 	 * Sets up.
@@ -50,12 +52,11 @@ public class CanvasTest
 		{
 		StepVerifier.setDefaultTimeout( Duration.ofSeconds( 3 ) );
 		
-		canvas = DefaultCanvas.monoOf( PositiveInteger.of( 3 ) , PositiveInteger.of( 3 ) )
-		                      .block();
+		canvas = DefaultCanvas.builder()
+		                      .size( 3 , 3 )
+		                      .build();
+			
 		}
-	
-	
-	
 	
 	public static Flux<Integer> intRange( final int start ,
 	                                      final int end )
@@ -72,14 +73,13 @@ public class CanvasTest
 		} );
 		}
 	
-	
 	@Test
 	public void initScreenTest()
 		{
-		var s=new StringBuilder( Strings.repeat( " ", 80 ));
-		System.out.println("1CanvasTest initScreenTest "+s );
-		s.replace( 1,1,"z" );
-		System.out.println("2CanvasTest initScreenTest "+s );
+		var s = new StringBuilder( Strings.repeat( " " , 80 ) );
+		System.out.println( "1CanvasTest initScreenTest " + s );
+		s.replace( 1 , 1 , "z" );
+		System.out.println( "2CanvasTest initScreenTest " + s );
 		}
 	
 	/**
@@ -109,7 +109,9 @@ public class CanvasTest
 	@Test
 	public void monoOfTest()
 		{
-		var c = DefaultCanvas.monoOf( PositiveInteger.of( 3 ) , PositiveInteger.of( 3 ) );
+		var c = DefaultCanvas.builder()
+		                     .size( 3 , 3 )
+		                     .buildMono();
 		
 		StepVerifier.create( c )
 		            .expectNextCount( 1 )
@@ -125,8 +127,8 @@ public class CanvasTest
 		{
 		var screen = canvas.makeScreen();
 		
-		StepVerifier.create(screen )
-		           .expectNext( "-----\n" + "|   |\n" + "|   |\n" + "|   |\n" + "-----\n" )
+		StepVerifier.create( screen )
+		            .expectNext( "-----\n" + "|   |\n" + "|   |\n" + "|   |\n" + "-----\n" )
 		            .expectComplete()
 		            .verify();
 		
@@ -141,9 +143,11 @@ public class CanvasTest
 	public void drawFigureTest()
 		{
 		
-		var rect = Rectangle.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 2 , 2 ) , 'x' , ( PositivePoint a , PositivePoint b , Character c ) -> Line.monoOf( a , b , c )
-		                                                                                                                                                      .cast( Figure.class ) )
-		                    .block();
+		var rect = Rectangle.builder( new DefaultDrawingFactory() )
+		                    .startPoint( 1 , 1 )
+		                    .endPoint( 2 , 2 )
+		                    .filler( 'x' )
+		                    .build();
 		
 		StepVerifier.create( canvas.draw( rect ) )
 		            .expectNextCount( 1 )
@@ -158,7 +162,12 @@ public class CanvasTest
 	@Test
 	public void drawMonoTest()
 		{
-		var r = Rectangle.monoOf( PositivePoint.of( 1 , 1 ) , PositivePoint.of( 2 , 2 ) , 'x' , ( PositivePoint a , PositivePoint b , Character c ) -> Line.monoOf( a , b , c ) .cast( Figure.class )).cast( Figure.class ) ;//.log( "VO rect" , Level.FINE , SignalType.ON_NEXT );
+		var r = Rectangle.builder( new DefaultDrawingFactory() )
+		                 .startPoint( 1 , 1 )
+		                 .endPoint( 2 , 2 )
+		                 .filler( 'x' )
+		                 .buildMono();
+		
 		var p = canvas.draw( r );//.log( "VO draw" , Level.FINE , SignalType.ON_NEXT );
 		//p.subscribe( logAtInfoConsumer( "NEXT" ) , logAtErrorConsumer( "ERROR" ) , logAtInfoRunnable( "COMPLETE" ) );
 		

@@ -105,4 +105,6 @@ public interface RectangleBuilder
 	public Mono<Figure> buildMono();
 	
 	public Try<Figure> buildTry();
+	
+	public  Figure build();
 	}

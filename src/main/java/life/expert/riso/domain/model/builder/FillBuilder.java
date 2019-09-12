@@ -12,6 +12,7 @@ package life.expert.riso.domain.model.builder;
 //---------------------------------------------
 
 import life.expert.riso.common.PositivePoint;
+import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.value.Fill;
 import lombok.NonNull;//@NOTNULL
@@ -139,6 +140,7 @@ public interface FillBuilder
 	
 	public Try<Figure> buildTry();
 	
+	public  Figure build();
 
 	
     
