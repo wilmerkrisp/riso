@@ -175,7 +175,15 @@ public final class ShellCommands
 	                          @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int lowerRightCornerX ,
 	                          @Min( MIN_CANVAS_SIZE ) @Max( MAX_CANVAS_SIZE ) int lowerRightCornerY )
 		{
-		getCanvasService().newRectangle( new RectangleDataTransferObject( getCurrentCanvas() , upperLeftCornerX , upperLeftCornerY , lowerRightCornerX , lowerRightCornerY , FIGURE_DEFAULT_CHARACTER ) )
+		var l = new RectangleDataTransferObject();
+		l.setCanvasId( getCurrentCanvas() );
+		l.setX0( upperLeftCornerX );
+		l.setY0( upperLeftCornerY );
+		l.setX1( lowerRightCornerX );
+		l.setY1( lowerRightCornerY );
+		l.setCharacter( FIGURE_DEFAULT_CHARACTER );
+		
+		getCanvasService().newRectangle( l )
 		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}

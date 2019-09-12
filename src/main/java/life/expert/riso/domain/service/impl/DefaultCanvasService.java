@@ -81,7 +81,7 @@ import static life.expert.common.reactivestreams.ForComprehension.*; //reactive 
  * Postconditions: none
  * Side effects: none
  * Tread safety: Not thread-safe
-
+ *
  * </pre>
  */
 @Service
@@ -137,14 +137,15 @@ public class DefaultCanvasService
 			return illegalStateMonoError( "canvas id must not be empty" + canvasId );
 		
 		var l = drawingFactory.newLineBuilder()
-		                         .startPoint( line.getX0() , line.getY0() )
-		                         .endPoint( line.getX1() , line.getY1() )
-		                         .filler( line.getCharacter() ).buildMono();
+		                      .startPoint( line.getX0() , line.getY0() )
+		                      .endPoint( line.getX1() , line.getY1() )
+		                      .filler( line.getCharacter() )
+		                      .buildMono();
 		
 		//System.out.println( "DefaultCanvasService newLine " + canvasId );
 		
-//		var a = getCanvasRepository().findById( canvasId )
-//		                             .subscribe( printConsumer() );
+		//		var a = getCanvasRepository().findById( canvasId )
+		//		                             .subscribe( printConsumer() );
 		
 		return getCanvasRepository().findById( canvasId )
 		                            .flatMap( c -> c.draw( l ) )
@@ -163,7 +164,11 @@ public class DefaultCanvasService
 		if( canvasId != null && canvasId.isBlank() )
 			return illegalStateMonoError( "canvas id must not be empty" );
 		
-		var r = drawingFactory.newMonoOfRectangle( rectangle.getX0() , rectangle.getY0() , rectangle.getX1() , rectangle.getY1() , rectangle.getCharacter() );
+		var r = drawingFactory.newRectangleBuilder()
+		                      .startPoint( rectangle.getX0() , rectangle.getY0() )
+		                      .endPoint( rectangle.getX1() , rectangle.getY1() )
+		                      .filler( rectangle.getCharacter() )
+		                      .buildMono();
 		
 		return getCanvasRepository().findById( rectangle.getCanvasId() )
 		                            .flatMap( c -> c.draw( r ) )

@@ -14,6 +14,7 @@ import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.builder.LineBuilder;
+import life.expert.riso.domain.model.builder.RectangleBuilder;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
 import life.expert.riso.domain.model.value.Fill;
 import life.expert.riso.domain.model.value.Line;
@@ -79,14 +80,9 @@ public class DefaultDrawingFactory
 		}
 	
 	@Override
-	public Mono<Figure> newMonoOfRectangle( int upperLeftCornerX ,
-	                                        int upperLeftCornerY ,
-	                                        int lowerRightCornerX ,
-	                                        int lowerRightCornerY ,
-	                                        char character )
+	public RectangleBuilder newRectangleBuilder()
 		{
-		return Rectangle.monoOf( upperLeftCornerX , upperLeftCornerY , lowerRightCornerX , lowerRightCornerY , character )
-		                .cast( Figure.class );
+		return Rectangle.builder( this );
 		}
 	
 	 

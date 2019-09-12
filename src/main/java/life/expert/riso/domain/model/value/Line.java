@@ -295,10 +295,6 @@ public final class Line
 	 * Postconditions: none
 	 * Side effects: none
 	 * Tread safety: Not thread-safe
-	 * Immutable
-	 * Unconditionally thread-safe
-	 * Conditionally thread-safe
-	 * Not thread-safe
 	 * </pre>
 	 */
 	public static final class Builder
@@ -319,7 +315,7 @@ public final class Line
 			{
 			}
 		
-		//to do Please use AKA preconditions
+		 
 		@Override
 		public Builder startPoint( final int x0 ,
 		                           final int y0 )

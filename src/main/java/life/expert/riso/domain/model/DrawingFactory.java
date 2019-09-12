@@ -27,6 +27,7 @@ import static io.vavr.API.Function;     //lambda->Function3
 import static io.vavr.API.Tuple;
 
 import life.expert.riso.domain.model.builder.LineBuilder;
+import life.expert.riso.domain.model.builder.RectangleBuilder;
 import reactor.core.publisher.Mono;
 
 public interface DrawingFactory
@@ -56,11 +57,7 @@ public interface DrawingFactory
 	
 	LineBuilder newLineBuilder();
 	
-	Mono<Figure> newMonoOfRectangle( int upperLeftCornerX ,
-	                                 int upperLeftCornerY ,
-	                                 int lowerRightCornerX ,
-	                                 int lowerRightCornerY ,
-	                                 char character );
-		
+	RectangleBuilder newRectangleBuilder();
+	
 	}
 
