@@ -205,7 +205,14 @@ public final class ShellCommands
 	                      @Pattern( regexp = "[a-zA-Z_0-9 ]{1}" ) String colour )
 		{
 		char c = colour.charAt( 0 );
-		getCanvasService().newFill( new FillDataTransferObject( getCurrentCanvas() , fillFromStartPointX , fillFromStartPointY , c ) )
+		
+		var l = new FillDataTransferObject();
+		l.setCanvasId( getCurrentCanvas() );
+		l.setX( fillFromStartPointX );
+		l.setY( fillFromStartPointY );
+		l.setCharacter( FIGURE_DEFAULT_CHARACTER );
+		
+		getCanvasService().newFill( l )
 		                  .map( ResultDataTransferObject::getScreen )
 		                  .subscribe( shellHelper::print , shellHelper::printAtError );
 		}

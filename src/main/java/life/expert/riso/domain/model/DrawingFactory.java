@@ -26,6 +26,7 @@ import static io.vavr.API.unchecked;    //checked->unchecked
 import static io.vavr.API.Function;     //lambda->Function3
 import static io.vavr.API.Tuple;
 
+import life.expert.riso.domain.model.builder.FillBuilder;
 import life.expert.riso.domain.model.builder.LineBuilder;
 import life.expert.riso.domain.model.builder.RectangleBuilder;
 import reactor.core.publisher.Mono;
@@ -51,9 +52,7 @@ public interface DrawingFactory
 	Mono<Canvas> newMonoOfCanvas( int width ,
 	                              int height );
 	
-	Mono<Figure> newMonoOfFill( int fillFromStartPointX ,
-	                            int fillFromStartPointY ,
-	                            char character );
+	FillBuilder newFillBuilder();
 	
 	LineBuilder newLineBuilder();
 	

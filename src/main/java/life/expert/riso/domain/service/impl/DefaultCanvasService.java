@@ -187,7 +187,10 @@ public class DefaultCanvasService
 		if( canvasId != null && canvasId.isBlank() )
 			return illegalStateMonoError( "canvas id must not be empty" );
 		
-		var f = drawingFactory.newMonoOfFill( fill.getX() , fill.getY() , fill.getCharacter() );
+		var f = drawingFactory.newFillBuilder()
+		                      .point( fill.getX() , fill.getY() )
+		                      .filler( fill.getCharacter() )
+		                      .buildMono();
 		
 		return getCanvasRepository().findById( fill.getCanvasId() )
 		                            .flatMap( c -> c.draw( f ) )

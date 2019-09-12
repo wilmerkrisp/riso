@@ -13,6 +13,7 @@ package life.expert.riso.domain.model.factory;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.FillBuilder;
 import life.expert.riso.domain.model.builder.LineBuilder;
 import life.expert.riso.domain.model.builder.RectangleBuilder;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
@@ -64,13 +65,10 @@ public class DefaultDrawingFactory
 		}
 	
 	@Override
-	public Mono<Figure> newMonoOfFill( int fillFromStartPointX ,
-	                                   int fillFromStartPointY ,
-	                                   char character )
+	public FillBuilder newFillBuilder()
 		{
-		return Fill.monoOf( fillFromStartPointX , fillFromStartPointY , character )
-		           .cast( Figure.class );
-			
+		return Fill.builder();
+		
 		}
 	
 	@Override
