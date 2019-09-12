@@ -109,12 +109,12 @@ j) для игнорирования свойства, назвать его с 
 */
 //</editor-fold>
 
-/**
+/**<pre>
  * simple mutable class: int int
  *
  * - pattern new-set-call
  * - not for inheritance
- */
+ </pre>*/
 @Data
 @Slf4j
 @NoArgsConstructor

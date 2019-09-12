@@ -56,7 +56,7 @@ import lombok.AccessLevel;
 
 import reactor.core.publisher.Mono;
 
-/**
+/**<pre>
  * This is object-precondition represents size with two positive &gt;=1 width and height inside
  * - in order not to do the same checks all the time,
  * - Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
@@ -66,7 +66,7 @@ import reactor.core.publisher.Mono;
  *
  * - only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
  * - 'of' - factory method is prohibited because it is intended only for easy creation of objects in tests, please use pure functional methods monoOf.., without raise exceptions.
- */
+ </pre>*/
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/

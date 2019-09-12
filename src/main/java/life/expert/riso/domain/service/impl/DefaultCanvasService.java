@@ -81,10 +81,7 @@ import static life.expert.common.reactivestreams.ForComprehension.*; //reactive 
  * Postconditions: none
  * Side effects: none
  * Tread safety: Not thread-safe
- * Immutable
- * Unconditionally thread-safe
- * Conditionally thread-safe
- * Not thread-safe
+
  * </pre>
  */
 @Service

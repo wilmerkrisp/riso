@@ -109,18 +109,18 @@ j) для игнорирования свойства, назвать его с 
 */
 //</editor-fold>
 
-/**
+/**<pre>
  * simple mutable class: int int char
  *
  * - pattern new-set-call
  * - not for inheritance
  *
- * <pre>{@code
+ * {@code
  * 	  //pattern new-set-call
  * 	  FillDataTransferObject o = new FillDataTransferObject();
  * o.setX("a");
  * o.compute();
- *    }</pre>
+ *    }
  *
  *
  *
@@ -128,7 +128,7 @@ j) для игнорирования свойства, назвать его с 
  * Postconditions: none
  * Side effects: none
  * Tread safety:  not thread safe
- */
+ </pre>*/
 
 @Data
 @Slf4j

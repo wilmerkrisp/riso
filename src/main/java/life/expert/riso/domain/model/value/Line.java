@@ -60,7 +60,7 @@ import lombok.AccessLevel;
 
 import reactor.core.publisher.Mono;
 
-/**
+/**<pre>
  * simple immutable class: int int int int char
  *
  * - pattern new-call
@@ -80,8 +80,7 @@ import reactor.core.publisher.Mono;
  * Postconditions: none
  * Side effects: none
  * Tread safety:  Immutable
- */
-
+ </pre>*/
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -191,6 +190,11 @@ public final class Line
 	 *
 	 * - you need add static import to method with pattern matching
 	 * import static life.expert.riso.common.LinePatterns.*;
+	 *
+	 * @param object
+	 * 	the object
+	 *
+	 * @return the tuple 5
 	 */
 	@Unapply
 	public static Tuple5<Integer,Integer,Integer,Integer,Character> Line( Line object )
@@ -276,12 +280,27 @@ public final class Line
 	 * <pre>
 	 * Classic builder patterns for creating  Line.
 	 * </pre>
+	 *
+	 * @return the line builder
 	 */
 	public static LineBuilder builder()
 		{
 		return new Builder();
 		}
 	
+	/**
+	 * <pre> * The type Builder.
+	 *
+	 * Preconditions: none
+	 * Postconditions: none
+	 * Side effects: none
+	 * Tread safety: Not thread-safe
+	 * Immutable
+	 * Unconditionally thread-safe
+	 * Conditionally thread-safe
+	 * Not thread-safe
+	 * </pre>
+	 */
 	public static final class Builder
 		implements LineBuilder
 		{
@@ -343,36 +362,32 @@ public final class Line
 			}
 		
 		@Override
-		public Builder startPointX( int x0)
-			{
-			this.x0 = x0;
-			return this;
-			}
-		
-		
-		@Override
-		public Builder startPointY( int y0)
+		public Builder startPointX( int x0 )
 			{
 			this.x0 = x0;
 			return this;
 			}
 		
 		@Override
-		public Builder endPointX( int x1)
+		public Builder startPointY( int y0 )
+			{
+			this.x0 = x0;
+			return this;
+			}
+		
+		@Override
+		public Builder endPointX( int x1 )
 			{
 			this.x1 = x1;
 			return this;
 			}
 		
-		
 		@Override
-		public Builder endPointY( int y1)
+		public Builder endPointY( int y1 )
 			{
 			this.y1 = y1;
 			return this;
 			}
-		
-		
 		
 		/**
 		 * Create Line from simple arguments
@@ -400,11 +415,13 @@ public final class Line
 		 * <pre>
 		 * Classic builder pattern for creating  Line.
 		 * This factory method is prohibited because it is intended only for easy creation of objects in tests
-		 *
-		 *
-		 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
-		 * @deprecated please use pure functional methods monoOf.., without raise exceptions.
 		 * </pre>
+		 *
+		 * @return the figure
+		 *
+		 * @throws IllegalArgumentException
+		 * 	if the input arguments do not satisfy the preconditions
+		 * @deprecated please use pure functional methods monoOf.., without raise exceptions.
 		 */
 		@Deprecated
 		public final Figure build()

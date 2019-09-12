@@ -64,7 +64,7 @@ import java.util.ArrayDeque;
 import life.expert.riso.common.PositivePoint;
 import reactor.util.function.Tuple2;
 
-/**
+/**<pre>
  * simple immutable class: int int char
  *
  * - pattern new-call
@@ -84,7 +84,7 @@ import reactor.util.function.Tuple2;
  * Postconditions: none
  * Side effects: none
  * Tread safety:  Immutable
- */
+ </pre>*/
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/

@@ -59,7 +59,7 @@ import lombok.AccessLevel;
 
 import reactor.core.publisher.Mono;
 
-/**
+/**<pre>
  * simple immutable class: int int int int char
  *
  * - pattern new-call
@@ -79,7 +79,7 @@ import reactor.core.publisher.Mono;
  * Postconditions: none
  * Side effects: none
  * Tread safety:  Immutable
- */
+ </pre>*/
 
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
