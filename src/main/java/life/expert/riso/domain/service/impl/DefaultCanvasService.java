@@ -151,8 +151,8 @@ public class DefaultCanvasService
 		                            .flatMap( c -> c.draw( l ) )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
-		                            .map( s -> new ResultDataTransferObject( canvasId , s ) );
-		//.transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
+		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
 	@Override
