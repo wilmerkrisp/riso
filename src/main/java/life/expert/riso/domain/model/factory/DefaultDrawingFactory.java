@@ -13,6 +13,7 @@ package life.expert.riso.domain.model.factory;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.CanvasBuilder;
 import life.expert.riso.domain.model.builder.FillBuilder;
 import life.expert.riso.domain.model.builder.LineBuilder;
 import life.expert.riso.domain.model.builder.RectangleBuilder;
@@ -57,11 +58,9 @@ public class DefaultDrawingFactory
 	implements DrawingFactory
 	{
 	@Override
-	public Mono<Canvas> newMonoOfCanvas( int width ,
-	                                     int height )
+	public CanvasBuilder newCanvasBuilder()
 		{
-		return DefaultCanvas.monoOf( width , height )
-		                    .cast( Canvas.class );
+		return DefaultCanvas.builder();
 		}
 	
 	@Override
@@ -82,9 +81,5 @@ public class DefaultDrawingFactory
 		{
 		return Rectangle.builder( this );
 		}
-	
-	 
-	
-	
-	
+		
 	}

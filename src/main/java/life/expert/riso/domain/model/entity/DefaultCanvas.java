@@ -7,9 +7,13 @@ import static life.expert.common.reactivestreams.Preconditions.checkArgumentAndM
 import java.util.Optional;
 
 import com.google.common.base.Strings;
+import life.expert.riso.common.PositivePoint;
 import life.expert.riso.common.PositiveSize;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.CanvasBuilder;
+import life.expert.riso.domain.model.builder.FillBuilder;
+import life.expert.riso.domain.model.value.Fill;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -162,108 +166,9 @@ public class DefaultCanvas
 		return fromSupplier( () -> new DefaultCanvas( width , height ) );
 		}
 	
-	/**
-	 * Create DefaultCanvas from simple arguments
-	 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
-	 *
-	 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
-	 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
-	 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 * 	to verify objects, this method uses precondition-objects
-	 */
-	public static Mono<DefaultCanvas> monoOf( int width ,
-	                                          int height )
-		{
-		return PositiveSize.monoOf( width , height )
-		                   .then( monoOf_( width , height ) );
-		}
-	
-	/**
-	 * <pre>
-	 * Classic fabric method for creating  DefaultCanvas.
-	 * This factory method is prohibited because it is intended only for easy creation of objects in tests
-	 *
-	 *
-	 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
-	 * @deprecated please use pure functional methods monoOf.., without raise exceptions. </pre>
-	 */
-	@Deprecated
-	public static DefaultCanvas of( int width ,
-	                                int height )
-		{
-		return monoOf( width , height ).block();
-		}
-	
-	/**
-	 * Create DefaultCanvas from Mono with Tuple inside
-	 * The method helps chaining flows together
-	 *
-	 * @param tuple
-	 * 	the tuple
-	 *
-	 * @return the Mono with lazyli created object
-	 */
-	public static Mono<DefaultCanvas> monoOfMono( Mono<Tuple2<Integer,Integer>> tuple )
-		{
-		if( tuple == null )
-			return illegalArgumentMonoError( "Input Mono must not be null." );
-		else
-			return tuple.flatMap( DefaultCanvas::monoOfTuple );
-		}
-	
-	/**
-	 * Standard shallow copy factory
-	 *
-	 * @param other
-	 * 	the other object
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 */
-	public static Mono<DefaultCanvas> copyOf( final DefaultCanvas other )
-		{
-		return fromSupplier( () -> new DefaultCanvas( other.id , other.name , other.width , other.height , other.xMax , other.yMax , other.screen ) );
-		}
-	
-	/**
-	 * Create DefaultCanvas from precondition-objects
-	 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
-	 *
-	 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
-	 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
-	 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
-	 *
-	 * @return the Mono with lazyli created object
-	 *
-	 * @implNote to create objects, this method calls the private factory monoOf_
-	 * 	to verify objects, this method uses precondition-objects
-	 */
-	public static Mono<DefaultCanvas> monoOfPreconditions( PositiveSize size )
-		{
-		return monoOf_( size.getWidth() , size.getHeight() );
-		}
-	
-	/**
-	 * Fabric method for creating objects wrapped into Try.
-	 *
-	 * For example, if this class is a precondition object and you need to check it and then pass it to the input of another object of the subject domain
-	 * This method is supposed to be used when you need to get an error immediately (not lazily),
-	 * for example, if the message is immediately returned to the user UI and not wait
-	 * when, for example at night, lazy processing occurs and a user error is detected
-	 *
-	 * @return the Try with Success or Failure inside
-	 */
-	public static Try<DefaultCanvas> tryOf( int width ,
-	                                        int height )
-		{
-		return tryFromMono( monoOf( width , height ) );
-		}
-	
+
+
+
 	//<editor-fold desc="object to tuple conversions">
 	
 	/**
@@ -279,20 +184,7 @@ public class DefaultCanvas
 		return Tuple.of( object.getWidth() , object.getHeight() );
 		}
 	
-	/**
-	 * Create DefaultCanvas from Tuple
-	 * The method helps with conversion operations Tuple-&gt;Sample
-	 *
-	 * @return the Mono with lazyli created object
-	 */
-	public static Mono<DefaultCanvas> monoOfTuple( Tuple2<Integer,Integer> tuple )
-		{
-		if( tuple == null )
-			return illegalArgumentMonoError( "Input tuple must not be null." );
-		else
-			return TupleUtils.function( DefaultCanvas::monoOf )
-			                 .apply( tuple );
-		}
+	
 	
 	//</editor-fold>
 	
@@ -442,6 +334,145 @@ public class DefaultCanvas
 
 	
 	//</editor-fold>
+	
+	
+	
+	
+	//<editor-fold desc="builder pattern">
+	
+	/**
+	 * <pre>
+	 * Classic builder patterns for creating  Line.
+	 * </pre>
+	 *
+	 * @return the line builder
+	 */
+	public static CanvasBuilder builder()
+		{
+		return new DefaultCanvas.Builder();
+		}
+	
+	/**
+	 * <pre> * The type Builder.
+	 *
+	 * Preconditions: none
+	 * Postconditions: none
+	 * Side effects: none
+	 * Tread safety: Not thread-safe
+	 * </pre>
+	 */
+	public static final class Builder
+		implements CanvasBuilder
+		{
+		
+		private int width;
+		
+		private int height;
+		
+		
+		
+		Builder()
+			{
+			}
+		
+		
+		@Override
+		public CanvasBuilder size( final int width ,
+		                           final int height )
+			{
+			this.width = width;
+			this.height = height;
+			return this;
+			}
+		
+		
+		
+		
+		@Override
+		public CanvasBuilder size( PositiveSize positiveSize )
+			{
+			this.width = positiveSize.getWidth();
+			this.height = positiveSize.getHeight();
+			return this;
+			}
+		
+		
+		@Override
+		public CanvasBuilder width( int width )
+			{
+			this.width = width;
+			return this;
+			}
+		
+		@Override
+		public CanvasBuilder height( int height )
+			{
+			this.height = height;
+			return this;
+			}
+		
+		
+		
+		/**
+		 * Create Line from simple arguments
+		 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
+		 *
+		 * - in order not to do the same checks all the time, they are placed in special objects-preconditions.
+		 * Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
+		 * Nevertheless, for convenience, methods accepting simple parameters are available, then they internally use the same precondition objects for verification
+		 *
+		 * @return the Mono with lazyli created object
+		 *
+		 * @implNote to create objects, this method calls the private factory monoOf_
+		 * 	to verify objects, this method uses precondition-objects
+		 */
+		@Override
+		public final Mono<Canvas> buildMono()
+			{
+			return PositiveSize.monoOf( width , height )
+			                   .then( monoOf_( width , height ) )
+			                    .cast( Canvas.class );
+			}
+		
+		/**
+		 * <pre>
+		 * Classic builder pattern for creating  Line.
+		 * This factory method is prohibited because it is intended only for easy creation of objects in tests
+		 * </pre>
+		 *
+		 * @return the figure
+		 *
+		 * @throws IllegalArgumentException
+		 * 	if the input arguments do not satisfy the preconditions
+		 * @deprecated please use pure functional methods monoOf.., without raise exceptions.
+		 */
+		@Deprecated
+		public final Canvas build()
+			{
+			return buildMono().block();
+			}
+		
+		/**
+		 * Builder pattern method for creating objects wrapped into Try.
+		 *
+		 * For example, if this class is a precondition object and you need to check it and then pass it to the input of another object of the subject domain
+		 * This method is supposed to be used when you need to get an error immediately (not lazily),
+		 * for example, if the message is immediately returned to the user UI and not wait
+		 * when, for example at night, lazy processing occurs and a user error is detected
+		 *
+		 * @return the Try with Success or Failure inside
+		 */
+		@Override
+		public final Try<Canvas> buildTry()
+			{
+			return tryFromMono( buildMono() );
+			}
+			
+		}
+	
+	//</editor-fold>
+	
+	
 	
 	}
 

@@ -115,7 +115,9 @@ public class DefaultCanvasService
 	//@Transactional
 	public Mono<ResultDataTransferObject> createCanvas( @NonNull CanvasDataTransferObject canvas )
 		{
-		var c = drawingFactory.newMonoOfCanvas( canvas.getWidth() , canvas.getHeight() );
+		var c = drawingFactory.newCanvasBuilder()
+		                      .size( canvas.getWidth() , canvas.getHeight() )
+		                      .buildMono();
 		
 		return getCanvasRepository().saveAll( c )
 		                            .next()
