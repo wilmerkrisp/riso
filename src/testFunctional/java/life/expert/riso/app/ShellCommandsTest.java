@@ -7,11 +7,6 @@ package life.expert.riso.app;
 //
 //--------------------------------------------------------------------------------
 
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.junit.Assert.assertThat;
-import static org.springframework.util.ReflectionUtils.findMethod;
-
 import life.expert.riso.InvokeHelper;
 import life.expert.riso.TestApplicationConfiguration;
 import life.expert.riso.app.controller.ShellCommands;
@@ -26,7 +21,13 @@ import org.springframework.shell.standard.StandardMethodTargetRegistrar;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-/**<pre>
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertThat;
+import static org.springframework.util.ReflectionUtils.findMethod;
+
+/**
+ * <pre>
  * Illustrative functional tests for the Drawing application. These functional tests use Spring
  * Shell commands auto-wired by the Spring Test Runner outside of the shell, to test functionality
  * of the commands.
@@ -35,7 +36,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * Postconditions: passed or failed tests
  * Side effects: io
  * Tread safety: Not thread-safe
- </pre>*/
+ * </pre>
+ */
 @RunWith( SpringJUnit4ClassRunner.class )
 @ContextConfiguration( classes = { TestApplicationConfiguration.class ,
                                    ShellCommands.class } )

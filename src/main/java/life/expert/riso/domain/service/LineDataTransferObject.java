@@ -5,7 +5,6 @@ package life.expert.riso.domain.service;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 //---------------------------------------------
@@ -18,69 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 //
 //               wilmer 2019/08/30
 //---------------------------------------------
-
-import lombok.NonNull;//@NOTNULL
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import static java.text.MessageFormat.format;           //format string
-
-import java.util.ResourceBundle;
-
-import static com.google.common.base.Preconditions.*;   //checkArgument
 //import static life.expert.common.base.Preconditions.*;  //checkCollection
-import static org.apache.commons.lang3.Validate.*;      //notEmpty(collection)
-
-import org.apache.commons.lang3.StringUtils;            //isNotBlank
-
-import java.util.function.*;                            //producer supplier
-
-import static java.util.stream.Collectors.*;            //toList streamAPI
-
-import java.util.Optional;
-
-import static reactor.core.publisher.Mono.*;
-import static reactor.core.scheduler.Schedulers.*;
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-import static life.expert.common.function.TupleUtils.*; //vavr's tuple->R INTO func->R
-
-import life.expert.value.string.*;
-import life.expert.value.numeric.*;
-
-import static life.expert.common.async.LogUtils.*;        //logAtInfo
-import static life.expert.common.function.NullableUtils.*;//.map(nullableFunction)
-import static life.expert.common.function.CheckedUtils.*;// .map(consumerToBoolean)
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
-import static life.expert.common.base.Objects.*;          //deepCopyOfObject
-import static life.expert.common.reactivestreams.ForComprehension.*; //reactive for-comprehension
-
-import static cyclops.control.Trampoline.more;
-import static cyclops.control.Trampoline.done;
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
-import static io.vavr.Patterns.*;                         //switch - case - success/failure
-import static io.vavr.Predicates.*;                       //switch - case
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
-
-import static io.vavr.API.Try;          //Try
-
-import io.vavr.control.Try;                               //try
-
-import static io.vavr.API.Failure;
-import static io.vavr.API.Success;
-import static io.vavr.API.Left;         //Either
-import static io.vavr.API.Right;
 
 //import java.util.List;                                  //usual list
 //import io.vavr.collection.List;                         //immutable List
@@ -109,18 +49,19 @@ j) для игнорирования свойства, назвать его с 
 */
 //</editor-fold>
 
-/**</pre>
+/**
+ * </pre>
  * simple mutable class: int int int int char
  *
  * - pattern new-set-call
  * - not for inheritance
  *
  * {@code
- * 	  //pattern new-set-call
- * 	  LineDataTransferObject o = new LineDataTransferObject();
+ * //pattern new-set-call
+ * LineDataTransferObject o = new LineDataTransferObject();
  * o.setX0("a");
  * o.compute();
- *    }*
+ * }*
  *
  *
  *
@@ -128,7 +69,8 @@ j) для игнорирования свойства, назвать его с 
  * Postconditions: none
  * Side effects: none
  * Tread safety:  not thread safe
- </pre>*/
+ * </pre>
+ */
 @Data
 @Slf4j
 @NoArgsConstructor
@@ -159,7 +101,7 @@ public final class LineDataTransferObject
 	 * 	-- GETTER --
 	 * @return the x0
 	 */
-	private int    x0;
+	private int x0;
 	
 	/**
 	 * y0

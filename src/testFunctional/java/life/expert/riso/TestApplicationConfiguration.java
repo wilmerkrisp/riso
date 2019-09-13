@@ -55,29 +55,29 @@ public class TestApplicationConfiguration
 		{
 		return new TestFunctionalHelper();
 		}
-//
-//	/**
-//	 * Test Canvas repository
-//	 *
-//	 * @return the canvas repository
-//	 */
-//	@Bean
-//	public CanvasRepository canvasRepository( @Lazy DefaultCanvasRepository canvasRepository)
-//		{
-//		return new CanvasRepositoryAdapter(canvasRepository);
-//		}
-
-//	@Bean
-//	public DrawingFactory drawinfFactory()
-//		{
-//		return new DefaultDrawingFactory();
-//		}
-
-//	@Bean
-//	public CanvasService canvasService( CanvasRepository canvasRepository ,
-//	                                    DrawingFactory drawingFactory )
-//		{
-//		return new DefaultCanvasService( canvasRepository , drawingFactory );
-//		}
+	//
+	//	/**
+	//	 * Test Canvas repository
+	//	 *
+	//	 * @return the canvas repository
+	//	 */
+	//	@Bean
+	//	public CanvasRepository canvasRepository( @Lazy DefaultCanvasRepository canvasRepository)
+	//		{
+	//		return new CanvasRepositoryAdapter(canvasRepository);
+	//		}
+	
+	//	@Bean
+	//	public DrawingFactory drawinfFactory()
+	//		{
+	//		return new DefaultDrawingFactory();
+	//		}
+	
+	//	@Bean
+	//	public CanvasService canvasService( CanvasRepository canvasRepository ,
+	//	                                    DrawingFactory drawingFactory )
+	//		{
+	//		return new DefaultCanvasService( canvasRepository , drawingFactory );
+	//		}
 	
 	}

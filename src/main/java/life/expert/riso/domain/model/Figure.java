@@ -23,8 +23,6 @@ public interface Figure
 	 *
 	 * @return the mono with Figure
 	 */
-	Mono<Figure> draw(   Drawing canvas );
-	
-	
+	Mono<Figure> draw( Drawing canvas );
 	
 	}

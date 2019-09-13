@@ -2,24 +2,12 @@ package life.expert.riso.app.controller;
 
 
 
-import static life.expert.common.async.LogUtils.printConsumer;
-import static life.expert.riso.app.OutputHelper.FIGURE_DEFAULT_CHARACTER;
-import static life.expert.riso.app.OutputHelper.MAX_CANVAS_SIZE;
-import static life.expert.riso.app.OutputHelper.MAX_SCREEN_SIZE;
-import static life.expert.riso.app.OutputHelper.MIN_CANVAS_SIZE;
-import static life.expert.riso.app.OutputHelper.MIN_SCREEN_SIZE;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-
 import life.expert.riso.app.OutputHelper;
-import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.service.CanvasDataTransferObject;
+import life.expert.riso.domain.service.CanvasService;
 import life.expert.riso.domain.service.FillDataTransferObject;
 import life.expert.riso.domain.service.LineDataTransferObject;
 import life.expert.riso.domain.service.RectangleDataTransferObject;
-import life.expert.riso.domain.service.CanvasService;
 import life.expert.riso.domain.service.ResultDataTransferObject;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -31,19 +19,15 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellMethodAvailability;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+
+import static life.expert.riso.app.OutputHelper.*;
+
 //import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
 
 //@Header@
 //--------------------------------------------------------------------------------

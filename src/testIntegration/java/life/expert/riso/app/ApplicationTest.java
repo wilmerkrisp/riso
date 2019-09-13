@@ -7,8 +7,7 @@ package life.expert.riso.app;
 //
 //--------------------------------------------------------------------------------
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,16 +15,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import org.junit.Test;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
-/**<pre>
+/**
+ * <pre>
  * Integration test uses pure java Runtime.exec  to run the application
  *
  * Preconditions: need to build jar and put in the folder
  * Postconditions: passed or failed tests
  * Side effects: io, runned and terminated process in an OS
  * Tread safety: Not thread-safe
- </pre>*/
+ * </pre>
+ */
 public class ApplicationTest
 	{
 	
@@ -84,8 +86,8 @@ public class ApplicationTest
 		reader.close();
 		
 		// todo fix Hooks.onOperatorError( ( err , data ) ->
-		verified_output.delete(0, verified_output.indexOf("\n") + 1);
-		verified_output.delete(0, verified_output.indexOf("\n") + 1);
+		verified_output.delete( 0 , verified_output.indexOf( "\n" ) + 1 );
+		verified_output.delete( 0 , verified_output.indexOf( "\n" ) + 1 );
 		
 		assertThat( verified_output.toString() , is( verified_ethalon ) );
 		

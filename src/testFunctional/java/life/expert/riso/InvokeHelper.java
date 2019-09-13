@@ -7,12 +7,12 @@ package life.expert.riso;
 //
 //--------------------------------------------------------------------------------
 
-import static org.springframework.util.ReflectionUtils.invokeMethod;
+import org.springframework.shell.CommandRegistry;
+import org.springframework.shell.MethodTarget;
 
 import javax.validation.constraints.NotNull;
 
-import org.springframework.shell.CommandRegistry;
-import org.springframework.shell.MethodTarget;
+import static org.springframework.util.ReflectionUtils.invokeMethod;
 
 /**
  * The type Invoke helper.

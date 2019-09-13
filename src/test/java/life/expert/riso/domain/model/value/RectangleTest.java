@@ -2,18 +2,15 @@ package life.expert.riso.domain.model.value;
 
 
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
-import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Canvas;
-import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
 import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
-import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
 import reactor.test.StepVerifier;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -43,15 +40,15 @@ public class RectangleTest
 	public void setUp()
 	throws Exception
 		{
-		canvas = (DefaultCanvas)DefaultCanvas.builder()
-		                      .size( 10 , 10 )
-		                      .build();
+		canvas = (DefaultCanvas) DefaultCanvas.builder()
+		                                      .size( 10 , 10 )
+		                                      .build();
 		
-		rectangle= (Rectangle) Rectangle.builder( new DefaultDrawingFactory() )
-		                    .startPoint( 1 , 1 )
-		                    .endPoint( 4 , 4 )
-		                    .filler( 'x' )
-		                    .build();
+		rectangle = (Rectangle) Rectangle.builder( new DefaultDrawingFactory() )
+		                                 .startPoint( 1 , 1 )
+		                                 .endPoint( 4 , 4 )
+		                                 .filler( 'x' )
+		                                 .build();
 		}
 	
 	/**
@@ -60,14 +57,13 @@ public class RectangleTest
 	@Test
 	public void monoOf()
 		{
-		var r=  Rectangle.builder( new DefaultDrawingFactory() )
-		                    .startPoint( 1 , 1 )
-		                    .endPoint( 4 , 4 )
-		                    .filler( 'x' )
-		                    .buildMono();
+		var r = Rectangle.builder( new DefaultDrawingFactory() )
+		                 .startPoint( 1 , 1 )
+		                 .endPoint( 4 , 4 )
+		                 .filler( 'x' )
+		                 .buildMono();
 		
-		
-		StepVerifier.create(r )
+		StepVerifier.create( r )
 		            .expectNextCount( 1 )
 		            .expectComplete()
 		            .verify();
@@ -81,8 +77,8 @@ public class RectangleTest
 		{
 		var c = canvas.draw( rectangle )
 		              .flatMap( x -> canvas.makeScreen() );
-//		c.log()
-//		 .subscribe();
+		//		c.log()
+		//		 .subscribe();
 		StepVerifier.create( c )
 		            .expectNext( "------------\n" + "|xxxx      |\n" + "|x  x      |\n" + "|x  x      |\n" + "|xxxx      |\n" + "|          |\n" + "|          |\n" + "|          |\n" + "|          |\n" + "|          |\n" + "|          |\n" + "------------\n" )
 		            .expectComplete()

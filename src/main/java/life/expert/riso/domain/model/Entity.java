@@ -7,11 +7,6 @@ package life.expert.riso.domain.model;
 //
 //--------------------------------------------------------------------------------
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 /**
  * Base abstract class for aggregate (DDD pattern)
  *

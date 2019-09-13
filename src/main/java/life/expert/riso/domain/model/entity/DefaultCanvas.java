@@ -2,18 +2,15 @@ package life.expert.riso.domain.model.entity;
 
 
 
-import static life.expert.common.reactivestreams.Preconditions.checkArgumentAndMap;
-
-import java.util.Optional;
-
 import com.google.common.base.Strings;
-import life.expert.riso.common.PositivePoint;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
+import io.vavr.control.Try;
+import io.vavr.match.annotation.Unapply;
 import life.expert.riso.common.PositiveSize;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.builder.CanvasBuilder;
-import life.expert.riso.domain.model.builder.FillBuilder;
-import life.expert.riso.domain.model.value.Fill;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -21,49 +18,25 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.data.annotation.Id;
-
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.relational.core.mapping.Table;
 import reactor.core.publisher.Mono;
 
-import io.vavr.control.Try;
+import java.util.Optional;
 
-import static reactor.core.publisher.Mono.*;
+import static life.expert.common.reactivestreams.Patterns.range;
+import static life.expert.common.reactivestreams.Patterns.tryFromMono;
+import static reactor.core.publisher.Mono.fromSupplier;
+
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.Case;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
-
 //import java.util.List;                                  //usual list
 //import io.vavr.collection.List;                         //immutable List
 //import com.google.common.collect.*;                     //ImmutableList
-
-import io.vavr.Tuple;
-import io.vavr.Tuple2
-	;
-import io.vavr.match.annotation.Unapply;
-
-import life.expert.common.function.TupleUtils;
-
 //import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.Match;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-
-import static io.vavr.API.$;                            // pattern matching
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
 
 /**
@@ -166,9 +139,6 @@ public class DefaultCanvas
 		return fromSupplier( () -> new DefaultCanvas( width , height ) );
 		}
 	
-
-
-
 	//<editor-fold desc="object to tuple conversions">
 	
 	/**
@@ -183,8 +153,6 @@ public class DefaultCanvas
 		{
 		return Tuple.of( object.getWidth() , object.getHeight() );
 		}
-	
-	
 	
 	//</editor-fold>
 	
@@ -266,10 +234,7 @@ public class DefaultCanvas
 		//coordinates starts from 1
 		return ( x < 1 || x > this.xMax || y < 1 || y > this.yMax ) ? Optional.empty() : Optional.of( getPixel_( y , x ) );
 		
-		
 		}
-	
-
 	
 	private char getPixel_( int y ,
 	                        int x )
@@ -322,12 +287,7 @@ public class DefaultCanvas
 		             .thenReturn( this );
 		}
 	
-
-	
 	//</editor-fold>
-	
-	
-	
 	
 	//<editor-fold desc="builder pattern">
 	
@@ -360,12 +320,9 @@ public class DefaultCanvas
 		
 		private int height;
 		
-		
-		
 		Builder()
 			{
 			}
-		
 		
 		@Override
 		public CanvasBuilder size( final int width ,
@@ -376,9 +333,6 @@ public class DefaultCanvas
 			return this;
 			}
 		
-		
-		
-		
 		@Override
 		public CanvasBuilder size( PositiveSize positiveSize )
 			{
@@ -386,7 +340,6 @@ public class DefaultCanvas
 			this.height = positiveSize.getHeight();
 			return this;
 			}
-		
 		
 		@Override
 		public CanvasBuilder width( int width )
@@ -401,8 +354,6 @@ public class DefaultCanvas
 			this.height = height;
 			return this;
 			}
-		
-		
 		
 		/**
 		 * Create Line from simple arguments
@@ -422,7 +373,7 @@ public class DefaultCanvas
 			{
 			return PositiveSize.monoOf( width , height )
 			                   .then( monoOf_( width , height ) )
-			                    .cast( Canvas.class );
+			                   .cast( Canvas.class );
 			}
 		
 		/**
@@ -463,8 +414,6 @@ public class DefaultCanvas
 		}
 	
 	//</editor-fold>
-	
-	
 	
 	}
 

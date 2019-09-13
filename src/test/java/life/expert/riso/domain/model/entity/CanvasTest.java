@@ -2,23 +2,19 @@ package life.expert.riso.domain.model.entity;
 
 
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
-import java.time.Duration;
-
 import com.google.common.base.Strings;
-import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Canvas;
-import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
-import life.expert.riso.domain.model.value.Line;
 import life.expert.riso.domain.model.value.Rectangle;
-import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+
+import java.time.Duration;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
 

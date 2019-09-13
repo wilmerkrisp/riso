@@ -11,33 +11,10 @@ package life.expert.riso.app;
 //               wilmer 2019/08/28
 //---------------------------------------------
 
+import io.r2dbc.spi.ConnectionFactory;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
 import life.expert.riso.domain.repository.CanvasRepository;
-
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
-import static life.expert.common.async.LogUtils.*;        //logAtInfo
-
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
-
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
-
-import io.r2dbc.spi.ConnectionFactory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.junit.Test;
@@ -50,6 +27,16 @@ import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+
+import static life.expert.common.async.LogUtils.print;
+
+//import static life.expert.common.base.Preconditions.*;  //checkCollection
+//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
+//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
+//import static java.util.function.Predicate.*;           //isEqual streamAPI
+//import java.util.List;                                  //usual list
+//import io.vavr.collection.List;                         //immutable List
+//import com.google.common.collect.*;                     //ImmutableList
 
 @RunWith( SpringRunner.class )
 //@SpringBootTest
