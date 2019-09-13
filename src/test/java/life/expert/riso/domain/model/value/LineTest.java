@@ -2,28 +2,16 @@ package life.expert.riso.domain.model.value;
 
 
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-
-import io.vavr.Tuple;
-import io.vavr.control.Try;
-import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.entity.DefaultCanvas;
-import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
-import life.expert.value.numeric.PositiveInteger;
 import org.junit.Before;
 import org.junit.Test;
 import reactor.test.StepVerifier;
 
-import static life.expert.common.async.LogUtils.*;        //logAtInfo
-import static life.expert.common.function.CheckedUtils.*;// .map(consumerToBoolean)
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+
 //import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-import static life.expert.common.function.TupleUtils.*; //vavr's tuple->R INTO func->R
-
-import static io.vavr.API.*;                              //switch
 //import static io.vavr.Predicates.*;                       //switch - case
-
-import static java.util.function.Predicate.*;           //isEqual streamAPI
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -53,19 +41,16 @@ public class LineTest
 	public void setUp()
 	throws Exception
 		{
-	
 		
-		canvas = (DefaultCanvas)DefaultCanvas.builder()
-		                      .size( 10 , 10 )
-		                      .build();
+		canvas = (DefaultCanvas) DefaultCanvas.builder()
+		                                      .size( 10 , 10 )
+		                                      .build();
 		
-		
-
-		line = (Line)Line.builder( )
-		                    .startPoint( 1 , 1 )
-		                    .endPoint( 1 , 4 )
-		                    .filler( 'x' )
-		                    .build();
+		line = (Line) Line.builder()
+		                  .startPoint( 1 , 1 )
+		                  .endPoint( 1 , 4 )
+		                  .filler( 'x' )
+		                  .build();
 		}
 	
 	/**
@@ -74,11 +59,11 @@ public class LineTest
 	@Test
 	public void monoOf()
 		{
-		var l  = Line.builder( )
-		                         .startPoint( 1 , 1 )
-		                         .endPoint( 1 , 4 )
-		                         .filler( 'x' )
-		                         .buildMono();
+		var l = Line.builder()
+		            .startPoint( 1 , 1 )
+		            .endPoint( 1 , 4 )
+		            .filler( 'x' )
+		            .buildMono();
 		
 		StepVerifier.create( l )
 		            .expectNextCount( 1 )
@@ -145,7 +130,5 @@ public class LineTest
 		{
 		assertThat( line.getCharacter() , is( 'x' ) );
 		}
-	
-	
 		
 	}

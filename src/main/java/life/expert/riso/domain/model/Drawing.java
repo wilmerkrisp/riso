@@ -2,8 +2,6 @@ package life.expert.riso.domain.model;
 
 
 
-import life.expert.riso.domain.model.DrawingFactory;
-
 import java.util.Optional;
 
 //@Header@
@@ -60,7 +58,5 @@ public interface Drawing
 	 */
 	public Optional<Character> getPixel( int x ,
 	                                     int y );
-	
-
-	
+		
 	}

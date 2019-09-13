@@ -11,52 +11,33 @@ package life.expert.riso.common;
 //               wilmer 2019/08/30
 //---------------------------------------------
 
-import lombok.NonNull;//@NOTNULL
+import com.google.common.collect.ComparisonChain;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
+import io.vavr.control.Try;
+import io.vavr.match.annotation.Patterns;
+import io.vavr.match.annotation.Unapply;
+import life.expert.common.function.TupleUtils;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
+
+import static life.expert.common.reactivestreams.Patterns.tryFromMono;
+import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMonoError;
+import static reactor.core.publisher.Mono.fromSupplier;
 
 //import static life.expert.common.base.Preconditions.*;  //checkCollection
-
-import static reactor.core.publisher.Mono.*;
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
-
-import io.vavr.control.Try;                               //try
-
 //import java.util.List;                                  //usual list
 //import io.vavr.collection.List;                         //immutable List
 //import com.google.common.collect.*;                     //ImmutableList
 
-import lombok.AllArgsConstructor;
-import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
-
-import io.vavr.Tuple;
-import io.vavr.Tuple2
-	;
-import io.vavr.match.annotation.Patterns;
-import io.vavr.match.annotation.Unapply;
-
-import com.google.common.collect.ComparisonChain;
-
-import life.expert.common.function.TupleUtils;
-import lombok.AccessLevel;
-
-import reactor.core.publisher.Mono;
-
-/**<pre>
+/**
+ * <pre>
  * This is object-precondition represents size with two positive &gt;=1 width and height inside
  * - in order not to do the same checks all the time,
  * - Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
@@ -66,7 +47,8 @@ import reactor.core.publisher.Mono;
  *
  * - only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
  * - 'of' - factory method is prohibited because it is intended only for easy creation of objects in tests, please use pure functional methods monoOf.., without raise exceptions.
- </pre>*/
+ * </pre>
+ */
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -196,8 +178,6 @@ public final class PositiveSize
 	
 	//<editor-fold desc="using and outstanding preconditions">
 	
-
-	
 	/**
 	 * Fabric method for creating objects wrapped into Try.
 	 *
@@ -261,8 +241,6 @@ public final class PositiveSize
 		}
 	
 	//</editor-fold>
-	
-
 	
 	@Override
 	public int compareTo( PositiveSize o )

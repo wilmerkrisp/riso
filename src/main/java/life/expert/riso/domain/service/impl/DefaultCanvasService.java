@@ -10,10 +10,8 @@ package life.expert.riso.domain.service.impl;
 //               wilmer 2019/08/13
 //---------------------------------------------
 
-import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.model.Canvas;
-
-import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.DrawingFactory;
 import life.expert.riso.domain.repository.CanvasRepository;
 import life.expert.riso.domain.service.CanvasDataTransferObject;
 import life.expert.riso.domain.service.CanvasService;
@@ -23,56 +21,27 @@ import life.expert.riso.domain.service.RectangleDataTransferObject;
 import life.expert.riso.domain.service.ResultDataTransferObject;
 import lombok.AccessLevel;
 import lombok.Getter;
-
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
-
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-
-import java.util.function.*;                            //producer supplier
-
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.Case;
-import static io.vavr.Predicates.*;                       //switch - case
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Tuple;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
+import java.util.function.Function;
+
+import static io.vavr.Predicates.not;
+import static life.expert.common.reactivestreams.Preconditions.illegalStateMonoError;
+
 //import static life.expert.common.base.Preconditions.*;  //checkCollection
-
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Match;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.Function;     //lambda->Function3
-
-import life.expert.value.string.*;
-import life.expert.value.numeric.*;
-
-import static life.expert.common.async.LogUtils.*;        //logAtInfo
-import static life.expert.common.function.NullableUtils.*;//.map(nullableFunction)
-import static life.expert.common.function.CheckedUtils.*;// .map(consumerToBoolean)
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
-import static life.expert.common.base.Objects.*;          //deepCopyOfObject
-import static life.expert.common.reactivestreams.ForComprehension.*; //reactive for-comprehension
+//import static life.expert.common.base.Preconditions.*;  //checkCollection
+//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
+//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
+//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
 /**
  * <pre> * The type Canvas service.
@@ -142,7 +111,6 @@ public class DefaultCanvasService
 		                      .endPoint( line.getX1() , line.getY1() )
 		                      .filler( line.getCharacter() )
 		                      .buildMono();
-		
 		
 		return getCanvasRepository().findById( canvasId )
 		                            .flatMap( c -> c.draw( l ) )

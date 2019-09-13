@@ -4,17 +4,14 @@ package life.expert.riso.app;
 
 import life.expert.riso.common.MergeableSimpleR2dbcRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.jline.terminal.Terminal;
 import org.jline.utils.AttributedString;
 import org.jline.utils.AttributedStyle;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories;
 import org.springframework.shell.jline.PromptProvider;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.util.StringUtils;
 import reactor.core.publisher.Hooks;
 
@@ -44,7 +41,8 @@ import reactor.core.publisher.Hooks;
 @EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
 public class Application
 	{
-	/** +
+	/**
+	 * +
 	 * Main method using Spring main cycle
 	 *
 	 * @param args
@@ -69,9 +67,6 @@ public class Application
 		
 		SpringApplication.run( Application.class , fullArgs );
 		
-		
-		
-		
 		}
 	
 	/**
@@ -88,11 +83,11 @@ public class Application
 		return () -> new AttributedString( "enter command: " , AttributedStyle.DEFAULT.foreground( AttributedStyle.YELLOW ) );
 		}
 	
-//	@Bean
-//	public OutputHelper shellHelper( @Lazy Terminal terminal )
-//		{
-//		return new ShellOutputHelper( terminal );
-//		}
+	//	@Bean
+	//	public OutputHelper shellHelper( @Lazy Terminal terminal )
+	//		{
+	//		return new ShellOutputHelper( terminal );
+	//		}
 	
 	//	/**
 	//	 * Output to the console will be done asynchronously through the methods of this Bean

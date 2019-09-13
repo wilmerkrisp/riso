@@ -16,16 +16,18 @@ import org.springframework.stereotype.Component;
 //
 //--------------------------------------------------------------------------------
 
-/**<pre>
+/**
+ * <pre>
  * Output to the console terminal object
- 
+ *
  * Preconditions: none
  * Postconditions: none
  * Side effects: output on the terminal object
  * Tread safety: Not thread-safe
- </pre>*/
+ * </pre>
+ */
 @Slf4j
-@Component("shellHelper")
+@Component( "shellHelper" )
 public final class ShellOutputHelper
 	implements OutputHelper
 	{
@@ -39,7 +41,7 @@ public final class ShellOutputHelper
 	 * 	the terminal
 	 */
 	@Autowired
-	public ShellOutputHelper(@Lazy Terminal terminal )
+	public ShellOutputHelper( @Lazy Terminal terminal )
 		{
 		this.terminal = terminal;
 		}

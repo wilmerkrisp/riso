@@ -13,54 +13,35 @@ package life.expert.riso.domain.model.value;
 
 //import static life.expert.common.base.Preconditions.*;  //checkCollection
 
-import static reactor.core.publisher.Mono.*;
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-
+import com.google.common.collect.ComparisonChain;
+import io.vavr.Tuple;
+import io.vavr.Tuple5;
+import io.vavr.control.Try;
+import io.vavr.match.annotation.Patterns;
+import io.vavr.match.annotation.Unapply;
 import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Drawing;
+import life.expert.riso.domain.model.Figure;
+import life.expert.riso.domain.model.builder.LineBuilder;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Value;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
-import static life.expert.common.reactivestreams.Preconditions.*; //reactive check
-import static life.expert.common.reactivestreams.Patterns.*;    //reactive helper functions
+import static life.expert.common.reactivestreams.Patterns.tryFromMono;
+import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMonoError;
+import static reactor.core.publisher.Mono.*;
 
+//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import static io.vavr.API.$;                            // pattern matching
-import static io.vavr.API.Case;
-import static io.vavr.API.Match;
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import static io.vavr.API.CheckedFunction;//checked functions
-import static io.vavr.API.unchecked;    //checked->unchecked
-import static io.vavr.API.Function;     //lambda->Function3
-import static io.vavr.API.Tuple;
-
-import io.vavr.control.Try;                               //try
-
 //import java.util.List;                                  //usual list
 //import io.vavr.collection.List;                         //immutable List
 //import com.google.common.collect.*;                     //ImmutableList
 
-import life.expert.riso.domain.model.Figure;
-import life.expert.riso.domain.model.builder.LineBuilder;
-import life.expert.value.string.SolidString;
-import lombok.AllArgsConstructor;
-import lombok.Value;
-import lombok.extern.slf4j.Slf4j;
-
-import io.vavr.Tuple;
-import io.vavr.Tuple5
-	;
-import io.vavr.match.annotation.Patterns;
-import io.vavr.match.annotation.Unapply;
-
-import com.google.common.collect.ComparisonChain;
-
-import life.expert.common.function.TupleUtils;
-import lombok.AccessLevel;
-
-import reactor.core.publisher.Mono;
-
-/**<pre>
+/**
+ * <pre>
  * simple immutable class: int int int int char
  *
  * - pattern new-call
@@ -80,7 +61,8 @@ import reactor.core.publisher.Mono;
  * Postconditions: none
  * Side effects: none
  * Tread safety:  Immutable
- </pre>*/
+ * </pre>
+ */
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -314,7 +296,6 @@ public final class Line
 			{
 			}
 		
-		 
 		@Override
 		public Builder startPoint( final int x0 ,
 		                           final int y0 )
