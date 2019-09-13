@@ -290,15 +290,6 @@ public class DefaultCanvas
 	public Mono<String> makeScreen()
 		{
 		return Mono.just( screen.toString() );
-		
-		//		StringBuilder screenBuffer = new StringBuilder( ( this.width + 1 ) * this.height );
-		//		//log( "makeScreen" );
-		//		return range( 0 , this.height - 1 ).flatMap( row -> range( 0 , this.width - 1 ).map( col -> this.screen[row][col] )
-		//		                                                                               .concatWithValues( '\n' ) )
-		//		                                   .collect( StringBuilder::new , StringBuilder::append )
-		//		                                   .map( StringBuilder::toString )
-		//		                                   .filter( not( String::isBlank ) ) /*postcondition: screen alwase not blank*/
-		//		                                   .single();
 		}
 	
 	/**

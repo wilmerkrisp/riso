@@ -270,7 +270,6 @@ public final class Line
 				}
 			}
 		
-		//log("inside line:"+ ((Canvas)canvas).makeScreen() );
 		return empty();
 		}
 	

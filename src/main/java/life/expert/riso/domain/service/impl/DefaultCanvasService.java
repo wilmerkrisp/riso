@@ -121,10 +121,9 @@ public class DefaultCanvasService
 		
 		return getCanvasRepository().saveAll( c )
 		                            .next()
-		                            .flatMap( Canvas::makeScreen )
-		                            .zipWith( c )
-		                            .map( t -> new ResultDataTransferObject( t.getT2()
-		                                                                      .getId() , t.getT1() ) )
+		                            .zipWhen( Canvas::makeScreen )
+		                            .map( t -> new ResultDataTransferObject( t.getT1()
+		                                                                      .getId() , t.getT2() ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
@@ -144,10 +143,6 @@ public class DefaultCanvasService
 		                      .filler( line.getCharacter() )
 		                      .buildMono();
 		
-		//System.out.println( "DefaultCanvasService newLine " + canvasId );
-		
-		//		var a = getCanvasRepository().findById( canvasId )
-		//		                             .subscribe( printConsumer() );
 		
 		return getCanvasRepository().findById( canvasId )
 		                            .flatMap( c -> c.draw( l ) )
