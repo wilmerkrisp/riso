@@ -210,7 +210,7 @@ public final class ShellCommands
 		l.setCanvasId( getCurrentCanvas() );
 		l.setX( fillFromStartPointX );
 		l.setY( fillFromStartPointY );
-		l.setCharacter( FIGURE_DEFAULT_CHARACTER );
+		l.setCharacter( c );
 		
 		getCanvasService().newFill( l )
 		                  .map( ResultDataTransferObject::getScreen )

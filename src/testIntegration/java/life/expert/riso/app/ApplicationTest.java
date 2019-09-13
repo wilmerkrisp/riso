@@ -40,7 +40,6 @@ public class ApplicationTest
 	throws IOException
 		{
 		//@formatter:off
-		
 		String verified_ethalon = "██████╗ ██████╗  █████╗ ██╗    ██╗██╗███╗   ██╗ ██████╗\n" +
 		                          "██╔══██╗██╔══██╗██╔══██╗██║    ██║██║████╗  ██║██╔════╝\n" +
 		                          "██║  ██║██████╔╝███████║██║ █╗ ██║██║██╔██╗ ██║██║  ███╗\n" +

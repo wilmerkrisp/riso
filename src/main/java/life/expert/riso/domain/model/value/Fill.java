@@ -66,7 +66,8 @@ import java.util.ArrayDeque;
 import life.expert.riso.common.PositivePoint;
 import reactor.util.function.Tuple2;
 
-/**<pre>
+/**
+ * <pre>
  * simple immutable class: int int char
  *
  * - pattern new-call
@@ -86,7 +87,8 @@ import reactor.util.function.Tuple2;
  * Postconditions: none
  * Side effects: none
  * Tread safety:  Immutable
- </pre>*/
+ * </pre>
+ */
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -154,9 +156,6 @@ public final class Fill
 		return fromSupplier( () -> new Fill( x , y , character ) );
 		}
 	
-
-
-	
 	//</editor-fold>
 	
 	//<editor-fold desc="object to tuple conversions">
@@ -180,7 +179,6 @@ public final class Fill
 		
 		}
 	
-
 	@Override
 	public int compareTo( Fill o )
 		{
@@ -272,10 +270,6 @@ public final class Fill
 		             .orElse( ' ' );
 		}
 	
-	
-	
-	
-	
 	//<editor-fold desc="builder pattern">
 	
 	/**
@@ -313,16 +307,14 @@ public final class Fill
 			{
 			}
 		
-		
 		@Override
 		public Builder point( final int x0 ,
-		                                final int y0 )
+		                      final int y0 )
 			{
 			this.x0 = x0;
 			this.y0 = y0;
 			return this;
 			}
-		
 		
 		@Override
 		public Builder filler( char character )
@@ -339,7 +331,6 @@ public final class Fill
 			return this;
 			}
 		
-		
 		@Override
 		public Builder pointX( int x0 )
 			{
@@ -353,8 +344,6 @@ public final class Fill
 			this.x0 = x0;
 			return this;
 			}
-		
-	
 		
 		/**
 		 * Create Line from simple arguments
