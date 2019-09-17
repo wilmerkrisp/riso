@@ -63,7 +63,11 @@ public class DefaultCanvasService
 	
 	private final DrawingFactory drawingFactory;
 	
-	@Getter( AccessLevel.NONE ) Function<Mono<ResultDataTransferObject>,Publisher<ResultDataTransferObject>> LOWLEVEL_EXCEPTION_WRAPPER = s -> s.onErrorMap( not( err -> err.getClass()
+	@Getter( AccessLevel.NONE ) Function<Mono<ResultDataTransferObject>,Publisher<ResultDataTransferObject>> LOWLEVEL_EXCEPTION_WRAPPER = s -> s.filter( r -> !r.getCanvasId()
+	                                                                                                                                                            .isBlank() )
+	                                                                                                                                            .filter( r -> !r.getScreen()
+	                                                                                                                                                            .isBlank() )
+	                                                                                                                                            .onErrorMap( not( err -> err.getClass()
 	                                                                                                                                                                        .equals( IllegalArgumentException.class ) ) , err -> new RuntimeException( "We are sorry, an unexpected error has occurred" , err ) );
 	
 	/**
@@ -91,8 +95,9 @@ public class DefaultCanvasService
 		return getCanvasRepository().saveAll( c )
 		                            .next()
 		                            .zipWhen( Canvas::makeScreen )
-		                            .map( t -> new ResultDataTransferObject( /*t.getT1() .getId()*/"canvasfake" , t.getT2() ) )
-		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .map( t -> new ResultDataTransferObject( t.getT1() .getId() , t.getT2() ) )
+		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER )
+		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.createCanvas is empty" ) );
 		}
 	
 	@Override
@@ -116,10 +121,9 @@ public class DefaultCanvasService
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
 		                            .filter( not( String::isBlank ) )/*verify postcondition*/
-		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.newLine. " ) )
-		                            //.checkpoint( "life.expert.riso.domain.service.impl.DefaultCanvasService.newLine. " )
 		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
-		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER )
+		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.newLine is empty" ) );
 			
 		}
 	
@@ -143,7 +147,8 @@ public class DefaultCanvasService
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
 		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
-		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER )
+		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.newRectangle is empty" ) );
 		}
 	
 	@Override
@@ -165,7 +170,8 @@ public class DefaultCanvasService
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
 		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
-		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER )
+		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.newFill is empty" ) );
 		}
 		
 	}
