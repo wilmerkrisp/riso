@@ -137,7 +137,9 @@ Thus the app is relates to the https://github.com/wilmerkrisp/bian/blob/master/m
 
 * The app is SPA java console application, in order not to reinvent the wheel, https://docs.spring.io/spring-shell/docs/3.0.0.BUILD-SNAPSHOT/reference/htmlsingle/[the Spring Shell framework for console applications] is taken as a basis (as there are no performance/size requirements for the application).
 
-* this application uses  https://github.com/wilmerkrisp/patterns/blob/master/patterns.pdf[patterns from the classifier]
+* this application uses  https://github.com/wilmerkrisp/patterns/blob/master/patterns.pdf[patterns from the classifier/vocabulary]
+
+* this application uses "package by component" architecturel style and consists of two gradle projects connected with SPI ServiceLoader
 
 * made benchmark test: the most interesting test of this application: fill lines O(n^2) complexity (as can be seen from the graph below) +
 where n - is the size of the filled area

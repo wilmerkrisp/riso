@@ -91,8 +91,7 @@ public class DefaultCanvasService
 		return getCanvasRepository().saveAll( c )
 		                            .next()
 		                            .zipWhen( Canvas::makeScreen )
-		                            .map( t -> new ResultDataTransferObject( t.getT1()
-		                                                                      .getId() , t.getT2() ) )
+		                            .map( t -> new ResultDataTransferObject( /*t.getT1() .getId()*/"canvasfake" , t.getT2() ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
 		}
 	
@@ -116,8 +115,12 @@ public class DefaultCanvasService
 		                            .flatMap( c -> c.draw( l ) )
 		                            .flatMap( c -> getCanvasRepository().save( c ) )
 		                            .flatMap( Canvas::makeScreen )
+		                            .filter( not( String::isBlank ) )/*verify postcondition*/
+		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.newLine. " ) )
+		                            //.checkpoint( "life.expert.riso.domain.service.impl.DefaultCanvasService.newLine. " )
 		                            .map( s -> new ResultDataTransferObject( canvasId , s ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER );
+			
 		}
 	
 	@Override
