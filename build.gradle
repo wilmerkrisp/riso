@@ -131,15 +131,15 @@ apply plugin:'org.springframework.boot'
 
 
 ////////////////////////////// java 13 experimental preview feature //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-tasks.findAll { it.name == /compile*/ }.each {
-    it.options.compilerArgs.add('--enable-preview')
-    }
-test {
-    jvmArgs(['--enable-preview'])
-}
-bootRun {
-    jvmArgs(['--enable-preview'])
-}
+//tasks.findAll { it.name == /compile*/ }.each {
+//    it.options.compilerArgs.add('--release 13 --enable-preview')
+//    }
+//test {
+//    jvmArgs(['--enable-preview'])
+//}
+//bootRun {
+//    jvmArgs(['--enable-preview'])
+//}
 
 ////////////////////////////// for running app//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 wrapper {
@@ -178,9 +178,9 @@ springBoot {
 
 java {
     //Defines which language version of Java your source files should be treated as.
-    sourceCompatibility = JavaVersion.VERSION_12
+    sourceCompatibility = JavaVersion.VERSION_HIGHER
     //Defines the minimum JVM version your code should run on, i.e. it determines the version of byte code the compiler generates.
-    targetCompatibility = JavaVersion.VERSION_12
+    targetCompatibility = JavaVersion.VERSION_HIGHER
 }
 
 
