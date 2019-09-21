@@ -178,9 +178,9 @@ springBoot {
 
 java {
     //Defines which language version of Java your source files should be treated as.
-    sourceCompatibility = JavaVersion.VERSION_HIGHER
+    sourceCompatibility = JavaVersion.VERSION_12
     //Defines the minimum JVM version your code should run on, i.e. it determines the version of byte code the compiler generates.
-    targetCompatibility = JavaVersion.VERSION_HIGHER
+    targetCompatibility = JavaVersion.VERSION_12
 }
 
 
