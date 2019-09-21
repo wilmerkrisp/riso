@@ -1,4 +1,4 @@
-package life.expert.riso.domain.service;
+package life.expert.riso.domain.service.dto;
 
 
 
@@ -44,91 +44,50 @@ import lombok.extern.slf4j.Slf4j;
 	@Getter( lazy=true)
 
 j) для игнорирования свойства, назвать его с $
-	 String $ x
+	 String $ width
 	 
 */
 //</editor-fold>
 
 /**
  * <pre>
- * simple mutable class: int int char
+ * simple mutable class: int int
  *
  * - pattern new-set-call
  * - not for inheritance
- *
- * {@code
- * 	  //pattern new-set-call
- * 	  FillDataTransferObject o = new FillDataTransferObject();
- * o.setX("a");
- * o.compute();
- *    }
- *
- *
- *
- * Preconditions: none
- * Postconditions: none
- * Side effects: none
- * Tread safety:  not thread safe
  * </pre>
  */
-
 @Data
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
-public final class FillDataTransferObject
+public final class CanvasDataTransferObject
 	{
 	
 	/**
-	 * canvas identificator for drawing figure
+	 * width
 	 *
 	 * -- SETTER --
 	 *
-	 * @param id
-	 * 	id
+	 * @param width
+	 * 	width
 	 *
 	 * 	-- GETTER --
-	 * @return the id
+	 * @return the width
 	 */
-	private String canvasId;
+	private int width;
 	
 	/**
-	 * x
+	 * y0
 	 *
 	 * -- SETTER --
 	 *
-	 * @param x
-	 * 	x
+	 * @param y0
+	 * 	y0
 	 *
 	 * 	-- GETTER --
-	 * @return the x
+	 * @return the y0
 	 */
-	private int x;
-	
-	/**
-	 * y
-	 *
-	 * -- SETTER --
-	 *
-	 * @param y
-	 * 	y
-	 *
-	 * 	-- GETTER --
-	 * @return the y
-	 */
-	private int y;
-	
-	/**
-	 * character
-	 *
-	 * -- SETTER --
-	 *
-	 * @param character
-	 * 	character
-	 *
-	 * 	-- GETTER --
-	 * @return the character
-	 */
-	private char character;
+	private int height;
 	
 	}

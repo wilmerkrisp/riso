@@ -3,12 +3,12 @@ package life.expert.riso.app.controller;
 
 
 import life.expert.riso.app.OutputHelper;
-import life.expert.riso.domain.service.CanvasDataTransferObject;
+import life.expert.riso.domain.service.dto.CanvasDataTransferObject;
 import life.expert.riso.domain.service.CanvasService;
-import life.expert.riso.domain.service.FillDataTransferObject;
-import life.expert.riso.domain.service.LineDataTransferObject;
-import life.expert.riso.domain.service.RectangleDataTransferObject;
-import life.expert.riso.domain.service.ResultDataTransferObject;
+import life.expert.riso.domain.service.dto.FillDataTransferObject;
+import life.expert.riso.domain.service.dto.LineDataTransferObject;
+import life.expert.riso.domain.service.dto.RectangleDataTransferObject;
+import life.expert.riso.domain.service.dto.ResultDataTransferObject;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

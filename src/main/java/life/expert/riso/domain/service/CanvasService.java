@@ -7,6 +7,11 @@ package life.expert.riso.domain.service;
 //
 //--------------------------------------------------------------------------------
 
+import life.expert.riso.domain.service.dto.CanvasDataTransferObject;
+import life.expert.riso.domain.service.dto.FillDataTransferObject;
+import life.expert.riso.domain.service.dto.LineDataTransferObject;
+import life.expert.riso.domain.service.dto.RectangleDataTransferObject;
+import life.expert.riso.domain.service.dto.ResultDataTransferObject;
 import reactor.core.publisher.Mono;
 
 public interface CanvasService

@@ -1,4 +1,4 @@
-package life.expert.riso.domain.service;
+package life.expert.riso.domain.service.dto;
 
 
 
@@ -50,18 +50,18 @@ j) для игнорирования свойства, назвать его с 
 //</editor-fold>
 
 /**
- * <pre>
+ * </pre>
  * simple mutable class: int int int int char
  *
  * - pattern new-set-call
  * - not for inheritance
  *
- *  {@code
- * 	  //pattern new-set-call
- * 	  RectangleDataTransferObject o = new RectangleDataTransferObject();
+ * {@code
+ * //pattern new-set-call
+ * LineDataTransferObject o = new LineDataTransferObject();
  * o.setX0("a");
  * o.compute();
- *    }
+ * }*
  *
  *
  *
@@ -71,14 +71,12 @@ j) для игнорирования свойства, назвать его с 
  * Tread safety:  not thread safe
  * </pre>
  */
-
 @Data
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
-public final class RectangleDataTransferObject
+public final class LineDataTransferObject
 	{
-	
 	/**
 	 * canvas identificator for drawing figure
 	 *

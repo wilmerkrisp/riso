@@ -1,4 +1,4 @@
-package life.expert.riso.domain.service;
+package life.expert.riso.domain.service.dto;
 
 
 
@@ -44,24 +44,24 @@ import lombok.extern.slf4j.Slf4j;
 	@Getter( lazy=true)
 
 j) для игнорирования свойства, назвать его с $
-	 String $ x0
+	 String $ x
 	 
 */
 //</editor-fold>
 
 /**
- * </pre>
- * simple mutable class: int int int int char
+ * <pre>
+ * simple mutable class: int int char
  *
  * - pattern new-set-call
  * - not for inheritance
  *
  * {@code
- * //pattern new-set-call
- * LineDataTransferObject o = new LineDataTransferObject();
- * o.setX0("a");
+ * 	  //pattern new-set-call
+ * 	  FillDataTransferObject o = new FillDataTransferObject();
+ * o.setX("a");
  * o.compute();
- * }*
+ *    }
  *
  *
  *
@@ -71,12 +71,14 @@ j) для игнорирования свойства, назвать его с 
  * Tread safety:  not thread safe
  * </pre>
  */
+
 @Data
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
-public final class LineDataTransferObject
+public final class FillDataTransferObject
 	{
+	
 	/**
 	 * canvas identificator for drawing figure
 	 *
@@ -91,56 +93,30 @@ public final class LineDataTransferObject
 	private String canvasId;
 	
 	/**
-	 * x0
+	 * x
 	 *
 	 * -- SETTER --
 	 *
-	 * @param x0
-	 * 	x0
+	 * @param x
+	 * 	x
 	 *
 	 * 	-- GETTER --
-	 * @return the x0
+	 * @return the x
 	 */
-	private int x0;
+	private int x;
 	
 	/**
-	 * y0
+	 * y
 	 *
 	 * -- SETTER --
 	 *
-	 * @param y0
-	 * 	y0
+	 * @param y
+	 * 	y
 	 *
 	 * 	-- GETTER --
-	 * @return the y0
+	 * @return the y
 	 */
-	private int y0;
-	
-	/**
-	 * x1
-	 *
-	 * -- SETTER --
-	 *
-	 * @param x1
-	 * 	x1
-	 *
-	 * 	-- GETTER --
-	 * @return the x1
-	 */
-	private int x1;
-	
-	/**
-	 * y1
-	 *
-	 * -- SETTER --
-	 *
-	 * @param y1
-	 * 	y1
-	 *
-	 * 	-- GETTER --
-	 * @return the y1
-	 */
-	private int y1;
+	private int y;
 	
 	/**
 	 * character
