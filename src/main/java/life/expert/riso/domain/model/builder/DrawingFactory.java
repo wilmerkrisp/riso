@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model;
+package life.expert.riso.domain.model.builder;
 //---------------------------------------------
 //      ___       __        _______   ______
 //     /   \     |  |      /  _____| /  __  \
@@ -15,11 +15,6 @@ package life.expert.riso.domain.model;
 //import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
 
 //import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-import life.expert.riso.domain.model.builder.CanvasBuilder;
-import life.expert.riso.domain.model.builder.FillBuilder;
-import life.expert.riso.domain.model.builder.LineBuilder;
-import life.expert.riso.domain.model.builder.RectangleBuilder;
 
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
 

@@ -10,7 +10,7 @@ package life.expert.riso.domain.model.factory;
 //               wilmer 2019/08/13
 //---------------------------------------------
 
-import life.expert.riso.domain.model.DrawingFactory;
+import life.expert.riso.domain.model.builder.DrawingFactory;
 import life.expert.riso.domain.model.builder.CanvasBuilder;
 import life.expert.riso.domain.model.builder.FillBuilder;
 import life.expert.riso.domain.model.builder.LineBuilder;

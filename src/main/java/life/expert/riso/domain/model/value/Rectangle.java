@@ -21,7 +21,7 @@ import io.vavr.match.annotation.Patterns;
 import io.vavr.match.annotation.Unapply;
 import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Drawing;
-import life.expert.riso.domain.model.DrawingFactory;
+import life.expert.riso.domain.model.builder.DrawingFactory;
 import life.expert.riso.domain.model.Figure;
 import life.expert.riso.domain.model.builder.RectangleBuilder;
 import lombok.AccessLevel;

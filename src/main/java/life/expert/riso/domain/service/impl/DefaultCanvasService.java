@@ -11,7 +11,7 @@ package life.expert.riso.domain.service.impl;
 //---------------------------------------------
 
 import life.expert.riso.domain.model.Canvas;
-import life.expert.riso.domain.model.DrawingFactory;
+import life.expert.riso.domain.model.builder.DrawingFactory;
 import life.expert.riso.domain.repository.CanvasRepository;
 import life.expert.riso.domain.service.dto.CanvasDataTransferObject;
 import life.expert.riso.domain.service.CanvasService;
