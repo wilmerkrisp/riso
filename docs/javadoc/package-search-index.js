@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"life.expert.riso.app"},{"l":"life.expert.riso.domain.model.entity"},{"l":"life.expert.riso.domain.model.value"},{"l":"life.expert.riso.domain.repository"}]
