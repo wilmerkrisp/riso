@@ -1,6 +1,7 @@
 # custom settings
 /README_INTERNAL.adoc
 /spring-shell.log
+/docs/
 
 ########################################################################################################################
 # java.gitignore template from https://github.com/github/gitignore
