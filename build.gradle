@@ -45,8 +45,6 @@ get JAR dependencies hierarchy
 generate module-info.java
     jdeps --generate-module-info ./ build/libs
 
-draw class diargamm (src/main/graphviz/classdiagram.dot)(build/graphviz/classdiagram.png)
-    ./gradlew archidoc graphviz
 
 show gradle dependencies diagram
     project->right click-> Diagrams -> Show diagram -> Gradle dependencies
@@ -114,9 +112,6 @@ plugins {
     id "io.morethan.jmhreport" version "0.9.0"
 
     id "com.jprofiler" version "11.0.2"
-
-    id "life.expert.archidoc" version "1.0.11"
-    id "com.simonharrer.graphviz" version "0.0.1"
 
 
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
@@ -311,18 +306,7 @@ tasks.create('saveProfile', com.jprofiler.gradle.Export) {
 saveProfile.dependsOn runProfile
 
 
-//////////////////////////////architecture//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-archidoc {
-
-    file "${project.projectDir}/src/main/graphviz/classdiagram.dot"
-    packages = ['life.expert.riso']
-
-    enableClassInfo()
-    enableInterClassDependencies()
-
-}
-
-
+//////////////////////////////documentation//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 asciidoctor {
     sourceDir = file("$projectDir")
     outputDir = file('build/docs')
