@@ -10,7 +10,7 @@ package life.expert.riso.domain.repository.impl;
 //               wilmer 2019/08/28
 //---------------------------------------------
 
-import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.impl.entity.DefaultCanvas;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model.value;
+package life.expert.riso.domain.model.impl.value;
 
 //---------------------------------------------
 //      ___       __        _______   ______
@@ -15,19 +15,24 @@ package life.expert.riso.domain.model.value;
 
 import com.google.common.collect.ComparisonChain;
 import io.vavr.Tuple;
-import io.vavr.Tuple5;
+import io.vavr.Tuple3;
 import io.vavr.control.Try;
 import io.vavr.match.annotation.Patterns;
 import io.vavr.match.annotation.Unapply;
 import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Drawing;
 import life.expert.riso.domain.model.Figure;
-import life.expert.riso.domain.model.builder.LineBuilder;
+import life.expert.riso.domain.model.factory.FillBuilder;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
+import reactor.util.function.Tuples;
+
+import java.util.ArrayDeque;
+import java.util.stream.IntStream;
 
 import static life.expert.common.reactivestreams.Patterns.tryFromMono;
 import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMonoError;
@@ -42,7 +47,7 @@ import static reactor.core.publisher.Mono.*;
 
 /**
  * <pre>
- * simple immutable class: int int int int char
+ * simple immutable class: int int char
  *
  * - pattern new-call
  * - the class not for inheritance
@@ -67,70 +72,40 @@ import static reactor.core.publisher.Mono.*;
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
 @Slf4j
-public final class Line
+public final class Fill
 	implements Figure,
-	           Comparable<Line>
+	           Comparable<Fill>
 	{
 	
 	/**
-	 * x0
+	 * x
 	 *
 	 * -- SETTER --
 	 *
-	 * @param x0
-	 * 	x0
-	 * @return x0
+	 * @param x
+	 * 	x
+	 * @return x
 	 *
 	 * 	-- GETTER --
-	 * @return x0
-	 * 	the x0
+	 * @return x
+	 * 	the x
 	 */
-	private final int x0;
+	private final int x;
 	
 	/**
-	 * y0
+	 * y
 	 *
 	 * -- SETTER --
 	 *
-	 * @param y0
-	 * 	y0
-	 * @return y0
+	 * @param y
+	 * 	y
+	 * @return y
 	 *
 	 * 	-- GETTER --
-	 * @return y0
-	 * 	the y0
+	 * @return y
+	 * 	the y
 	 */
-	private final int y0;
-	
-	/**
-	 * x1
-	 *
-	 * -- SETTER --
-	 *
-	 * @param x1
-	 * 	x1
-	 * @return x1
-	 *
-	 * 	-- GETTER --
-	 * @return x1
-	 * 	the x1
-	 */
-	private final int x1;
-	
-	/**
-	 * y1
-	 *
-	 * -- SETTER --
-	 *
-	 * @param y1
-	 * 	y1
-	 * @return y1
-	 *
-	 * 	-- GETTER --
-	 * @return y1
-	 * 	the y1
-	 */
-	private final int y1;
+	private final int y;
 	
 	/**
 	 * character
@@ -153,13 +128,11 @@ public final class Line
 	Other factories use this method to create an object.
 	He himself calls the private constructor to create the object.
 	* */
-	private static Mono<Line> monoOf_( final int x0 ,
-	                                   final int y0 ,
-	                                   final int x1 ,
-	                                   final int y1 ,
+	private static Mono<Fill> monoOf_( final int x ,
+	                                   final int y ,
 	                                   final char character )
 		{
-		return fromSupplier( () -> new Line( x0 , y0 , x1 , y1 , character ) );
+		return fromSupplier( () -> new Fill( x , y , character ) );
 		}
 	
 	//</editor-fold>
@@ -168,91 +141,112 @@ public final class Line
 	
 	/**
 	 * pattern matching in vavr
-	 * The method helps with conversion operations Line-&gt;Tuple
+	 * The method helps with conversion operations Fill-&gt;Tuple
 	 *
 	 * - you need add static import to method with pattern matching
-	 * import static life.expert.riso.common.LinePatterns.*;
+	 * import static life.expert.riso.common.FillPatterns.*;
 	 *
 	 * @param object
 	 * 	the object
 	 *
-	 * @return the tuple 5
+	 * @return the tuple 3
 	 */
 	@Unapply
-	public static Tuple5<Integer,Integer,Integer,Integer,Character> Line( Line object )
+	public static Tuple3<Integer,Integer,Character> Fill( Fill object )
 		{
-		return Tuple.of( object.getX0() , object.getY0() , object.getX1() , object.getY1() , object.getCharacter() );
+		return Tuple.of( object.getX() , object.getY() , object.getCharacter() );
+		
 		}
 	
-	//</editor-fold>
-	
 	@Override
-	public int compareTo( Line o )
+	public int compareTo( Fill o )
 		{
 		return ComparisonChain.start()
-		                      .compare( this.x0 , o.x0 )
-		                      .compare( this.y0 , o.y0 )
-		                      .compare( this.x1 , o.x1 )
-		                      .compare( this.y1 , o.y1 )
+		                      .compare( this.x , o.x )
+		                      .compare( this.y , o.y )
 		                      .compare( this.character , o.character )
 		                      .result();
 		}
+	
+	//</editor-fold>
 	
 	@Override
 	public Mono<Figure> draw( final Drawing canvas )
 		{
 		if( canvas == null )
 			return illegalArgumentMonoError( "Canvas must not be empty" );
-		else if( !( canvas.getXMax() >= this.getX0() && canvas.getXMax() >= this.getX1() && canvas.getYMax() >= this.getY0() && canvas.getYMax() >= this.getY1() ) )
+		else if( !( canvas.getXMax() >= this.getX() && canvas.getYMax() >= this.getY() ) )
 			return illegalArgumentMonoError( "Figure must be inside canvas" );
 		else
 			return just( canvas ).flatMap( this::draw_ )
 			                     .thenReturn( this );
 		}
 	
+	@SuppressWarnings( "unchecked" )
 	private Mono<Void> draw_( final Drawing canvas )
 		{
-		int x_0 = this.x0;
-		int x_1 = this.x1;
-		int y_0 = this.y0;
-		int y_1 = this.y1;
+		var  h         = canvas.getYMax();
+		var  w         = canvas.getXMax();
+		char old_color = pixel_( canvas , x , y );
 		
-		if( x_1 - x_0 < 0 )
+		var stack = new ArrayDeque<Tuple2>( 80 );
+		for( var point = Tuples.of( x , y ) ;
+		     point != null ;
+		     point = stack.poll() )
 			{
-			// Swap x0 and x1
-			x_0 = x_0 ^ x_1;
-			x_1 = x_0 ^ x_1;
-			x_0 = x_0 ^ x_1;
-			// Swap y0 and y1
-			y_0 = y_0 ^ y_1;
-			y_1 = y_0 ^ y_1;
-			y_0 = y_0 ^ y_1;
-			}
-		
-		float deltaX     = x_1 - x_0;
-		float deltaY     = y_1 - y_0;
-		float signumY    = Math.signum( deltaY );
-		float error      = 0;
-		float deltaError = ( deltaX == 0 ) ? Math.abs( deltaY ) + 1 : Math.abs( deltaY / deltaX );
-		int   y          = y_0;
-		
-		// Finds and fills all pixels between the two points
-		for( int x = x_0 ;
-		     x <= x_1 ;
-		     x++ )
-			{
-			canvas.putPixel( x , y , character );
-			error += deltaError;
+			int x_ = point.getT1();
+			int y_ = point.getT2();
 			
-			while( error >= 0.5 && signumY * y <= signumY * y_1 )
+			//goto up
+			y_ = IntStream.iterate( y_ , i -> i >= 1 , i -> i - 1 )
+			              .takeWhile( i -> pixel_( canvas , x_ , i ) == old_color )
+			              .min()
+			              .orElse( 1 );
+			
+			//goto down
+			for( boolean left = false, right = false /*variables for 'breaking' vertical 'lines'*/ ;
+			     y_ <= h && pixel_( canvas , x_ , y_ ) == old_color ;
+			     y_++ )
 				{
-				canvas.putPixel( x , y , character );
-				y += signumY;
-				error--;
+				canvas.putPixel( x_ , y_ , character );
+				
+				if( !left && x_ > 1 && pixel_( canvas , x_ - 1 , y_ ) == old_color )
+					{
+					//add left vertical line for analysis
+					stack.offer( Tuples.of( x_ - 1 , y_ ) );
+					left = true;
+					}
+				else if( left && x_ > 1 && pixel_( canvas , x_ - 1 , y_ ) != old_color )
+					{
+					//if left vertical line breaks
+					left = false;
+					}
+				
+				if( !right && x_ < w && pixel_( canvas , x_ + 1 , y_ ) == old_color )
+					{
+					//add left vertical line for analysis
+					stack.offer( Tuples.of( x_ + 1 , y_ ) );
+					right = true;
+					}
+				else if( right && x_ < w && pixel_( canvas , x_ + 1 , y_ ) != old_color )
+					{
+					//if left vertical line breaks
+					right = false;
+					}
 				}
+				
 			}
 		
 		return empty();
+		}
+	
+	//helper method
+	private char pixel_( Drawing canvas ,
+	                     int x ,
+	                     int y )
+		{
+		return canvas.getPixel( x , y )
+		             .orElse( ' ' );
 		}
 	
 	//<editor-fold desc="builder pattern">
@@ -264,9 +258,9 @@ public final class Line
 	 *
 	 * @return the line builder
 	 */
-	public static LineBuilder builder()
+	public static FillBuilder builder()
 		{
-		return new Builder();
+		return new Fill.Builder();
 		}
 	
 	/**
@@ -279,16 +273,12 @@ public final class Line
 	 * </pre>
 	 */
 	public static final class Builder
-		implements LineBuilder
+		implements FillBuilder
 		{
 		
 		private int x0;
 		
 		private int y0;
-		
-		private int x1;
-		
-		private int y1;
 		
 		private char character;
 		
@@ -297,20 +287,11 @@ public final class Line
 			}
 		
 		@Override
-		public Builder startPoint( final int x0 ,
-		                           final int y0 )
+		public Builder point( final int x0 ,
+		                      final int y0 )
 			{
 			this.x0 = x0;
 			this.y0 = y0;
-			return this;
-			}
-		
-		@Override
-		public Builder endPoint( final int x1 ,
-		                         final int y1 )
-			{
-			this.x1 = x1;
-			this.y1 = y1;
 			return this;
 			}
 		
@@ -322,7 +303,7 @@ public final class Line
 			}
 		
 		@Override
-		public Builder startPoint( PositivePoint startPoint )
+		public Builder point( PositivePoint startPoint )
 			{
 			this.x0 = startPoint.getX();
 			this.y0 = startPoint.getY();
@@ -330,38 +311,16 @@ public final class Line
 			}
 		
 		@Override
-		public Builder endPoint( PositivePoint endPoint )
-			{
-			this.x1 = endPoint.getX();
-			this.y1 = endPoint.getY();
-			return this;
-			}
-		
-		@Override
-		public Builder startPointX( int x0 )
+		public Builder pointX( int x0 )
 			{
 			this.x0 = x0;
 			return this;
 			}
 		
 		@Override
-		public Builder startPointY( int y0 )
+		public Builder pointY( int y0 )
 			{
 			this.x0 = x0;
-			return this;
-			}
-		
-		@Override
-		public Builder endPointX( int x1 )
-			{
-			this.x1 = x1;
-			return this;
-			}
-		
-		@Override
-		public Builder endPointY( int y1 )
-			{
-			this.y1 = y1;
 			return this;
 			}
 		
@@ -382,8 +341,7 @@ public final class Line
 		public final Mono<Figure> buildMono()
 			{
 			return PositivePoint.monoOf( x0 , y0 )
-			                    .then( PositivePoint.monoOf( x1 , y1 ) )
-			                    .then( monoOf_( x0 , y0 , x1 , y1 , character ) )
+			                    .then( monoOf_( x0 , y0 , character ) )
 			                    .cast( Figure.class );
 			}
 		
@@ -427,4 +385,3 @@ public final class Line
 	//</editor-fold>
 	
 	}
-

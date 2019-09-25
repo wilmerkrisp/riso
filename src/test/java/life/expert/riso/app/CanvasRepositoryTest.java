@@ -13,7 +13,7 @@ package life.expert.riso.app;
 
 import io.r2dbc.spi.ConnectionFactory;
 import life.expert.riso.domain.model.Canvas;
-import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.impl.entity.DefaultCanvas;
 import life.expert.riso.domain.repository.CanvasRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;

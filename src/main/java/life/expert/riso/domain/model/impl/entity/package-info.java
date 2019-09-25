@@ -5,4 +5,4 @@
  *
  * </pre>
  */
-package life.expert.riso.domain.model.entity;
+package life.expert.riso.domain.model.impl.entity;

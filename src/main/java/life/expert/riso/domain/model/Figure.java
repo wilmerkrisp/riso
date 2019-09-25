@@ -2,7 +2,7 @@ package life.expert.riso.domain.model;
 //@Header@
 //--------------------------------------------------------------------------------
 //
-//                          riso  life.expert.riso.domain.model.value
+//                          riso  life.expert.riso.domain.model.impl.value
 //                           wilmer 2019/07/23
 //
 //--------------------------------------------------------------------------------

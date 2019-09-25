@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model.builder;
+package life.expert.riso.domain.model.factory;
 
 //---------------------------------------------
 //      ___       __        _______   ______

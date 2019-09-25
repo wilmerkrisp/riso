@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model.factory;
+package life.expert.riso.domain.model.impl.factory;
 //---------------------------------------------
 //      ___       __        _______   ______
 //     /   \     |  |      /  _____| /  __  \
@@ -10,15 +10,15 @@ package life.expert.riso.domain.model.factory;
 //               wilmer 2019/08/13
 //---------------------------------------------
 
-import life.expert.riso.domain.model.builder.DrawingFactory;
-import life.expert.riso.domain.model.builder.CanvasBuilder;
-import life.expert.riso.domain.model.builder.FillBuilder;
-import life.expert.riso.domain.model.builder.LineBuilder;
-import life.expert.riso.domain.model.builder.RectangleBuilder;
-import life.expert.riso.domain.model.entity.DefaultCanvas;
-import life.expert.riso.domain.model.value.Fill;
-import life.expert.riso.domain.model.value.Line;
-import life.expert.riso.domain.model.value.Rectangle;
+import life.expert.riso.domain.model.factory.DrawingFactory;
+import life.expert.riso.domain.model.factory.CanvasBuilder;
+import life.expert.riso.domain.model.factory.FillBuilder;
+import life.expert.riso.domain.model.factory.LineBuilder;
+import life.expert.riso.domain.model.factory.RectangleBuilder;
+import life.expert.riso.domain.model.impl.entity.DefaultCanvas;
+import life.expert.riso.domain.model.impl.value.Fill;
+import life.expert.riso.domain.model.impl.value.Line;
+import life.expert.riso.domain.model.impl.value.Rectangle;
 import org.springframework.stereotype.Component;
 
 //import static life.expert.common.base.Preconditions.*;  //checkCollection

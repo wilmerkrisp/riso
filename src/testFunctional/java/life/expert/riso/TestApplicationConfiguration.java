@@ -28,7 +28,7 @@ import org.springframework.shell.jline.PromptProvider;
                   "life.expert.riso.domain.repository" ,
                   "life.expert.riso.domain.model" ,
                   "life.expert.riso.domain.service" ,
-                  "life.expert.riso.domain.model.entity" } )
+                  "life.expert.riso.domain.model.impl.entity" } )
 @EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
 public class TestApplicationConfiguration
 	{

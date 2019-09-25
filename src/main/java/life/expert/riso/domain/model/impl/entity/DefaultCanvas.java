@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model.entity;
+package life.expert.riso.domain.model.impl.entity;
 
 
 
@@ -10,7 +10,7 @@ import io.vavr.match.annotation.Unapply;
 import life.expert.riso.common.PositiveSize;
 import life.expert.riso.domain.model.Canvas;
 import life.expert.riso.domain.model.Figure;
-import life.expert.riso.domain.model.builder.CanvasBuilder;
+import life.expert.riso.domain.model.factory.CanvasBuilder;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;

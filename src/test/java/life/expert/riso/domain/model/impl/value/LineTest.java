@@ -1,8 +1,8 @@
-package life.expert.riso.domain.model.value;
+package life.expert.riso.domain.model.impl.value;
 
 
 
-import life.expert.riso.domain.model.entity.DefaultCanvas;
+import life.expert.riso.domain.model.impl.entity.DefaultCanvas;
 import org.junit.Before;
 import org.junit.Test;
 import reactor.test.StepVerifier;
@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 //@Header@
 //--------------------------------------------------------------------------------
 //
-//                          riso  life.expert.riso.domain.model.value
+//                          riso  life.expert.riso.domain.model.impl.value
 //                           wilmer 2019/07/25
 //
 //--------------------------------------------------------------------------------

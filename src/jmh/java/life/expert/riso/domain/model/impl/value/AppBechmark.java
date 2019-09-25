@@ -1,4 +1,4 @@
-package life.expert.riso.domain.model.value;//@Header@
+package life.expert.riso.domain.model.impl.value;//@Header@
 //--------------------------------------------------------------------------------
 //
 //                          graph  life.expert.riso.base

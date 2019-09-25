@@ -1,11 +1,11 @@
-package life.expert.riso.domain.model.entity;
+package life.expert.riso.domain.model.impl.entity;
 
 
 
 import com.google.common.base.Strings;
 import life.expert.riso.domain.model.Canvas;
-import life.expert.riso.domain.model.factory.DefaultDrawingFactory;
-import life.expert.riso.domain.model.value.Rectangle;
+import life.expert.riso.domain.model.impl.factory.DefaultDrawingFactory;
+import life.expert.riso.domain.model.impl.value.Rectangle;
 import org.junit.Before;
 import org.junit.Test;
 import reactor.core.publisher.Flux;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 //@Header@
 //--------------------------------------------------------------------------------
 //
-//                          riso  life.expert.riso.domain.model.entity
+//                          riso  life.expert.riso.domain.model.impl.entity
 //                           wilmer 2019/07/24
 //
 //--------------------------------------------------------------------------------

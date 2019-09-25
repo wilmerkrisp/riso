@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 //@Header@
 //--------------------------------------------------------------------------------
 //
-//                          riso  life.expert.riso.domain.model.entity
+//                          riso  life.expert.riso.domain.model.impl.entity
 //                           wilmer 2019/07/23
 //
 //--------------------------------------------------------------------------------
