@@ -312,6 +312,16 @@ asciidoctor {
     outputDir = file('build/docs')
 }
 
+javadoc {
+    options.tags = ["apiNote:a:API Note:",
+                    "implSpec:a:Implementation Requirements:",
+                    "implNote:a:Implementation Note:"]
+
+    if( JavaVersion.current().isJava11Compatible() )
+        {
+        options.addBooleanOption('html5', true)
+        }
+}
 
 //////////////////////////////dependencies//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
