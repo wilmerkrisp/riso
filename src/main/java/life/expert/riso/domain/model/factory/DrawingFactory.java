@@ -18,6 +18,11 @@ package life.expert.riso.domain.model.factory;
 
 //import static java.util.function.Predicate.*;           //isEqual streamAPI
 
+import life.expert.riso.domain.model.factory.CanvasBuilder;
+import life.expert.riso.domain.model.factory.FillBuilder;
+import life.expert.riso.domain.model.factory.LineBuilder;
+import life.expert.riso.domain.model.factory.RectangleBuilder;
+
 public interface DrawingFactory
 	{
 	
