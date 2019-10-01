@@ -166,12 +166,12 @@ delegate IDE build/run actions to gradle
 ** testFunctional
 ** testIntegration
 
-* this application uses "package by component" architecturel style and consists of two gradle projects connected with SPI ServiceLoader
-* class diagramm
-[source,bash]
-gradlew archidoc
+* Structure101 used for architecture control
+image:/docs/structure101/arch1.png[width=300, link="/docs/structure101/arch1.png"]
+image:/docs/structure101/LSM1.png[width=300, link="/docs/structure101/LSM1.png"]
+image:/docs/structure101/arch2.png[width=300, link="/docs/structure101/arch2.png"]
+image:/docs/structure101/LSM2.png[width=700, link="/docs/structure101/LSM2.png"]
 
-** image:/docs/archidoc/classdiagram.png[width=700, link="image:/docs/archidoc/classdiagram.png"]
 
 * well-known libraries are widely used (Guava, Apache commons)
 ** in accordance with the principles of reference architectures of https://www.opengroup.org/togaf[TOGAF] architecture, the most well-established components are transferred to the library, here I use https://github.com/wilmerkrisp/himalaya[my own library]
