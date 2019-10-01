@@ -1,0 +1,358 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Canvas</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">life.expert.riso.domain.model.impl.entity</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Canvas (life.expert.riso.domain.model.impl.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat
+">
+  Class, %
+</th>
+<th class="coverageStat
+">
+  Method, %
+</th>
+<th class="coverageStat
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Canvas</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.4%
+  </span>
+  <span class="absValue">
+    (13/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.7%
+  </span>
+  <span class="absValue">
+    (67/ 81)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package life.expert.riso.domain.model.impl.entity;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import life.expert.riso.domain.model.Figure;
+<i>6</i>&nbsp;import lombok.extern.slf4j.Slf4j;
+<i>7</i>&nbsp;import org.apache.commons.lang3.RandomStringUtils;
+<i>8</i>&nbsp;import reactor.core.publisher.Mono;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;import java.util.Optional;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import static life.expert.common.reactivestreams.Preconditions.checkArgumentAndMap;
+<i>13</i>&nbsp;import static reactor.core.publisher.Mono.just;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;//@Header@
+<i>16</i>&nbsp;//--------------------------------------------------------------------------------
+<i>17</i>&nbsp;//
+<i>18</i>&nbsp;//                          riso  life.expert.riso.domain.model.impl.entity
+<i>19</i>&nbsp;//                           wilmer 2019/07/23
+<i>20</i>&nbsp;//
+<i>21</i>&nbsp;//--------------------------------------------------------------------------------
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * The type Canvas.
+<i>25</i>&nbsp; */
+<b class="fc"><i>26</i>&nbsp;@Slf4j</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;public final class Canvas
+<i>29</i>&nbsp;	extends Entity&lt;String&gt;
+<i>30</i>&nbsp;	implements Drawing
+<i>31</i>&nbsp;	{
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;	private int width = 2;</b>
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;	private int height = 2;</b>
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;	private int xMax;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;	private int yMax;
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;	private char[][] screen;
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;	//&lt;editor-fold desc=&quot;common methods&quot;&gt;
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;	private Canvas()
+<b class="nc"><i>48</i>&nbsp;		{</b>
+<b class="nc"><i>49</i>&nbsp;		throw new UnsupportedOperationException( &quot;Please use constructor with parameters.&quot; );</b>
+<i>50</i>&nbsp;		}
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;	/**
+<i>53</i>&nbsp;	 * Of mono.
+<i>54</i>&nbsp;	 *
+<i>55</i>&nbsp;	 * @param width
+<i>56</i>&nbsp;	 * 	the width
+<i>57</i>&nbsp;	 * @param height
+<i>58</i>&nbsp;	 * 	the height
+<i>59</i>&nbsp;	 *
+<i>60</i>&nbsp;	 * @return the mono
+<i>61</i>&nbsp;	 */
+<i>62</i>&nbsp;	public static Mono&lt;Canvas&gt; monoOf( int width ,
+<i>63</i>&nbsp;	                                   int height )
+<i>64</i>&nbsp;		{
+<b class="fc"><i>65</i>&nbsp;		return checkArgumentAndMap( width , height , ( x , y ) -&gt; x &gt; 0 &amp;&amp; y &gt; 0 , &quot;Width and height must be positive&quot; , Canvas::new );</b>
+<i>66</i>&nbsp;		}
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;	private Canvas( int width ,
+<i>69</i>&nbsp;	                int height )
+<b class="fc"><i>70</i>&nbsp;		{</b>
+<b class="fc"><i>71</i>&nbsp;		int     length          = 10;</b>
+<b class="fc"><i>72</i>&nbsp;		boolean useLetters      = true;</b>
+<b class="fc"><i>73</i>&nbsp;		boolean useNumbers      = false;</b>
+<b class="fc"><i>74</i>&nbsp;		String  generatedString = RandomStringUtils.random( length , useLetters , useNumbers );</b>
+<i>75</i>&nbsp;
+<b class="fc"><i>76</i>&nbsp;		super.id = generatedString;</b>
+<b class="fc"><i>77</i>&nbsp;		super.name = &quot;default&quot;;</b>
+<b class="fc"><i>78</i>&nbsp;		this.xMax = width;</b>
+<b class="fc"><i>79</i>&nbsp;		this.yMax = height;</b>
+<b class="fc"><i>80</i>&nbsp;		this.width = width + 2;</b>
+<b class="fc"><i>81</i>&nbsp;		this.height = height + 2;</b>
+<i>82</i>&nbsp;
+<b class="fc"><i>83</i>&nbsp;		initScreen();</b>
+<i>84</i>&nbsp;
+<b class="fc"><i>85</i>&nbsp;		}</b>
+<i>86</i>&nbsp;
+<i>87</i>&nbsp;	private void initScreen()
+<i>88</i>&nbsp;		{
+<b class="fc"><i>89</i>&nbsp;		this.screen = new char[this.height][this.width];</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;		// Border corners
+<b class="fc"><i>92</i>&nbsp;		this.screen[this.height - 1][0] = &#39;-&#39;;</b>
+<b class="fc"><i>93</i>&nbsp;		this.screen[this.height - 1][this.width - 1] = &#39;-&#39;;</b>
+<b class="fc"><i>94</i>&nbsp;		this.screen[0][0] = &#39;-&#39;;</b>
+<b class="fc"><i>95</i>&nbsp;		this.screen[0][this.width - 1] = &#39;-&#39;;</b>
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;		// Upper and lower borders
+<b class="fc"><i>98</i>&nbsp;		for( int col = 1 ;</b>
+<b class="fc"><i>99</i>&nbsp;		     col &lt; this.width - 1 ;</b>
+<b class="fc"><i>100</i>&nbsp;		     col++ )</b>
+<i>101</i>&nbsp;			{
+<b class="fc"><i>102</i>&nbsp;			this.screen[this.height - 1][col] = &#39;-&#39;;</b>
+<b class="fc"><i>103</i>&nbsp;			this.screen[0][col] = &#39;-&#39;;</b>
+<i>104</i>&nbsp;			}
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;		// Left and right borders
+<b class="fc"><i>107</i>&nbsp;		for( int row = 1 ;</b>
+<b class="fc"><i>108</i>&nbsp;		     row &lt; this.height - 1 ;</b>
+<b class="fc"><i>109</i>&nbsp;		     row++ )</b>
+<i>110</i>&nbsp;			{
+<b class="fc"><i>111</i>&nbsp;			this.screen[row][0] = &#39;|&#39;;</b>
+<b class="fc"><i>112</i>&nbsp;			this.screen[row][this.width - 1] = &#39;|&#39;;</b>
+<i>113</i>&nbsp;			}
+<i>114</i>&nbsp;
+<b class="fc"><i>115</i>&nbsp;		flushScreen();</b>
+<b class="fc"><i>116</i>&nbsp;		}</b>
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;	/**
+<i>119</i>&nbsp;	 * Fills the screen with spaces.
+<i>120</i>&nbsp;	 */
+<i>121</i>&nbsp;	private void flushScreen()
+<i>122</i>&nbsp;		{
+<b class="fc"><i>123</i>&nbsp;		for( int row = 1 ;</b>
+<b class="fc"><i>124</i>&nbsp;		     row &lt; this.height - 1 ;</b>
+<b class="fc"><i>125</i>&nbsp;		     row++ )</b>
+<i>126</i>&nbsp;			{
+<b class="fc"><i>127</i>&nbsp;			for( int col = 1 ;</b>
+<b class="fc"><i>128</i>&nbsp;			     col &lt; this.width - 1 ;</b>
+<b class="fc"><i>129</i>&nbsp;			     col++ )</b>
+<i>130</i>&nbsp;				{
+<b class="fc"><i>131</i>&nbsp;				this.screen[row][col] = &#39; &#39;;</b>
+<i>132</i>&nbsp;				}
+<i>133</i>&nbsp;			}
+<b class="fc"><i>134</i>&nbsp;		}</b>
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;	private int getWidth()
+<i>137</i>&nbsp;		{
+<b class="nc"><i>138</i>&nbsp;		return width;</b>
+<i>139</i>&nbsp;		}
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;	private void setWidth( final int width )
+<i>142</i>&nbsp;		{
+<b class="nc"><i>143</i>&nbsp;		this.width = width;</b>
+<b class="nc"><i>144</i>&nbsp;		}</b>
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;	private int getHeight()
+<i>147</i>&nbsp;		{
+<b class="nc"><i>148</i>&nbsp;		return width;</b>
+<i>149</i>&nbsp;		}
+<i>150</i>&nbsp;
+<i>151</i>&nbsp;	private void setHeight( final int height )
+<i>152</i>&nbsp;		{
+<b class="nc"><i>153</i>&nbsp;		this.height = height;</b>
+<b class="nc"><i>154</i>&nbsp;		}</b>
+<i>155</i>&nbsp;
+<i>156</i>&nbsp;	@Override
+<i>157</i>&nbsp;	public int getXMax()
+<i>158</i>&nbsp;		{
+<b class="fc"><i>159</i>&nbsp;		return xMax;</b>
+<i>160</i>&nbsp;		}
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;	private void setXMax( final int xMax )
+<i>163</i>&nbsp;		{
+<b class="nc"><i>164</i>&nbsp;		this.xMax = xMax;</b>
+<b class="nc"><i>165</i>&nbsp;		}</b>
+<i>166</i>&nbsp;
+<i>167</i>&nbsp;	//&lt;/editor-fold&gt;
+<i>168</i>&nbsp;
+<i>169</i>&nbsp;	//&lt;editor-fold desc=&quot;drawing methods&quot;&gt;
+<i>170</i>&nbsp;
+<i>171</i>&nbsp;	@Override
+<i>172</i>&nbsp;	public int getYMax()
+<i>173</i>&nbsp;		{
+<b class="fc"><i>174</i>&nbsp;		return yMax;</b>
+<i>175</i>&nbsp;		}
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;	private void setYMax( final int yMax )
+<i>178</i>&nbsp;		{
+<b class="nc"><i>179</i>&nbsp;		this.yMax = yMax;</b>
+<b class="nc"><i>180</i>&nbsp;		}</b>
+<i>181</i>&nbsp;
+<i>182</i>&nbsp;	@Override
+<i>183</i>&nbsp;	public void putPixel( int x ,
+<i>184</i>&nbsp;	                      int y ,
+<i>185</i>&nbsp;	                      char c )
+<i>186</i>&nbsp;		{
+<i>187</i>&nbsp;		//coordinates starts from 1
+<b class="fc"><i>188</i>&nbsp;		int tx = x - 1;</b>
+<b class="fc"><i>189</i>&nbsp;		int ty = y - 1;</b>
+<i>190</i>&nbsp;
+<b class="fc"><i>191</i>&nbsp;		if( tx &lt; 0 || tx &gt; this.xMax || ty &lt; 0 || ty &gt; this.yMax )</b>
+<i>192</i>&nbsp;			{
+<b class="nc"><i>193</i>&nbsp;			return;</b>
+<i>194</i>&nbsp;			}
+<i>195</i>&nbsp;
+<b class="fc"><i>196</i>&nbsp;		this.screen[++ty][++tx] = c;</b>
+<b class="fc"><i>197</i>&nbsp;		}</b>
+<i>198</i>&nbsp;
+<i>199</i>&nbsp;	@Override
+<i>200</i>&nbsp;	public Optional&lt;Character&gt; getPixel( int x ,
+<i>201</i>&nbsp;	                                     int y )
+<i>202</i>&nbsp;		{
+<i>203</i>&nbsp;		//coordinates starts from 1
+<b class="fc"><i>204</i>&nbsp;		int tx = x - 1;</b>
+<b class="fc"><i>205</i>&nbsp;		int ty = y - 1;</b>
+<i>206</i>&nbsp;
+<b class="fc"><i>207</i>&nbsp;		if( tx &lt; 0 || tx &gt; this.xMax || ty &lt; 0 || ty &gt; this.yMax )</b>
+<i>208</i>&nbsp;			{
+<b class="nc"><i>209</i>&nbsp;			return Optional.empty();</b>
+<i>210</i>&nbsp;			}
+<i>211</i>&nbsp;
+<b class="fc"><i>212</i>&nbsp;		return Optional.of( this.screen[++ty][++tx] );</b>
+<i>213</i>&nbsp;		}
+<i>214</i>&nbsp;
+<i>215</i>&nbsp;	/**
+<i>216</i>&nbsp;	 * return terminal image of screen
+<i>217</i>&nbsp;	 *
+<i>218</i>&nbsp;	 * @return the string
+<i>219</i>&nbsp;	 */
+<i>220</i>&nbsp;	public String makeScreen()
+<i>221</i>&nbsp;		{
+<b class="fc"><i>222</i>&nbsp;		StringBuilder screenBuffer = new StringBuilder( ( this.width + 1 ) * this.height );</b>
+<i>223</i>&nbsp;
+<i>224</i>&nbsp;		//		for( int row = this.height - 1 ;
+<i>225</i>&nbsp;		//		     row &gt;= 0 ;
+<i>226</i>&nbsp;		//		     row-- )
+<i>227</i>&nbsp;
+<b class="fc"><i>228</i>&nbsp;		for( int row = 0 ;</b>
+<b class="fc"><i>229</i>&nbsp;		     row &lt;= this.height - 1 ;</b>
+<b class="fc"><i>230</i>&nbsp;		     row++ )</b>
+<i>231</i>&nbsp;			{
+<b class="fc"><i>232</i>&nbsp;			for( int col = 0 ;</b>
+<b class="fc"><i>233</i>&nbsp;			     col &lt; this.width ;</b>
+<b class="fc"><i>234</i>&nbsp;			     col++ )</b>
+<i>235</i>&nbsp;				{
+<b class="fc"><i>236</i>&nbsp;				screenBuffer.append( this.screen[row][col] );</b>
+<i>237</i>&nbsp;				}
+<i>238</i>&nbsp;
+<b class="fc"><i>239</i>&nbsp;			screenBuffer.append( &#39;\n&#39; );</b>
+<i>240</i>&nbsp;			}
+<i>241</i>&nbsp;
+<b class="fc"><i>242</i>&nbsp;		return screenBuffer.toString();</b>
+<i>243</i>&nbsp;		}
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;	/**
+<i>246</i>&nbsp;	 * put figure on canvas
+<i>247</i>&nbsp;	 *
+<i>248</i>&nbsp;	 * @param figure
+<i>249</i>&nbsp;	 * 	the figure
+<i>250</i>&nbsp;	 *
+<i>251</i>&nbsp;	 * @return the mono
+<i>252</i>&nbsp;	 */
+<i>253</i>&nbsp;	public Mono&lt;Canvas&gt; draw( Figure figure )
+<i>254</i>&nbsp;		{
+<b class="fc"><i>255</i>&nbsp;		return figure.draw( this )</b>
+<b class="fc"><i>256</i>&nbsp;		             .flatMap( f -&gt; just( this ) );</b>
+<i>257</i>&nbsp;		}
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;	/**
+<i>260</i>&nbsp;	 * Draw mono.
+<i>261</i>&nbsp;	 *
+<i>262</i>&nbsp;	 * @param figure
+<i>263</i>&nbsp;	 * 	the figure
+<i>264</i>&nbsp;	 *
+<i>265</i>&nbsp;	 * @return the mono
+<i>266</i>&nbsp;	 */
+<i>267</i>&nbsp;	public Mono&lt;Canvas&gt; draw( Mono&lt;? extends Figure&gt; figure )
+<i>268</i>&nbsp;		{
+<b class="fc"><i>269</i>&nbsp;		return figure.flatMap( f -&gt; f.draw( this ) )</b>
+<b class="fc"><i>270</i>&nbsp;		             .flatMap( f -&gt; just( this ) );</b>
+<i>271</i>&nbsp;		}
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;	//&lt;/editor-fold&gt;
+<i>274</i>&nbsp;
+<i>275</i>&nbsp;	}
+</div>
+</div>
+
+<div class="footer">
+
+    <div style="float:right;">generated on 2019-07-26 12:34</div>
+</div>
+</body>
+</html>
