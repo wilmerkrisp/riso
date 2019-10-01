@@ -10,28 +10,40 @@ package life.expert.riso.domain.model.factory;
 //               wilmer 2019/08/07
 //---------------------------------------------
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
 
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
 
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-
-import life.expert.riso.domain.model.factory.CanvasBuilder;
-import life.expert.riso.domain.model.factory.FillBuilder;
-import life.expert.riso.domain.model.factory.LineBuilder;
-import life.expert.riso.domain.model.factory.RectangleBuilder;
-
+/**
+ * The interface Drawing factory.
+ */
 public interface DrawingFactory
 	{
 	
+	/**
+	 * New canvas builder canvas builder.
+	 *
+	 * @return the canvas builder
+	 */
 	CanvasBuilder newCanvasBuilder();
 	
+	/**
+	 * New fill builder fill builder.
+	 *
+	 * @return the fill builder
+	 */
 	FillBuilder newFillBuilder();
 	
+	/**
+	 * New line builder line builder.
+	 *
+	 * @return the line builder
+	 */
 	LineBuilder newLineBuilder();
 	
+	/**
+	 * New rectangle builder rectangle builder.
+	 *
+	 * @return the rectangle builder
+	 */
 	RectangleBuilder newRectangleBuilder();
 	
 	}

@@ -16,9 +16,7 @@ import java.time.Duration;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
 
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -84,8 +82,6 @@ public class CanvasTest
 	@Test
 	public void getXMaxTest()
 		{
-		//		var f=intRange( 0 , 8 ).flatMap( i -> intRange( 10 , 18 ).map( j -> Tuples.of( i , j ) ) );
-		//		f.subscribe( logAtInfoConsumer("NEXT") , logAtErrorConsumer("ERROR") , logAtInfoRunnable("COMPLETE") );
 		
 		assertThat( canvas.getXMax() , is( 3 ) );
 		}
@@ -128,8 +124,6 @@ public class CanvasTest
 		            .expectComplete()
 		            .verify();
 		
-		//assertThat( screen , is(Mono.just( "-----\n" + "|   |\n" + "|   |\n" + "|   |\n" + "-----\n") ) );
-		
 		}
 	
 	/**
@@ -165,7 +159,6 @@ public class CanvasTest
 		                 .buildMono();
 		
 		var p = canvas.draw( r );//.log( "VO draw" , Level.FINE , SignalType.ON_NEXT );
-		//p.subscribe( logAtInfoConsumer( "NEXT" ) , logAtErrorConsumer( "ERROR" ) , logAtInfoRunnable( "COMPLETE" ) );
 		
 		StepVerifier.create( p )
 		            .expectNextCount( 1 )

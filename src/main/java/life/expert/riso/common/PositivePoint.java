@@ -28,27 +28,9 @@ import static life.expert.common.reactivestreams.Patterns.tryFromMono;
 import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMonoError;
 import static reactor.core.publisher.Mono.fromSupplier;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
 
 
-/*
-*  todo If it is a precondition-object then
-*  1) modify class-javadoc comment (see below)
-	- This is object-precondition represents point with two positive &gt;=0 coordinates inside
-	- in order not to do the same checks all the time,
-	- Thus, if such an object is transferred to the input, then we know that it always contains the correct data.
-*  2) remove  ref to localized resource
-*  3) delete comment from monoOf
-*  4) remove method monoOfPreconditions
-*  5) remove method compute
-*
-* */
+
 
 /**
  * <pre>
@@ -63,7 +45,6 @@ import static reactor.core.publisher.Mono.fromSupplier;
  * - 'of' - factory method is prohibited because it is intended only for easy creation of objects in tests, please use pure functional methods monoOf.., without raise exceptions.
  * </pre>
  */
-
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -118,6 +99,11 @@ public final class PositivePoint
 	 * Create PositivePoint from simple arguments
 	 * Only the monoOf.. factory methods is allowed, because it allows you to lazily create objects only with a real subscription
 	 *
+	 * @param x
+	 * 	the x
+	 * @param y
+	 * 	the y
+	 *
 	 * @return the Mono with lazyli created object
 	 *
 	 * @implNote to create objects, this method calls the private factory monoOf_
@@ -138,6 +124,9 @@ public final class PositivePoint
 	 * This factory method is prohibited because it is intended only for easy creation of objects in tests
 	 *
 	 *
+	 * @param x the x
+	 * @param y the y
+	 * @return the positive point
 	 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
 	 * @deprecated please use pure functional methods monoOf.., without raise exceptions. </pre>
 	 */
@@ -192,6 +181,11 @@ public final class PositivePoint
 	 * for example, if the message is immediately returned to the user UI and not wait
 	 * when, for example at night, lazy processing occurs and a user error is detected
 	 *
+	 * @param x
+	 * 	the x
+	 * @param y
+	 * 	the y
+	 *
 	 * @return the Try with Success or Failure inside
 	 */
 	public static Try<PositivePoint> tryOf( final int x ,
@@ -210,6 +204,11 @@ public final class PositivePoint
 	 *
 	 * - you need add static import to method with pattern matching
 	 * import static life.expert.riso.common.PositivePointPatterns.*;
+	 *
+	 * @param object
+	 * 	the object
+	 *
+	 * @return the tuple 2
 	 */
 	@Unapply
 	public static Tuple2<Integer,Integer> PositivePoint( PositivePoint object )
@@ -221,6 +220,9 @@ public final class PositivePoint
 	/**
 	 * Create PositivePoint from Tuple
 	 * The method helps with conversion operations Tuple-&gt;PositivePoint
+	 *
+	 * @param tuple
+	 * 	the tuple
 	 *
 	 * @return the Mono with lazyli created object
 	 */

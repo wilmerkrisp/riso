@@ -28,16 +28,7 @@ import static life.expert.common.reactivestreams.Patterns.range;
 import static life.expert.common.reactivestreams.Patterns.tryFromMono;
 import static reactor.core.publisher.Mono.fromSupplier;
 
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
-//import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
+
 
 /**
  * <pre>
@@ -52,7 +43,6 @@ import static reactor.core.publisher.Mono.fromSupplier;
  */
 @Slf4j
 @ToString
-//@Getter
 @Data
 @Table
 public class DefaultCanvas
@@ -74,7 +64,7 @@ public class DefaultCanvas
 	//@Transient
 	private int yMax;
 	
-	//@Getter( AccessLevel.NONE )
+	
 	private String screen;
 	
 	//<editor-fold desc="basic constructors">
@@ -116,11 +106,11 @@ public class DefaultCanvas
 		if( id == null || name == null || width < 3 || height < 3 || screen == null || xMax < 1 || yMax < 1 )
 			throw new IllegalArgumentException( "Violated precondition: id == null || name == null || width < 3 || height < 3 || screen == null || xMax < 1 || yMax < 1" );
 		
-		this.id = id;
-		this.name = name;
-		this.xMax = xMax;
-		this.yMax = yMax;
-		this.width = width;  //+ 2;
+		this.id     = id;
+		this.name   = name;
+		this.xMax   = xMax;
+		this.yMax   = yMax;
+		this.width  = width;  //+ 2;
 		this.height = height;// + 2;
 		this.screen = screen;
 		}
@@ -147,6 +137,11 @@ public class DefaultCanvas
 	 *
 	 * - you need add static import to method with pattern matching
 	 * import static life.expert.riso.common.SamplePatterns.*;
+	 *
+	 * @param object
+	 * 	the object
+	 *
+	 * @return the tuple 2
 	 */
 	@Unapply
 	public static Tuple2<Integer,Integer> DefaultCanvas( DefaultCanvas object )
@@ -176,23 +171,9 @@ public class DefaultCanvas
 		                                       setPixel_( i , max_width , '|' );
 		                                       } );
 		
-		// Border corners
-		//		setPixel_( max_height , 0 , '╔' );
-		//		setPixel_( max_height , max_width , '╗' );
-		//		setPixel_( 0 , 0 , '╚' );
-		//		setPixel_( 0 , max_width , '╝' );
-		
-		//flushScreen();
+ 
 		}
-	
-	/**
-	 * Fills the screen with spaces.
-	 */
-	//	private void flushScreen()
-	//		{
-	//		For( range( 1 , this.yMax ) , range( 1 , this.xMax ) ).yield( ( row , col ) -> this.screen[row][col] = ' ' )
-	//		                                                      .subscribe();
-	//		}
+ 
 	
 	//</editor-fold>
 	
@@ -222,9 +203,7 @@ public class DefaultCanvas
 		int pos = y * ( this.width + 1 ) + x;
 		screen = new StringBuilder( screen ).replace( pos , pos + 1 , String.valueOf( character ) )
 		                                    .toString();
-		//screen.substring( 0 , pos ) + String.valueOf( character ) + screen.substring( pos + 1 );//replace( pos , pos + 1 , String.valueOf( character ) );
-		
-		//System.out.println( String.format( "setPixel(%d,%d)  %s " , x , y , screen ) );
+ 
 		}
 	
 	@Override
@@ -328,7 +307,7 @@ public class DefaultCanvas
 		public CanvasBuilder size( final int width ,
 		                           final int height )
 			{
-			this.width = width;
+			this.width  = width;
 			this.height = height;
 			return this;
 			}
@@ -336,7 +315,7 @@ public class DefaultCanvas
 		@Override
 		public CanvasBuilder size( PositiveSize positiveSize )
 			{
-			this.width = positiveSize.getWidth();
+			this.width  = positiveSize.getWidth();
 			this.height = positiveSize.getHeight();
 			return this;
 			}

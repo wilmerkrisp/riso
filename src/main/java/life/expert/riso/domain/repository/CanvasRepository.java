@@ -15,14 +15,11 @@ import life.expert.riso.domain.model.Canvas;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
 
+
+/**
+ * The interface Canvas repository.
+ */
 @NoRepositoryBean
 public interface CanvasRepository
 	extends ReactiveCrudRepository<Canvas,String>

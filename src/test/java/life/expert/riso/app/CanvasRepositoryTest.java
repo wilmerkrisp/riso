@@ -30,27 +30,13 @@ import reactor.test.StepVerifier;
 
 import static life.expert.common.async.LogUtils.print;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
+
 
 @RunWith( SpringRunner.class )
-//@SpringBootTest
 @DataR2dbcTest
-//@ComponentScan( { "life.expert.algo.research.app", "life.expert.algo.research.repository"  } )
-//@EnableR2dbcRepositories( basePackages = { "life.expert.algo.research.app" ,
-//                                           "life.expert.algo.research.domain.repository" }, repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
-//@TestPropertySource( properties = { "spring.r2dbc.schema=classpath:schema.sql", "spring.r2dbc.initialization-mode=always"})
-
-// todo 1 ПОМЕСТИ ЭТОТ ТЕСТ В ТОТ ЖЕ ПАКЕТ ЧТО И @ApplicationCOntext только в тестовой иерархии
-// todo 2 в тестовой иерархии не долнобыть своего application.properties
 public class CanvasRepositoryTest
 	{
-	//@Qualifier( "canvasRepository")
+
 	@Autowired private CanvasRepository canvasRepository;
 	
 	@Autowired ConnectionFactory connectionFactory;
@@ -112,19 +98,7 @@ public class CanvasRepositoryTest
 	            "----------------------\n";
                 //@formatter:on
 		
-		//
-		//		this.canvasRepository.findAll()
-		//		                     .doOnEach( x -> System.out.println( "++DEL++++++++ " + x ) )
-		//		                     .flatMap( r -> this.canvasRepository.deleteById( r.getId() ) )
-		//		                     .as( StepVerifier::create )
-		//		                     .expectNextCount( 0 )
-		//		                     .verifyComplete();
-		
-		//		this.canvasRepository.findAll()
-		//		                     .doOnEach( x -> System.out.println( "++++++++++ " + x ) )
-		//		                     .as( StepVerifier::create )
-		//		                     .expectNextCount( 1 )
-		//		                     .verifyComplete();
+
 		
 		Canvas before_and_after = new DefaultCanvas( "x" , "x" , 22 , 6 , 20 , 4 , canvas_for_test );
 		
@@ -141,10 +115,7 @@ public class CanvasRepositoryTest
 		                     .expectNext( before_and_after )
 		                     .verifyComplete();
 		
-		//		canvasRepository.findByName( "first" )
-		//		                .as( StepVerifier::create )
-		//		                .expectNextCount( 1 )
-		//		                .verifyComplete();
+
 		}
 		
 	}

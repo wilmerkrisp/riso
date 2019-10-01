@@ -34,14 +34,7 @@ import java.util.function.Function;
 import static io.vavr.Predicates.not;
 import static life.expert.common.reactivestreams.Preconditions.illegalStateMonoError;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
+
 
 /**
  * <pre> * The type Canvas service.
@@ -75,13 +68,15 @@ public class DefaultCanvasService
 	 *
 	 * @param canvasRepository
 	 * 	the canvas repository
+	 * @param drawingFactory
+	 * 	the drawing factory
 	 */
 	@Autowired
 	public DefaultCanvasService( @Lazy CanvasRepository canvasRepository ,
 	                             @Lazy DrawingFactory drawingFactory )
 		{
 		this.canvasRepository = canvasRepository;
-		this.drawingFactory = drawingFactory;
+		this.drawingFactory   = drawingFactory;
 		}
 	
 	@Override
@@ -95,7 +90,8 @@ public class DefaultCanvasService
 		return getCanvasRepository().saveAll( c )
 		                            .next()
 		                            .zipWhen( Canvas::makeScreen )
-		                            .map( t -> new ResultDataTransferObject( t.getT1() .getId() , t.getT2() ) )
+		                            .map( t -> new ResultDataTransferObject( t.getT1()
+		                                                                      .getId() , t.getT2() ) )
 		                            .transform( LOWLEVEL_EXCEPTION_WRAPPER )
 		                            .switchIfEmpty( illegalStateMonoError( "life.expert.riso.domain.service.impl.DefaultCanvasService.createCanvas is empty" ) );
 		}

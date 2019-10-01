@@ -16,49 +16,13 @@ import life.expert.riso.common.PositivePoint;
 import life.expert.riso.domain.model.Figure;
 import reactor.core.publisher.Mono;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
 
 /**
  * <pre>
- *   interface simple
- *   !CHANGE_ME_DESCRIPTION!
  *
  *
- *
- *
- *
- * - этот тип предназанчен для наследования
- *
- *
- *
- * Конструкторы класса не должны вызывать переопределяемые методы, непосредственно или опосредованно.
- * Нарушение этого правила может привестик аварийному завершению программы.
- * Тк Конструктор суперкласса выполняется прежде конструктора подкласса,
- *
- *
- * в джавадоке (в тегах @implSpec  @implNote ) нужно раскрыть детали реализации методов и указать какие из переопределяемых методов он использует сам
- * тк наследование нарушает инкапсуляцию
- * например, чтобы юзер знал что некоторый добавленный в overrided методы функционал  может сработать два раза (в случае когда AddAll вызывает Add)
- *
- *
- * {@code
- *
- *
- * example 1
- *
- *              VC_somesubclass                  implements FillBuilder
- *              VI_somesubinterface              extends    FillBuilder
- *              VCG_somesubclass< T >        implements FillBuilder
- *              VIG_somesubinterface< T >    extends    FillBuilder
- *
- * }</pre>
+ * }*</pre>
  *
  * @author wilmer
  * @version 1.0
@@ -67,21 +31,78 @@ import reactor.core.publisher.Mono;
 public interface FillBuilder
 	{
 	
+	/**
+	 * Point fill builder.
+	 *
+	 * @param x0
+	 * 	the x 0
+	 * @param y0
+	 * 	the y 0
+	 *
+	 * @return the fill builder
+	 */
 	public FillBuilder point( final int x0 ,
 	                          final int y0 );
 	
+	/**
+	 * Point fill builder.
+	 *
+	 * @param startPoint
+	 * 	the start point
+	 *
+	 * @return the fill builder
+	 */
 	public FillBuilder point( PositivePoint startPoint );
 	
+	/**
+	 * Filler fill builder.
+	 *
+	 * @param character
+	 * 	the character
+	 *
+	 * @return the fill builder
+	 */
 	public FillBuilder filler( char character );
 	
+	/**
+	 * Point x fill builder.
+	 *
+	 * @param x0
+	 * 	the x 0
+	 *
+	 * @return the fill builder
+	 */
 	public FillBuilder pointX( int x0 );
 	
+	/**
+	 * Point y fill builder.
+	 *
+	 * @param y0
+	 * 	the y 0
+	 *
+	 * @return the fill builder
+	 */
 	public FillBuilder pointY( int y0 );
 	
+	/**
+	 * Build mono mono.
+	 *
+	 * @return the mono
+	 */
 	public Mono<Figure> buildMono();
 	
+	/**
+	 * Build try try.
+	 *
+	 * @return the try
+	 */
 	public Try<Figure> buildTry();
 	
+	/**
+	 * Build figure.
+	 *
+	 * @return the figure
+	 */
 	public Figure build();
 	
 	}

@@ -37,7 +37,7 @@ import reactor.core.publisher.Hooks;
 @SpringBootApplication
 @ComponentScan( { "life.expert.riso.app" ,
                   "life.expert.riso.domain" } )
-//@EnableTransactionManagement
+ 
 @EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
 public class Application
 	{
@@ -82,47 +82,6 @@ public class Application
 		{
 		return () -> new AttributedString( "enter command: " , AttributedStyle.DEFAULT.foreground( AttributedStyle.YELLOW ) );
 		}
-	
-	//	@Bean
-	//	public OutputHelper shellHelper( @Lazy Terminal terminal )
-	//		{
-	//		return new ShellOutputHelper( terminal );
-	//		}
-	
-	//	/**
-	//	 * Output to the console will be done asynchronously through the methods of this Bean
-	//	 *
-	//	 * @param terminal
-	//	 * 	the shell terminal
-	//	 *
-	//	 * @return the shell helper
-	//	 */
-	//	@Bean
-	//	public OutputHelper shellHelper( @Lazy Terminal terminal )
-	//		{
-	//		return new ShellOutputHelper( terminal );
-	//		}
-	//
-	//	/**
-	//	 * Bean to store the current user session
-	//	 *
-	//	 * @return the application state
-	//	 */
-	//	@Bean
-	//	public ApplicationState applicationState()
-	//		{
-	//		return new ApplicationState();
-	//		}
-	//
-	//	/**
-	//	 * Bean get repository for storing/getting canvas objects
-	//	 *
-	//	 * @return the canvas repository
-	//	 */
-	//	@Bean
-	//	public CanvasRepository canvasRepository()
-	//		{
-	//		return new InMemoryCanvasRepository();
-	//		}
+
 	
 	}

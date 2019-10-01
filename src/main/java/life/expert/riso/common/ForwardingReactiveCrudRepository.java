@@ -8,6 +8,24 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+/**
+ * <pre> * The type Forwarding reactive crud repository.
+ *
+ * Preconditions: none
+ * Postconditions: none
+ * Side effects: none
+ * Tread safety: Not thread-safe
+ * Immutable
+ * Unconditionally thread-safe
+ * Conditionally thread-safe
+ * Not thread-safe
+ * </pre>
+ *
+ * @param <T>
+ * 	the type parameter
+ * @param <ID>
+ * 	the type parameter
+ */
 @NoRepositoryBean
 public abstract class ForwardingReactiveCrudRepository<T, ID>
 	implements ReactiveCrudRepository<T,ID>
@@ -22,6 +40,11 @@ public abstract class ForwardingReactiveCrudRepository<T, ID>
 	 * generally override this method with an abstract method that has a more specific return type.
 	 * Concrete subclasses override this method to supply the
 	 * instance being decorated.
+	 *
+	 * @param <S>
+	 * 	the type parameter
+	 *
+	 * @return the reactive crud repository
 	 */
 	protected abstract <S extends T> ReactiveCrudRepository<S,ID> delegate();
 	

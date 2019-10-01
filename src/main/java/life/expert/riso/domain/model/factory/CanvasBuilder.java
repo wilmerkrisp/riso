@@ -15,31 +15,76 @@ import life.expert.riso.common.PositiveSize;
 import life.expert.riso.domain.model.Canvas;
 import reactor.core.publisher.Mono;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
 
+/**
+ * The interface Canvas builder.
+ */
 public interface CanvasBuilder
 	{
 	
+	/**
+	 * Size canvas builder.
+	 *
+	 * @param width
+	 * 	the width
+	 * @param height
+	 * 	the height
+	 *
+	 * @return the canvas builder
+	 */
 	public CanvasBuilder size( final int width ,
 	                           final int height );
 	
+	/**
+	 * Size canvas builder.
+	 *
+	 * @param positiveSize
+	 * 	the positive size
+	 *
+	 * @return the canvas builder
+	 */
 	public CanvasBuilder size( PositiveSize positiveSize );
 	
+	/**
+	 * Width canvas builder.
+	 *
+	 * @param width
+	 * 	the width
+	 *
+	 * @return the canvas builder
+	 */
 	public CanvasBuilder width( int width );
 	
+	/**
+	 * Height canvas builder.
+	 *
+	 * @param height
+	 * 	the height
+	 *
+	 * @return the canvas builder
+	 */
 	public CanvasBuilder height( int height );
 	
+	/**
+	 * Build mono mono.
+	 *
+	 * @return the mono
+	 */
 	public Mono<Canvas> buildMono();
 	
+	/**
+	 * Build try try.
+	 *
+	 * @return the try
+	 */
 	public Try<Canvas> buildTry();
 	
+	/**
+	 * Build canvas.
+	 *
+	 * @return the canvas
+	 */
 	public Canvas build();
 	
 	}

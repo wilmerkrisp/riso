@@ -17,40 +17,10 @@ import lombok.extern.slf4j.Slf4j;
 //
 //               wilmer 2019/08/30
 //---------------------------------------------
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
-
-//<editor-fold desc=".">
-/*
-
-@Data означает
-    @ToString,
-    @EqualsAndHashCode,
-    @Getter
-    @Setter
-    @RequiredArgsConstructor
-
-
- 	- класс сделан final тк класс изначально не предназначался для наследования
-  
- 
- i) если нужно закешировать свойство то пометить его аннотацией
-	@Getter( lazy=true)
-
-j) для игнорирования свойства, назвать его с $
-	 String $ x0
-	 
-*/
-//</editor-fold>
 
 /**
- * </pre>
+ * <pre>
  * simple mutable class: int int int int char
  *
  * - pattern new-set-call
@@ -61,7 +31,7 @@ j) для игнорирования свойства, назвать его с 
  * LineDataTransferObject o = new LineDataTransferObject();
  * o.setX0("a");
  * o.compute();
- * }*
+ * }**
  *
  *
  *

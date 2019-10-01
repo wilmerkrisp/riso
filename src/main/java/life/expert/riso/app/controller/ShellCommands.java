@@ -25,17 +25,8 @@ import javax.validation.constraints.Pattern;
 
 import static life.expert.riso.app.OutputHelper.*;
 
-//import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
-//@Header@
-//--------------------------------------------------------------------------------
-//
-//                          riso  life.expert.riso.app
-//                           wilmer 2019/07/21
-//
-//--------------------------------------------------------------------------------
+
 
 /**
  * <pre>
@@ -71,7 +62,7 @@ public final class ShellCommands
 	public void setCurrentCanvas( String currentCanvas )
 		{
 		this.currentCanvas = currentCanvas;
-		isCanvasAvialable = true;
+		isCanvasAvialable  = true;
 		}
 	
 	/**
@@ -79,12 +70,14 @@ public final class ShellCommands
 	 *
 	 * @param shellHelper
 	 * 	the shell helper
+	 * @param canvasService
+	 * 	the canvas service
 	 */
 	@Autowired
 	public ShellCommands( @Lazy OutputHelper shellHelper ,
 	                      @Lazy CanvasService canvasService )
 		{
-		this.shellHelper = shellHelper;
+		this.shellHelper   = shellHelper;
 		this.canvasService = canvasService;
 		
 		}

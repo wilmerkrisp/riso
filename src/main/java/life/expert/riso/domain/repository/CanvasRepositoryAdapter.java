@@ -18,18 +18,11 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
+
 
 /**
  * please name it EmployeeRepositoryAdapter
  */
-
 @Repository( "canvasRepository" )
 @SuppressWarnings( "unchecked" )
 public class CanvasRepositoryAdapter
@@ -53,6 +46,12 @@ public class CanvasRepositoryAdapter
 		
 		}
 	
+	/**
+	 * Instantiates a new Canvas repository adapter.
+	 *
+	 * @param backingRepository
+	 * 	the backing repository
+	 */
 	@Autowired
 	public CanvasRepositoryAdapter( @NonNull @Lazy ReactiveCrudRepository<? extends Canvas,String> backingRepository )
 		{

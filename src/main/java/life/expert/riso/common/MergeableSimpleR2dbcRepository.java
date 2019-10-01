@@ -22,7 +22,7 @@ import reactor.core.publisher.Mono;
  * @EnableR2dbcRepositories( basePackages = "life.expert.....repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
  * public class Application
  * ...
- * }
+ * }*
  *
  *
  * Preconditions: none
@@ -67,9 +67,9 @@ public class MergeableSimpleR2dbcRepository<T, ID>
 		{
 		super( entity , databaseClient , converter , accessStrategy );
 		
-		this.entity = entity;
+		this.entity         = entity;
 		this.databaseClient = databaseClient;
-		this.converter = converter;
+		this.converter      = converter;
 		this.accessStrategy = accessStrategy;
 		}
 	

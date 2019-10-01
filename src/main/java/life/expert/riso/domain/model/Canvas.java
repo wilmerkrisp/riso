@@ -4,9 +4,7 @@ package life.expert.riso.domain.model;
 
 import reactor.core.publisher.Mono;
 
-//import static reactor.function.TupleUtils.*; // tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
+
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -27,15 +25,35 @@ import reactor.core.publisher.Mono;
  * Tread safety:  Immutable
  * </pre>
  */
-
 public interface Canvas
 	extends Drawing,
 	        Entity<String>
 	{
+	/**
+	 * Draw mono.
+	 *
+	 * @param figure
+	 * 	the figure
+	 *
+	 * @return the mono
+	 */
 	public Mono<Canvas> draw( Figure figure );
 	
+	/**
+	 * Draw mono.
+	 *
+	 * @param figure
+	 * 	the figure
+	 *
+	 * @return the mono
+	 */
 	public Mono<Canvas> draw( Mono<Figure> figure );
 	
+	/**
+	 * Make screen mono.
+	 *
+	 * @return the mono
+	 */
 	public Mono<String> makeScreen();
 	
 	}

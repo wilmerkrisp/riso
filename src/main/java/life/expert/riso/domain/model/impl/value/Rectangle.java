@@ -11,7 +11,7 @@ package life.expert.riso.domain.model.impl.value;
 //               wilmer 2019/08/30
 //---------------------------------------------
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
+
 
 import com.google.common.collect.ComparisonChain;
 import io.vavr.Tuple;
@@ -35,12 +35,7 @@ import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMo
 import static reactor.core.publisher.Mono.fromSupplier;
 import static reactor.core.publisher.Mono.just;
 
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
+
 
 /**
  * <pre>
@@ -65,7 +60,6 @@ import static reactor.core.publisher.Mono.just;
  * Tread safety:  Immutable
  * </pre>
  */
-
 @Value
 @AllArgsConstructor( access = AccessLevel.PRIVATE )
 @Patterns /*pattern matching in vavr*/
@@ -184,6 +178,11 @@ public final class Rectangle
 	 *
 	 * - you need add static import to method with pattern matching
 	 * import static life.expert.riso.common.RectanglePatterns.*;
+	 *
+	 * @param object
+	 * 	the object
+	 *
+	 * @return the tuple 5
 	 */
 	@Unapply
 	public static Tuple5<Integer,Integer,Integer,Integer,Character> Rectangle( Rectangle object )
@@ -259,6 +258,9 @@ public final class Rectangle
 	 * <pre>
 	 * Classic builder patterns for creating  Rectangle.
 	 * </pre>
+	 *
+	 * @param factory
+	 * 	the factory
 	 *
 	 * @return the rectangle builder
 	 */

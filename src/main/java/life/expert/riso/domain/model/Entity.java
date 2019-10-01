@@ -13,15 +13,24 @@ package life.expert.riso.domain.model;
  * @param <ID>
  * 	the type of entity ID
  */
-
 public interface Entity<ID>
 	{
 	
+	/**
+	 * Gets id.
+	 *
+	 * @return the id
+	 */
 	ID getId();
 	
-	//void setId(T id);
 	
+	
+	/**
+	 * Gets name.
+	 *
+	 * @return the name
+	 */
 	String getName();
 	
-	//void setName(String name);
+	
 	}

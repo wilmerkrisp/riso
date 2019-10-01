@@ -28,13 +28,7 @@ import static life.expert.common.reactivestreams.Patterns.tryFromMono;
 import static life.expert.common.reactivestreams.Preconditions.illegalArgumentMonoError;
 import static reactor.core.publisher.Mono.fromSupplier;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
+
 
 /**
  * <pre>

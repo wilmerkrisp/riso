@@ -25,21 +25,13 @@ import org.springframework.stereotype.Repository;
 /**
  * please name it DefaultEmployeeRepository
  */
-
 @Repository
 public interface DefaultCanvasRepository
 	extends ReactiveCrudRepository<DefaultCanvas,String>
 	{
 	
-	/*
-	@Query( "select * from DEFAULT_EMPLOYEE where name = :name" )
-	Flux<Employee> findByName( String name );
+ 
 	
-	@Query( "INSERT INTO DEFAULT_EMPLOYEE (ID, NAME) VALUES(:id, :name )" )
-	Mono<Long> create( String id ,
-	                   String name );
-	                   */
-		
 	}
 
  

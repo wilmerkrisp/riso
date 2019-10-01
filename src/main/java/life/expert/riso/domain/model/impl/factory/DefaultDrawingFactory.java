@@ -21,14 +21,7 @@ import life.expert.riso.domain.model.impl.value.Line;
 import life.expert.riso.domain.model.impl.value.Rectangle;
 import org.springframework.stereotype.Component;
 
-//import static life.expert.common.base.Preconditions.*;  //checkCollection
-//import static  reactor.function.TupleUtils.*; //reactor's tuple->R INTO func->R
-//import static io.vavr.API.*;                           //conflicts with my reactive For-comprehension
-//import static java.util.function.Predicate.*;           //isEqual streamAPI
 
-//import java.util.List;                                  //usual list
-//import io.vavr.collection.List;                         //immutable List
-//import com.google.common.collect.*;                     //ImmutableList
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -38,6 +31,16 @@ import org.springframework.stereotype.Component;
 //
 //--------------------------------------------------------------------------------
 
+/**
+ * <pre> * The type Default drawing factory.
+ *
+ * Preconditions: none
+ * Postconditions: none
+ * Side effects: none
+ * Tread safety: Not thread-safe
+
+ * </pre>
+ */
 @Component
 public class DefaultDrawingFactory
 	implements DrawingFactory

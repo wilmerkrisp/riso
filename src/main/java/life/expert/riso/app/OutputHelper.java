@@ -48,16 +48,10 @@ public interface OutputHelper
 	 * The main method of printing
 	 *
 	 * @param format
-	 * 	A format string as described in <a href="../util/Formatter.html#syntax">Format
-	 * 	string syntax</a>.
+	 * 	A format string as described in <a href="../util/Formatter.html#syntax">Format 	string syntax</a>.
 	 * @param args
-	 * 	Arguments referenced by the format specifiers in the format         string.  If
-	 * 	there are more arguments than format specifiers, the         extra arguments are
-	 * 	ignored.  The number of arguments is         variable and may be zero.  The
-	 * 	maximum number of arguments is         limited by the maximum dimension of a Java
-	 * 	array as defined by         <cite>The Java&trade; Virtual Machine
-	 * 	Specification</cite>.         The behaviour on a         {@code null} argument
-	 * 	depends on the <a         href="../util/Formatter.html#syntax">conversion</a>.
+	 * 	Arguments referenced by the format specifiers in the format         string.  If 	there are more arguments than format specifiers, the         extra arguments are 	ignored.  The number of arguments is         variable and may be zero.  The 	maximum number of arguments is         limited by the maximum dimension of a Java 	array as defined by         <cite>The Java&trade; Virtual Machine
+	 * 	Specification</cite>.         The behaviour on a         {@code null} argument 	depends on the <a         href="../util/Formatter.html#syntax">conversion</a>.
 	 */
 	public void print( String format ,
 	                   Object... args );

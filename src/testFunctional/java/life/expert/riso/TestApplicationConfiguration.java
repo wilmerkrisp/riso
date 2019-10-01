@@ -21,9 +21,6 @@ import org.springframework.shell.jline.PromptProvider;
  * The type Test application configuration.
  */
 @TestConfiguration
-//@DataR2dbcTest
-//@EnableR2dbcRepositories( basePackages = { "life.expert.algo.research.app" ,
-//                                           "life.expert.algo.research.domain.repository" }, repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
 @ComponentScan( { "life.expert.riso.app" ,
                   "life.expert.riso.domain.repository" ,
                   "life.expert.riso.domain.model" ,
@@ -55,29 +52,6 @@ public class TestApplicationConfiguration
 		{
 		return new TestFunctionalHelper();
 		}
-	//
-	//	/**
-	//	 * Test Canvas repository
-	//	 *
-	//	 * @return the canvas repository
-	//	 */
-	//	@Bean
-	//	public CanvasRepository canvasRepository( @Lazy DefaultCanvasRepository canvasRepository)
-	//		{
-	//		return new CanvasRepositoryAdapter(canvasRepository);
-	//		}
-	
-	//	@Bean
-	//	public DrawingFactory drawinfFactory()
-	//		{
-	//		return new DefaultDrawingFactory();
-	//		}
-	
-	//	@Bean
-	//	public CanvasService canvasService( CanvasRepository canvasRepository ,
-	//	                                    DrawingFactory drawingFactory )
-	//		{
-	//		return new DefaultCanvasService( canvasRepository , drawingFactory );
-	//		}
+
 	
 	}
