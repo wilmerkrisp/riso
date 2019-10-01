@@ -7,6 +7,7 @@ package life.expert.riso.domain.model.impl.value;//@Header@
 //--------------------------------------------------------------------------------
 
 import life.expert.riso.domain.model.Canvas;
+import life.expert.riso.domain.model.impl.entity.DefaultCanvas;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
@@ -28,9 +29,14 @@ public class AppBechmark
 	public void fillTest( ExperimentData data ,
 	                      Blackhole hole )
 		{
-		Canvas.monoOf( data.iterations , data.iterations )
-		      .flatMap( c -> c.draw( Fill.monoOf( 1 , 1 , 'o' ) ) )
-		      .subscribe( hole::consume );
+		DefaultCanvas.builder()
+		             .size( data.iterations , data.iterations )
+		             .buildMono()
+		             .flatMap( c -> c.draw( Fill.builder()
+		                                        .point( 1 , 1 )
+		                                        .filler( 'o' )
+		                                        .build() ) )
+		             .subscribe( hole::consume );
 		}
 		
 	}
