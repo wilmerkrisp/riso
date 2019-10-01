@@ -21,37 +21,35 @@ import org.springframework.shell.jline.PromptProvider;
  * The type Test application configuration.
  */
 @TestConfiguration
-@ComponentScan( { "life.expert.riso.app" ,
-                  "life.expert.riso.domain.repository" ,
-                  "life.expert.riso.domain.model" ,
-                  "life.expert.riso.domain.service" ,
-                  "life.expert.riso.domain.model.impl.entity" } )
-@EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
-public class TestApplicationConfiguration
-	{
-	
-	/**
-	 * After each command invocation, the shell waits for new input from the user, displaying a prompt
-	 * in yellow.
-	 *
-	 * @return the prompt provider
-	 */
-	@Bean
-	public PromptProvider customPromptProvider()
-		{
-		return () -> new AttributedString( "enter command: " , AttributedStyle.DEFAULT.foreground( AttributedStyle.YELLOW ) );
-		}
-	
-	/**
-	 * Test Shell helper .
-	 *
-	 * @return the shell helper
-	 */
-	@Bean
-	public OutputHelper shellHelper()
-		{
-		return new TestFunctionalHelper();
-		}
+@ComponentScan({"life.expert.riso.app",
+    "life.expert.riso.domain.repository",
+    "life.expert.riso.domain.model",
+    "life.expert.riso.domain.service",
+    "life.expert.riso.domain.model.impl.entity"})
+@EnableR2dbcRepositories(basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class)
+public class TestApplicationConfiguration {
 
-	
-	}
+  /**
+   * After each command invocation, the shell waits for new input from the user, displaying a prompt
+   * in yellow.
+   *
+   * @return the prompt provider
+   */
+  @Bean
+  public PromptProvider customPromptProvider() {
+    return () -> new AttributedString("enter command: ",
+        AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW));
+  }
+
+  /**
+   * Test Shell helper .
+   *
+   * @return the shell helper
+   */
+  @Bean
+  public OutputHelper shellHelper() {
+    return new TestFunctionalHelper();
+  }
+
+
+}

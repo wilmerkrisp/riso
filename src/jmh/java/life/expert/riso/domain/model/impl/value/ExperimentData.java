@@ -13,19 +13,19 @@ import org.openjdk.jmh.annotations.State;
 /**
  * The type Experiment data.
  */
-@State( Scope.Thread )
-public class ExperimentData
-	{
-	
-	@Param( { "100" ,
-	          "200" ,
-	          "300" ,
-	          "400" ,
-	          "500" ,
-	          "600" ,
-	          "700" ,
-	          "800" ,
-	          "900" ,
-	          "1000" } ) int iterations;
-		
-	}
+@State(Scope.Thread)
+public class ExperimentData {
+
+  @Param({"100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900",
+      "1000"})
+  int iterations;
+
+}

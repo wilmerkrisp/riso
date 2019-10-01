@@ -19,45 +19,40 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 
 
-
 /**
  * please name it EmployeeRepositoryAdapter
  */
-@Repository( "canvasRepository" )
-@SuppressWarnings( "unchecked" )
+@Repository("canvasRepository")
+@SuppressWarnings("unchecked")
 public class CanvasRepositoryAdapter
-	extends ForwardingReactiveCrudRepository<Canvas,String>
-	implements CanvasRepository
-	{
-	
-	private final ReactiveCrudRepository<? extends Canvas,String> delegate; // backing list
-	
-	@Override
-	protected ReactiveCrudRepository<? extends Canvas,String> delegate()
-		{
-		return delegate;
-		}
-	
-	private CanvasRepositoryAdapter()
-		{
-		super();
-		
-		throw new UnsupportedOperationException( "Dont use this PRIVATE constructor.Please use constructor with parameters." );
-		
-		}
-	
-	/**
-	 * Instantiates a new Canvas repository adapter.
-	 *
-	 * @param backingRepository
-	 * 	the backing repository
-	 */
-	@Autowired
-	public CanvasRepositoryAdapter( @NonNull @Lazy ReactiveCrudRepository<? extends Canvas,String> backingRepository )
-		{
-		this.delegate = backingRepository;
-		}
-		
-	}
+    extends ForwardingReactiveCrudRepository<Canvas, String>
+    implements CanvasRepository {
 
- 
+  private final ReactiveCrudRepository<? extends Canvas, String> delegate; // backing list
+
+  @Override
+  protected ReactiveCrudRepository<? extends Canvas, String> delegate() {
+    return delegate;
+  }
+
+  private CanvasRepositoryAdapter() {
+    super();
+
+    throw new UnsupportedOperationException(
+        "Dont use this PRIVATE constructor.Please use constructor with parameters.");
+
+  }
+
+  /**
+   * Instantiates a new Canvas repository adapter.
+   *
+   * @param backingRepository the backing repository
+   */
+  @Autowired
+  public CanvasRepositoryAdapter(
+      @NonNull @Lazy ReactiveCrudRepository<? extends Canvas, String> backingRepository) {
+    this.delegate = backingRepository;
+  }
+
+}
+

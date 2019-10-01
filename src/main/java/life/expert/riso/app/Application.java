@@ -1,7 +1,6 @@
 package life.expert.riso.app;
 
 
-
 import life.expert.riso.common.MergeableSimpleR2dbcRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jline.utils.AttributedString;
@@ -35,53 +34,50 @@ import reactor.core.publisher.Hooks;
  */
 @Slf4j
 @SpringBootApplication
-@ComponentScan( { "life.expert.riso.app" ,
-                  "life.expert.riso.domain" } )
- 
-@EnableR2dbcRepositories( basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class )
-public class Application
-	{
-	/**
-	 * +
-	 * Main method using Spring main cycle
-	 *
-	 * @param args
-	 * 	the args
-	 */
-	public static void main( final String... args )
-		{
-		// todo https://github.com/jline/jline3/issues/263
-		System.setProperty( "org.jline.terminal.dumb" , "true" );
-		
-		// Spring Reactor global error handler
-		Hooks.onOperatorError( ( err , data ) ->
-		                       {
-		                       String s = ( data == null ) ? "No additional data" : "Additional data" + data.toString();
-		                       logger_.error( s , err );
-		                       return err;
-		                       } );
-		
-		// for overriding standart quit command
-		String[] disabledCommands = { "--spring.shell.command.quit.enabled=false" };
-		var      fullArgs         = StringUtils.concatenateStringArrays( args , disabledCommands );
-		
-		SpringApplication.run( Application.class , fullArgs );
-		
-		}
-	
-	/**
-	 * Bean to customize the prompt string
-	 * <p>
-	 * After each command invocation, the shell waits for new input from the user, displaying a prompt
-	 * in yellow.
-	 *
-	 * @return the prompt provider
-	 */
-	@Bean
-	public PromptProvider customPromptProvider()
-		{
-		return () -> new AttributedString( "enter command: " , AttributedStyle.DEFAULT.foreground( AttributedStyle.YELLOW ) );
-		}
+@ComponentScan({"life.expert.riso.app",
+    "life.expert.riso.domain"})
 
-	
-	}
+@EnableR2dbcRepositories(basePackages = "life.expert.riso.domain.repository", repositoryBaseClass = MergeableSimpleR2dbcRepository.class)
+public class Application {
+
+  /**
+   * + Main method using Spring main cycle
+   *
+   * @param args the args
+   */
+  public static void main(final String... args) {
+    // todo https://github.com/jline/jline3/issues/263
+    System.setProperty("org.jline.terminal.dumb", "true");
+
+    // Spring Reactor global error handler
+    Hooks.onOperatorError((err, data) ->
+    {
+      String s = (data == null) ? "No additional data" : "Additional data" + data.toString();
+      logger_.error(s, err);
+      return err;
+    });
+
+    // for overriding standart quit command
+    String[] disabledCommands = {"--spring.shell.command.quit.enabled=false"};
+    var fullArgs = StringUtils.concatenateStringArrays(args, disabledCommands);
+
+    SpringApplication.run(Application.class, fullArgs);
+
+  }
+
+  /**
+   * Bean to customize the prompt string
+   * <p>
+   * After each command invocation, the shell waits for new input from the user, displaying a prompt
+   * in yellow.
+   *
+   * @return the prompt provider
+   */
+  @Bean
+  public PromptProvider customPromptProvider() {
+    return () -> new AttributedString("enter command: ",
+        AttributedStyle.DEFAULT.foreground(AttributedStyle.YELLOW));
+  }
+
+
+}

@@ -16,13 +16,11 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 
-
 /**
  * The interface Canvas repository.
  */
 @NoRepositoryBean
 public interface CanvasRepository
-	extends ReactiveCrudRepository<Canvas,String>
-	{
-	
-	}
+    extends ReactiveCrudRepository<Canvas, String> {
+
+}

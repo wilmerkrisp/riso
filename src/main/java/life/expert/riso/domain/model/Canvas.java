@@ -1,10 +1,7 @@
 package life.expert.riso.domain.model;
 
 
-
 import reactor.core.publisher.Mono;
-
-
 
 //@Header@
 //--------------------------------------------------------------------------------
@@ -26,34 +23,30 @@ import reactor.core.publisher.Mono;
  * </pre>
  */
 public interface Canvas
-	extends Drawing,
-	        Entity<String>
-	{
-	/**
-	 * Draw mono.
-	 *
-	 * @param figure
-	 * 	the figure
-	 *
-	 * @return the mono
-	 */
-	public Mono<Canvas> draw( Figure figure );
-	
-	/**
-	 * Draw mono.
-	 *
-	 * @param figure
-	 * 	the figure
-	 *
-	 * @return the mono
-	 */
-	public Mono<Canvas> draw( Mono<Figure> figure );
-	
-	/**
-	 * Make screen mono.
-	 *
-	 * @return the mono
-	 */
-	public Mono<String> makeScreen();
-	
-	}
+    extends Drawing,
+    Entity<String> {
+
+  /**
+   * Draw mono.
+   *
+   * @param figure the figure
+   * @return the mono
+   */
+  public Mono<Canvas> draw(Figure figure);
+
+  /**
+   * Draw mono.
+   *
+   * @param figure the figure
+   * @return the mono
+   */
+  public Mono<Canvas> draw(Mono<Figure> figure);
+
+  /**
+   * Make screen mono.
+   *
+   * @return the mono
+   */
+  public Mono<String> makeScreen();
+
+}

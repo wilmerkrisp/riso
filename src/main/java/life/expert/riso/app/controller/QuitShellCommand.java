@@ -19,17 +19,15 @@ import org.springframework.shell.standard.commands.Quit;
 @ShellComponent
 @Slf4j
 public class QuitShellCommand
-	implements Quit.Command
-	{
-	
-	/**
-	 * Quit.
-	 */
-	@ShellMethod( value = "Exit the shell.", key = { "quit" ,
-	                                                 "exit" ,
-	                                                 "Q" } )
-	public void quit()
-		{
-		throw new ExitRequest( 0 );
-		}
-	}
+    implements Quit.Command {
+
+  /**
+   * Quit.
+   */
+  @ShellMethod(value = "Exit the shell.", key = {"quit",
+      "exit",
+      "Q"})
+  public void quit() {
+    throw new ExitRequest(0);
+  }
+}

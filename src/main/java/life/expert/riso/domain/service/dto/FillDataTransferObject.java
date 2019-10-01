@@ -1,7 +1,6 @@
 package life.expert.riso.domain.service.dto;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,59 +44,54 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
-public final class FillDataTransferObject
-	{
-	
-	/**
-	 * canvas identificator for drawing figure
-	 *
-	 * -- SETTER --
-	 *
-	 * @param id
-	 * 	id
-	 *
-	 * 	-- GETTER --
-	 * @return the id
-	 */
-	private String canvasId;
-	
-	/**
-	 * x
-	 *
-	 * -- SETTER --
-	 *
-	 * @param x
-	 * 	x
-	 *
-	 * 	-- GETTER --
-	 * @return the x
-	 */
-	private int x;
-	
-	/**
-	 * y
-	 *
-	 * -- SETTER --
-	 *
-	 * @param y
-	 * 	y
-	 *
-	 * 	-- GETTER --
-	 * @return the y
-	 */
-	private int y;
-	
-	/**
-	 * character
-	 *
-	 * -- SETTER --
-	 *
-	 * @param character
-	 * 	character
-	 *
-	 * 	-- GETTER --
-	 * @return the character
-	 */
-	private char character;
-	
-	}
+public final class FillDataTransferObject {
+
+  /**
+   * canvas identificator for drawing figure
+   * <p>
+   * -- SETTER --
+   *
+   * @param id id
+   * <p>
+   * -- GETTER --
+   * @return the id
+   */
+  private String canvasId;
+
+  /**
+   * x
+   * <p>
+   * -- SETTER --
+   *
+   * @param x x
+   * <p>
+   * -- GETTER --
+   * @return the x
+   */
+  private int x;
+
+  /**
+   * y
+   * <p>
+   * -- SETTER --
+   *
+   * @param y y
+   * <p>
+   * -- GETTER --
+   * @return the y
+   */
+  private int y;
+
+  /**
+   * character
+   * <p>
+   * -- SETTER --
+   *
+   * @param character character
+   * <p>
+   * -- GETTER --
+   * @return the character
+   */
+  private char character;
+
+}

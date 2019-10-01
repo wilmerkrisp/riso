@@ -10,27 +10,24 @@ package life.expert.riso.domain.model;
 /**
  * Base abstract class for aggregate (DDD pattern)
  *
- * @param <ID>
- * 	the type of entity ID
+ * @param <ID> the type of entity ID
  */
-public interface Entity<ID>
-	{
-	
-	/**
-	 * Gets id.
-	 *
-	 * @return the id
-	 */
-	ID getId();
-	
-	
-	
-	/**
-	 * Gets name.
-	 *
-	 * @return the name
-	 */
-	String getName();
-	
-	
-	}
+public interface Entity<ID> {
+
+  /**
+   * Gets id.
+   *
+   * @return the id
+   */
+  ID getId();
+
+
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
+  String getName();
+
+
+}

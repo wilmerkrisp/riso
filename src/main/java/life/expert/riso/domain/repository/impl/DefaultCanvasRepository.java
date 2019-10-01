@@ -27,11 +27,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DefaultCanvasRepository
-	extends ReactiveCrudRepository<DefaultCanvas,String>
-	{
-	
- 
-	
-	}
+    extends ReactiveCrudRepository<DefaultCanvas, String> {
 
- 
+
+}
+

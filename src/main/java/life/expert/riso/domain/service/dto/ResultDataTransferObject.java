@@ -1,7 +1,6 @@
 package life.expert.riso.domain.service.dto;
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,33 +44,30 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @NoArgsConstructor
 @AllArgsConstructor
-public final class ResultDataTransferObject
-	{
-	
-	/**
-	 * canvasId
-	 *
-	 * -- SETTER --
-	 *
-	 * @param canvasId
-	 * 	canvasId
-	 *
-	 * 	-- GETTER --
-	 * @return the canvasId
-	 */
-	private String canvasId;
-	
-	/**
-	 * screen
-	 *
-	 * -- SETTER --
-	 *
-	 * @param screen
-	 * 	screen
-	 *
-	 * 	-- GETTER --
-	 * @return the screen
-	 */
-	private String screen;
-	
-	}
+public final class ResultDataTransferObject {
+
+  /**
+   * canvasId
+   * <p>
+   * -- SETTER --
+   *
+   * @param canvasId canvasId
+   * <p>
+   * -- GETTER --
+   * @return the canvasId
+   */
+  private String canvasId;
+
+  /**
+   * screen
+   * <p>
+   * -- SETTER --
+   *
+   * @param screen screen
+   * <p>
+   * -- GETTER --
+   * @return the screen
+   */
+  private String screen;
+
+}

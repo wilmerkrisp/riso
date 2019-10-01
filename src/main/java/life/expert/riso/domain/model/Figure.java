@@ -12,17 +12,14 @@ import reactor.core.publisher.Mono;
 /**
  * Basic interface for different shapes (lines, triangles, etc.) that can draw themselves on canvas
  */
-public interface Figure
-	{
-	
-	/**
-	 * Draw figure on canvas.
-	 *
-	 * @param canvas
-	 * 	the canvas
-	 *
-	 * @return the mono with Figure
-	 */
-	Mono<Figure> draw( Drawing canvas );
-	
-	}
+public interface Figure {
+
+  /**
+   * Draw figure on canvas.
+   *
+   * @param canvas the canvas
+   * @return the mono with Figure
+   */
+  Mono<Figure> draw(Drawing canvas);
+
+}

@@ -1,25 +1,25 @@
 <!-- File: src/main/resources/logback-spring.xml -->
 <configuration>
 
-    <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
-        <encoder>
-            <pattern>%-30(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n</pattern>
-        </encoder>
-    </appender>
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
+    <encoder>
+      <pattern>%-30(%d{HH:mm:ss.SSS} [%thread]) %-5level %logger{32} - %msg%n</pattern>
+    </encoder>
+  </appender>
 
 
-    <appender class="ch.qos.logback.core.FileAppender" name="FILE">
-        <encoder>
-            <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
-            </Pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-        <file>riso.log</file>
-    </appender>
+  <appender class="ch.qos.logback.core.FileAppender" name="FILE">
+    <encoder>
+      <Pattern>%d %-4relative [%thread] %-5level %logger{35} - %msg%n
+      </Pattern>
+      <charset>UTF-8</charset>
+    </encoder>
+    <file>riso.log</file>
+  </appender>
 
-    <root level="DEBUG">
-        <!--appender-ref ref="CONSOLE"/-->
-        <appender-ref ref="FILE"/>
-    </root>
+  <root level="DEBUG">
+    <!--appender-ref ref="CONSOLE"/-->
+    <appender-ref ref="FILE"/>
+  </root>
 
 </configuration>
