@@ -116,7 +116,7 @@ plugins {
 
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
 
-    id "io.freefair.lombok" version "4.1.0"
+    id "io.freefair.lombok" version "4.1.1"
 
     id "org.asciidoctor.convert" version "2.3.0"
 }
@@ -183,7 +183,7 @@ java {
 
 dependencyManagement {
     imports {
-        mavenBom "io.projectreactor:reactor-bom:Californium-SR11"
+        mavenBom "io.projectreactor:reactor-bom:Californium-SR12"
     }
 }
 
