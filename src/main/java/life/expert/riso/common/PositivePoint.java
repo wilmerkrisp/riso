@@ -128,9 +128,8 @@ public final class PositivePoint
 	 * @param y the y
 	 * @return the positive point
 	 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
-	 * @deprecated please use pure functional methods monoOf.., without raise exceptions. </pre>
+	  </pre>
 	 */
-	@Deprecated
 	public static PositivePoint of( final int x ,
 	                                final int y )
 		{

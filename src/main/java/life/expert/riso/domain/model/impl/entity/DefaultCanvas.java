@@ -365,10 +365,8 @@ public class DefaultCanvas
 		 *
 		 * @throws IllegalArgumentException
 		 * 	if the input arguments do not satisfy the preconditions
-		 * @deprecated please use pure functional methods monoOf.., without raise exceptions.
 		 */
 		@Override
-		@Deprecated
 		public final Canvas build()
 			{
 			return buildMono().block();

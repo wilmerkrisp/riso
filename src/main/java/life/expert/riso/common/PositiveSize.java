@@ -127,9 +127,9 @@ public final class PositiveSize
 	 * @param height the item 2
 	 * @return the positive size
 	 * @throws IllegalArgumentException if the input arguments do not satisfy the preconditions
-	 * @deprecated please use pure functional methods monoOf.., without raise exceptions. </pre>
+	  </pre>
 	 */
-	@Deprecated
+	
 	public static PositiveSize of( final int width ,
 	                               final int height )
 		{
