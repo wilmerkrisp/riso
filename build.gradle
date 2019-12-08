@@ -29,7 +29,7 @@ debugiing
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-check jar new versions
+check jar new versions  help/dependencyUpdates
     ./gradlew -q dependencyUpdates
 
 jar libraries clear dependencies cache
@@ -42,8 +42,10 @@ get JAR dependencies hierarchy
     ./gradlew -q dependencies
     ./gradlew -q dependencyInsight --dependency mylibname --configuration scm
 
-generate module-info.java
-    jdeps --generate-module-info ./ build/libs
+draw class diargamm and architecture inside Structure101
+-- Menu -- New Local Project -- Static classpath
+-- add class folder: myapp/build/classes/java/main
+-- add source files folder: myapp/src
 
 
 show gradle dependencies diagram
@@ -92,7 +94,7 @@ buildscript {
         maven { url 'https://repo.spring.io/libs-snapshot' }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.0.M6")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.2.2.RELEASE")
         //classpath("org.junit.platform:junit-platform-gradle-plugin:1.2.0")
     }
 }
@@ -106,9 +108,9 @@ plugins {
     id 'idea'
 
     id 'com.dorongold.task-tree' version '1.4' /* ./gradlew -q build taskTree */
-    id 'com.github.ben-manes.versions' version '0.25.0' /* ./gradlew -q dependencyUpdates */
+    id 'com.github.ben-manes.versions' version '0.27.0' /* ./gradlew -q dependencyUpdates */
 
-    id "me.champeau.gradle.jmh" version "0.5.0-rc-2"
+    id "me.champeau.gradle.jmh" version "0.5.0"
     id "io.morethan.jmhreport" version "0.9.0"
 
     id "com.jprofiler" version "11.0.2"
@@ -116,9 +118,9 @@ plugins {
 
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
 
-    id "io.freefair.lombok" version "4.1.1"
+    id "io.freefair.lombok" version "4.1.6"
 
-    id "org.asciidoctor.convert" version "2.3.0"
+    id "org.asciidoctor.convert" version "2.4.0"
 }
 
 apply plugin:'org.springframework.boot'
@@ -138,7 +140,7 @@ apply plugin:'org.springframework.boot'
 
 ////////////////////////////// for running app//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 wrapper {
-    gradleVersion = '5.6.2'
+    gradleVersion = '6.0.1'  //'5.6.2'
 }
 
 //plugin application
@@ -183,7 +185,7 @@ java {
 
 dependencyManagement {
     imports {
-        mavenBom "io.projectreactor:reactor-bom:Californium-SR12"
+        mavenBom "io.projectreactor:reactor-bom:Californium-SR14"
     }
 }
 
@@ -356,9 +358,9 @@ repositories {
 
 dependencies {
 
-    implementation 'life.expert:himalaya:1.0.55'
+    implementation 'life.expert:himalaya:1.0.59'
 
-    testImplementation 'org.mockito:mockito-core:3.0.0'
+    testImplementation 'org.mockito:mockito-core:3.2.0'
     testImplementation 'com.google.truth:truth:1.0'
 
     implementation 'org.apache.commons:commons-lang3:3.9'
@@ -366,7 +368,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.6'
 
     implementation 'com.google.guava:guava:28.1-jre'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.6'
 
 
     implementation "io.projectreactor:reactor-core"
@@ -381,7 +383,7 @@ dependencies {
     annotationProcessor 'io.vavr:vavr-match-processor:0.10.2'
 
 
-    implementation 'org.springframework.boot:spring-boot-dependencies:2.2.0.M6'
+    implementation 'org.springframework.boot:spring-boot-dependencies:2.2.2.RELEASE'
     implementation "org.springframework.shell:spring-shell-starter:3.0.0.BUILD-SNAPSHOT"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation "org.springframework.shell:spring-shell-core-test-support:3.0.0.BUILD-SNAPSHOT"

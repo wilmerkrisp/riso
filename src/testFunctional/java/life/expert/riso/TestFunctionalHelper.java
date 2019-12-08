@@ -2,6 +2,7 @@ package life.expert.riso;
 
 
 import life.expert.common.async.LogUtils;
+import life.expert.common.async.PrintUtils;
 import life.expert.riso.app.OutputHelper;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +31,7 @@ public final class TestFunctionalHelper
   public void print(String format,
       Object... args) {
     terminal.append(String.format(format, args));
-    LogUtils.print(format);
+    PrintUtils.print(format);
   }
 
   @Override

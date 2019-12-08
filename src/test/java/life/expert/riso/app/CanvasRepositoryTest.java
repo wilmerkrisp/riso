@@ -11,7 +11,9 @@ package life.expert.riso.app;
 //               wilmer 2019/08/28
 //---------------------------------------------
 
-import static life.expert.common.async.LogUtils.print;
+
+
+import static life.expert.common.async.PrintUtils.print;
 
 import io.r2dbc.spi.ConnectionFactory;
 import life.expert.riso.domain.model.Canvas;
