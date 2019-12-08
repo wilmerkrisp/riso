@@ -110,7 +110,7 @@ plugins {
     id 'com.dorongold.task-tree' version '1.4' /* ./gradlew -q build taskTree */
     id 'com.github.ben-manes.versions' version '0.27.0' /* ./gradlew -q dependencyUpdates */
 
-    id "me.champeau.gradle.jmh" version "0.5.0"
+    id "me.champeau.gradle.jmh" version  "0.4.8" // todo wrong jmh version "0.5.0"
     id "io.morethan.jmhreport" version "0.9.0"
 
     id "com.jprofiler" version "11.0.2"
@@ -254,8 +254,14 @@ jmh {
     forceGC = true // Should JMH force GC between iterations?
 
 
-    benchmarkMode = ['avgt'] // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
-    fork = 2 // How many times to forks a single benchmark. Use 0 to disable forking altogether
+    /** for real benchmarking mode: you need uncomment below and comment all another
+     benchmarkMode = ['avgt'] // Benchmark mode. Available modes are: [Throughput/thrpt, AverageTime/avgt, SampleTime/sample, SingleShotTime/ss, All/all]
+     fork = 2 // How many times to forks a single benchmark. Use 0 to disable forking altogether
+     */
+    benchmarkMode = ['ss']
+    iterations = 1
+    warmupIterations = 0
+    fork = 0
 
 }
 
