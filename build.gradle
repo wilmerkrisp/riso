@@ -25,6 +25,7 @@ increase gradle wrapper  version
 
 debugiing
     ./gradlew -q -m -d
+    ./gradlew --debug
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,7 @@ testing
 testing off
     --exclude-task test
 
-benchmarking
+benchmarking   ./gradlew --stop && ./gradlew clean jmh --no-daemon
     jmh/jmh          - run benchmark, get build/reports/jmh/results.json
     other/jmhReport  - json->html
 
