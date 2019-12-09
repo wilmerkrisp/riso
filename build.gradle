@@ -114,7 +114,7 @@ plugins {
     id "me.champeau.gradle.jmh" version  "0.4.8" // todo wrong jmh version "0.5.0"
     id "io.morethan.jmhreport" version "0.9.0"
 
-    id "com.jprofiler" version "11.0.2"
+    //id "com.jprofiler" version "11.0.2"
 
 
     id "io.spring.dependency-management" version "1.0.8.RELEASE"
@@ -273,13 +273,13 @@ jmhReport {
 
 
 //////////////////////////////profiling//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/**
+/*
  - please config filenames and location here, used in saveProfile(),logProfile()
  - also change getLogFile if log file names differently
 
  runProfile  - run jprofiler and generate dump file
  saveProfile  - convert dump to csv
- */
+
 
 
 
@@ -293,7 +293,7 @@ tasks.create('runProfile', com.jprofiler.gradle.JavaProfile) {
     main = mainClassName
     classpath sourceSets.main.runtimeClasspath
     offline = true
-    sessionId = 168 /*this is ID of profile inside config.xml*/
+    sessionId = 168 //this is ID of profile inside config.xml
     configFile = file('/Users/wilmer/.jprofiler10/config.xml')
     group = "jprofiler"
     args = ["--myarg1", "--myarg2"]
@@ -309,7 +309,7 @@ tasks.create('saveProfile', com.jprofiler.gradle.Export) {
     }
 }
 saveProfile.dependsOn runProfile
-
+ */
 
 //////////////////////////////documentation//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 asciidoctor {
